@@ -1,7 +1,11 @@
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 public class TestData {
+
+     static List<String> locations = Arrays.asList("Berlin", "Sidney", "Tokyo", "London");
+     static Random rnd = new Random();
 
     public  static String generateData(int limit) {
         int dataLength = (int)(Math.random()*(limit-4) + 4);
@@ -14,7 +18,7 @@ public class TestData {
         return data;
     }
 
-    public static String getRandomCity(List<String> locations, Random rnd) {
+    public static String getRandomCity() {
         return locations.get(rnd.nextInt(locations.size()));
     }
 
