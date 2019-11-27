@@ -1,3 +1,4 @@
 .idea
 target
 chromedriver*
+params.properties

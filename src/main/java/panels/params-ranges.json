@@ -1,0 +1,507 @@
+{
+  "CDP" : {
+    "Daily Precipitation": {
+      "in": {
+        "min": 0,
+        "max": 24
+      },
+      "cm": {
+        "min": 0,
+        "max": 61
+      },
+      "mm": {
+        "min": 0,
+        "max": 609
+      }
+    },
+    "Daily Snowfall": {
+      "in": {
+        "min": 0,
+        "max": 80
+      },
+      "cm": {
+        "min": 0,
+        "max": 204
+      },
+      "mm": {
+        "min": 0,
+        "max": 2032
+      }
+    },
+    "Dew Point": {
+      "°F": {
+        "min": -40,
+        "max": 110
+      },
+      "°C": {
+        "min": -40,
+        "max": 43
+      }
+    },
+    "Feels Like Temperature": {
+      "°F": {
+        "min": -130,
+        "max": 150
+      },
+      "°C": {
+        "min": -90,
+        "max": 62
+      }
+    },
+    "MSL Pressure": {
+      "mb": {
+        "min": 0,
+        "max": 1060
+      }
+    },
+    "Max Temperature": {
+      "°F": {
+        "min": -130,
+        "max": 140
+      },
+      "°C": {
+        "min": -90,
+        "max": 58
+      }
+    },
+    "Max Temperature Normal": {
+      "°F": {
+        "min": -130,
+        "max": 140
+      },
+      "°C": {
+        "min": -90,
+        "max": 58
+      }
+    },
+    "Min Temperature": {
+      "°F": {
+        "min": -130,
+        "max": 109
+      },
+      "°C": {
+        "min": -90,
+        "max": 43
+      }
+    },
+    "Min Temperature Normal": {
+      "°F": {
+        "min": -130,
+        "max": 109
+      },
+      "°C": {
+        "min": -90,
+        "max": 43
+      }
+    },
+    "Precipitation - Month To Date": {
+      "in": {
+        "min": 0,
+        "max": 180
+      },
+      "cm": {
+        "min": 0,
+        "max": 457
+      },
+      "mm": {
+        "min": 0,
+        "max": 4572
+      }
+    },
+    "Precipitation - Since January 1st": {
+      "in": {
+        "min": 0,
+        "max": 480
+      },
+      "cm": {
+        "min": 0,
+        "max": 1219
+      },
+      "mm": {
+        "min": 0,
+        "max": 12192
+      }
+    },
+    "Precipitation 1Hr": {
+      "in": {
+        "min": 0,
+        "max": 2
+      },
+      "cm": {
+        "min": 0,
+        "max": 5
+      },
+      "mm": {
+        "min": 0,
+        "max": 50
+      }
+    },
+    "Precipitation 2 Day": {
+      "in": {
+        "min": 0,
+        "max": 48
+      },
+      "cm": {
+        "min": 0,
+        "max": 122
+      },
+      "mm": {
+        "min": 0,
+        "max": 1219
+      }
+    },
+    "Precipitation 3 Day": {
+      "in": {
+        "min": 0,
+        "max": 72
+      },
+      "cm": {
+        "min": 0,
+        "max": 182
+      },
+      "mm": {
+        "min": 0,
+        "max": 1828
+      }
+    },
+    "Precipitation 6Hr": {
+      "in": {
+        "min": 0,
+        "max": 6
+      },
+      "cm": {
+        "min": 0,
+        "max": 15
+      },
+      "mm": {
+        "min": 0,
+        "max": 152
+      }
+    },
+    "Precipitation 7 Day": {
+      "in": {
+        "min": 0,
+        "max": 168
+      },
+      "cm": {
+        "min": 0,
+        "max": 427
+      },
+      "mm": {
+        "min": 0,
+        "max": 4267
+      }
+    },
+    "Pressure Change 3Hr": {
+      "mb": {
+        "min": -6,
+        "max": 6
+      }
+    },
+    "Relative Humidity": {
+      "%": {
+        "min": 0,
+        "max": 100
+      }
+    },
+    "Snow 1Hr": {
+      "in": {
+        "min": 0,
+        "max": 6
+      },
+      "cm": {
+        "min": 0,
+        "max": 16
+      },
+      "mm": {
+        "min": 0,
+        "max": 153
+      }
+    },
+    "Snow 6Hr": {
+      "in": {
+        "min": 0,
+        "max": 36
+      },
+      "cm": {
+        "min": 0,
+        "max": 96
+      },
+      "mm": {
+        "min": 0,
+        "max": 918
+      }
+    },
+    "Snowfall - Month To Date": {
+      "in": {
+        "min": 0,
+        "max": 390
+      },
+      "cm": {
+        "min": 0,
+        "max": 991
+      },
+      "mm": {
+        "min": 0,
+        "max": 9906
+      }
+    },
+    "Snowfall - Since July 1st": {
+      "in": {
+        "min": 0,
+        "max": 1140
+      },
+      "cm": {
+        "min": 0,
+        "max": 2896
+      },
+      "mm": {
+        "min": 0,
+        "max": 28956
+      }
+    },
+    "Snowfall - Year To Date": {
+      "in": {
+        "min": 0,
+        "max": 1140
+      },
+      "cm": {
+        "min": 0,
+        "max": 2896
+      },
+      "mm": {
+        "min": 0,
+        "max": 28956
+      }
+    },
+    "Snowfall 2 Day": {
+      "in": {
+        "min": 0,
+        "max": 125
+      },
+      "cm": {
+        "min": 0,
+        "max": 317
+      },
+      "mm": {
+        "min": 0,
+        "max": 3175
+      }
+    },
+    "Snowfall 3 Day": {
+      "in": {
+        "min": 0,
+        "max": 250
+      },
+      "cm": {
+        "min": 0,
+        "max": 625
+      },
+      "mm": {
+        "min": 0,
+        "max": 6250
+      }
+    },
+    "Snowfall 7 Day": {
+      "in": {
+        "min": 0,
+        "max": 560
+      },
+      "cm": {
+        "min": 0,
+        "max": 1423
+      },
+      "mm": {
+        "min": 0,
+        "max": 14224
+      }
+    },
+    "Temperature": {
+      "°F": {
+        "min": -130,
+        "max": 300
+      },
+      "°C": {
+        "min": -90,
+        "max": 149
+      }
+    },
+    "Temperature Change 24Hr": {
+      "°F": {
+        "min": -130,
+        "max": 300
+      },
+      "°C": {
+        "min": -90,
+        "max": 149
+      }
+    },
+    "Visibility": {
+      "mi.": {
+        "min": 0,
+        "max": 30
+      },
+      "km": {
+        "min": 0,
+        "max": 48
+      }
+    },
+    "Wind Gust Speed": {
+      "mph": {
+        "min": 10,
+        "max": 260
+      },
+      "m/s": {
+        "min": 5,
+        "max": 116
+      },
+      "kt": {
+        "min": 10,
+        "max": 226
+      },
+      "km/h": {
+        "min": 20,
+        "max": 425
+      }
+    },
+    "Wind Speed": {
+      "mph": {
+        "min": 0,
+        "max": 260
+      },
+      "m/s": {
+        "min": 0,
+        "max": 116
+      },
+      "kt": {
+        "min": 0,
+        "max": 226
+      },
+      "km/h": {
+        "min": 0,
+        "max": 425
+      }
+    }
+  },
+
+  "FDP" : {
+    "Cloud Cover" : {
+      "%" : {
+        "min" : 0,
+        "max" : 100
+      }
+    },
+    "Dew Point" : {
+      "°F" : {
+        "min" : -40,
+        "max" : 110
+      },
+      "°C" : {
+        "min" : -40,
+        "max" : 43
+      }
+    },
+    "Feels Like Temperature" : {
+      "°F" : {
+        "min" : -130,
+        "max" : 150
+      },
+      "°C" : {
+        "min" : -90,
+        "max" : 62
+      }
+    },
+    "Max Temp Departure" : {
+      "°F" : {
+        "min" : -20,
+        "max" : 80
+      },
+      "°C" : {
+        "min" : -28,
+        "max" : 26
+      }
+    },
+    "Max Temperature" : {
+      "°F" : {
+        "min" : -130,
+        "max" : 140
+      },
+      "°C" : {
+        "min" : -90,
+        "max" : 58
+      }
+    },
+    "Min Temp Departure" : {
+      "°F" : {
+        "min" : -20,
+        "max" : 80
+      },
+      "°C" : {
+        "min" : -28,
+        "max" : 26
+      }
+    },
+    "Min Temperature" : {
+      "°F" : {
+        "min" : -130,
+        "max" : 109
+      },
+      "°C" : {
+        "min" : -90,
+        "max" : 43
+      }
+    },
+    "Precipitation Accumulation" : {
+      "in" : {
+        "min" : 0,
+        "max" : 180
+      },
+      "cm" : {
+        "min" : 0,
+        "max" : 457
+      },
+      "mm" : {
+        "min" : 0,
+        "max" : 4572
+      }
+    },
+    "Snow Accumulation" : {
+      "in" : {
+        "min" : 0,
+        "max" : 250
+      },
+      "cm" : {
+        "min" : 0,
+        "max" : 625
+      },
+      "mm" : {
+        "min" : 0,
+        "max" : 6250
+      }
+    },
+    "Temperature" : {
+      "°F" : {
+        "min" : -130,
+        "max" : 300
+      },
+      "°C" : {
+        "min" : -90,
+        "max" : 149
+      }
+    },
+    "Wind Speed" : {
+      "m/s" : {
+        "min" : 0,
+        "max" : 112
+      },
+      "mph" : {
+        "min" : 0,
+        "max" : 250
+      },
+      "kt" : {
+        "min" : 0,
+        "max" : 217
+      }
+    }
+  }
+}
