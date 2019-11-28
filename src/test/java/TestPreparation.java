@@ -28,7 +28,6 @@ public class TestPreparation {
         envParams = new EnvParams();
         System.setProperty("webdriver.chrome.driver","/home/ubuntu/IdeaProjects/SoftServeInternship/src/test/java/chromedriver");
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
         options.addArguments("start-maximized");
         options.addArguments("disable-infobars");
         options.addArguments("--disable-extensions");
