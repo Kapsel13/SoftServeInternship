@@ -27,14 +27,7 @@ public class TestPreparation {
     public void basicSetUp() {
         envParams = new EnvParams();
         System.setProperty("webdriver.chrome.driver","/home/ubuntu/IdeaProjects/SoftServeInternship/src/test/java/chromedriver");
-        /*ChromeOptions options = new ChromeOptions();
-        options.addArguments("start-maximized");
-        options.addArguments("disable-infobars");
-        options.addArguments("--disable-extensions");
-        options.addArguments("--disable-gpu");
-        options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--no-sandbox");*/
-        driver = new ChromeDriver(/*options*/);
+        driver = new ChromeDriver();
         driver.manage().timeouts().pageLoadTimeout(10,TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(10000, TimeUnit.MILLISECONDS);
         driver.manage().window().maximize();
