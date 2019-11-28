@@ -28,6 +28,10 @@ public class TestPreparation {
         envParams = new EnvParams();
         System.setProperty("webdriver.chrome.driver","/home/ubuntu/IdeaProjects/SoftServeInternship/src/test/java/chromedriver");
         ChromeOptions options = new ChromeOptions();
+        options.addArguments("start-maximized");
+        options.addArguments("disable-infobars");
+        options.addArguments("--disable-extensions");
+        options.addArguments("--disable-gpu");
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--no-sandbox");
         driver = new ChromeDriver(options);
