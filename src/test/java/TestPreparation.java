@@ -37,8 +37,8 @@ public class TestPreparation {
         driver.manage().timeouts().pageLoadTimeout(10,TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(10000, TimeUnit.MILLISECONDS);
         driver.manage().window().maximize();
-        /*driver.get("https://dev.opsdashboard.ibm.com/");
-        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        driver.get("https://dev.opsdashboard.ibm.com/");
+        /*File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 
         validAdminUsername = envParams.getAdminUsername();
         validAdminPassword = envParams.getAdminPassword();
