@@ -32,7 +32,7 @@ public class TestPreparation {
         envParams = new EnvParams();
         System.setProperty("webdriver.chrome.driver","/home/ubuntu/IdeaProjects/SoftServeInternship/src/test/java/chromedriver");
         ChromeOptions options = new ChromeOptions();
-        options.setExperimentalOption("useAutomationExtension", false);
+        /*options.setExperimentalOption("useAutomationExtension", false);
         driver = new ChromeDriver(options);
         driver.manage().timeouts().pageLoadTimeout(10,TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(10000, TimeUnit.MILLISECONDS);
@@ -48,7 +48,7 @@ public class TestPreparation {
         validEditorPassword = envParams.getEditorPassword();
         validReadOnlyUsername = envParams.getReadOnlyUsername();
         validReadOnlyPassword = envParams.getReadOnlyPassword();
-        wait = new WebDriverWait(driver, 5);
+        wait = new WebDriverWait(driver, 5);*/
     }
 
     @After
