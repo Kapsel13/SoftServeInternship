@@ -38,7 +38,7 @@ public class TestPreparation {
         driver.manage().timeouts().implicitlyWait(10000, TimeUnit.MILLISECONDS);
         driver.manage().window().maximize();
         driver.get("https://dev.opsdashboard.ibm.com/");
-        /*File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 
         validAdminUsername = envParams.getAdminUsername();
         validAdminPassword = envParams.getAdminPassword();
@@ -48,7 +48,7 @@ public class TestPreparation {
         validEditorPassword = envParams.getEditorPassword();
         validReadOnlyUsername = envParams.getReadOnlyUsername();
         validReadOnlyPassword = envParams.getReadOnlyPassword();
-        wait = new WebDriverWait(driver, 5);*/
+        wait = new WebDriverWait(driver, 5);
     }
 
     @After
