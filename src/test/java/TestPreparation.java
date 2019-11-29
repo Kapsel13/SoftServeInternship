@@ -32,8 +32,8 @@ public class TestPreparation {
         envParams = new EnvParams();
         System.setProperty("webdriver.chrome.driver","/home/ubuntu/IdeaProjects/SoftServeInternship/src/test/java/chromedriver");
         ChromeOptions options = new ChromeOptions();
-        /*options.setExperimentalOption("useAutomationExtension", false);
-        driver = new ChromeDriver(options);
+        options.setExperimentalOption("useAutomationExtension", false);
+        /*driver = new ChromeDriver(options);
         driver.manage().timeouts().pageLoadTimeout(10,TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(10000, TimeUnit.MILLISECONDS);
         driver.manage().window().maximize();
