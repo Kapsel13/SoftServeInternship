@@ -30,7 +30,14 @@ public class EnvParams {
             readOnlyPassword = props.getProperty("readOnlyPassword");
         }
         catch (IOException e){
-
+            adminUsername = System.getProperty("adminUsername");
+            adminPassword = System.getProperty("adminPassword");
+            creatorUsername = System.getProperty("creatorUsername");
+            creatorPassword = System.getProperty("creatorPassword");
+            editorUsername = System.getProperty("editorUsername");
+            editorPassword = System.getProperty("editorPassword");
+            readOnlyUsername = System.getProperty("readOnlyUsername");
+            readOnlyPassword = System.getProperty("readOnlyPassword");
         }
     }
 
