@@ -1,5 +1,4 @@
 
-import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.By;
@@ -32,8 +31,6 @@ public class TestPreparation {
     protected String validReadOnlyPassword;
     @Before
     public void basicSetUp() throws IOException {
-        /*File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(srcFile,new File("/home/Ubuntu/IdeaProjects/SoftServeInternship/src/test/java/screenshot.png"));*/
         envParams = new EnvParams();
         System.setProperty("webdriver.chrome.driver","/home/ubuntu/IdeaProjects/SoftServeInternship/src/test/java/chromedriver");
         ChromeOptions options = new ChromeOptions();
