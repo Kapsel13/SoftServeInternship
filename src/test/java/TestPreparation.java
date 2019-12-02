@@ -1,3 +1,4 @@
+import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.By;
@@ -11,6 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import setup.EnvParams;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 
@@ -28,7 +30,9 @@ public class TestPreparation {
     protected String validReadOnlyUsername;
     protected String validReadOnlyPassword;
     @Before
-    public void basicSetUp() {
+    public void basicSetUp() throws IOException {
+        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(srcFile,new File("/home/Ubuntu/IdeaProjects/SoftServeInternship/src/test/java/screenshot.png"));
         envParams = new EnvParams();
         System.setProperty("webdriver.chrome.driver","/home/ubuntu/IdeaProjects/SoftServeInternship/src/test/java/chromedriver");
         ChromeOptions options = new ChromeOptions();
@@ -43,8 +47,6 @@ public class TestPreparation {
         driver.manage().timeouts().implicitlyWait(10000, TimeUnit.MILLISECONDS);
         driver.manage().window().maximize();
         driver.get("https://dev.opsdashboard.ibm.com/");
-        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-
         validAdminUsername = envParams.getAdminUsername();
         validAdminPassword = envParams.getAdminPassword();
         validCreatorUsername = envParams.getCreatorUsername();
