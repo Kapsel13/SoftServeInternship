@@ -56,7 +56,7 @@ public class TestPreparation {
         validEditorPassword = envParams.getEditorPassword();
         validReadOnlyUsername = envParams.getReadOnlyUsername();
         validReadOnlyPassword = envParams.getReadOnlyPassword();
-        wait = new WebDriverWait(driver, 5);
+        wait = new WebDriverWait(driver, 15);
     }
 
     @After
