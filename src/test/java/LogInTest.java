@@ -26,6 +26,7 @@ public class LogInTest extends TestPreparation {
     @Test
     public void testResponseOnInvalidAdminPassword() {
         LogInPage logInPage = new LogInPage(driver,wait);
+        System.out.println("**********************"+validAdminUsername+"**************");
         logInPage.provideUsername(validAdminUsername,true);
         logInPage.providePassword(invalidPassword,false);
     }
