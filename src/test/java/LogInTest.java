@@ -23,7 +23,7 @@ public class LogInTest extends TestPreparation {
         logInPage.provideUsername(invalidUsername,false);
     }
 
-    /*@Test
+    @Test
     public void testResponseOnInvalidAdminPassword() {
         LogInPage logInPage = new LogInPage(driver,wait);
         logInPage.provideUsername(validAdminUsername,true);
@@ -83,5 +83,5 @@ public class LogInTest extends TestPreparation {
         logInPage.providePassword(validReadOnlyPassword,true);
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.logOut();
-    }*/
+    }
 }
