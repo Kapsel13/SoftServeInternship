@@ -1,9 +1,6 @@
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.annotations.*;
 import pages.DashboardPage;
 import pages.LogInPage;
 
@@ -31,7 +28,7 @@ public class WeatherAppTest extends TestPreparation {
     private By dashboardTag = By.xpath("(//span[@class='dropdown-item-title'])[1]");
 
 
-    @Before
+    @BeforeMethod
     public void setUp() {
         invalidAdminUsername = TestData.generateData(12);
         invalidAdminPassword = TestData.generateData(12);
@@ -41,21 +38,21 @@ public class WeatherAppTest extends TestPreparation {
         newDashboardText = By.xpath("//span[contains(text(),'"+validDashboardName+"')]");
     }
 
-    @Test
+    @Test(priority = 1)
     public void testResponseOnEmptyLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
         wait.until(ExpectedConditions.visibilityOfElementLocated(locationDisabledButton));
     }
 
-    @Test
+    @Test(priority = 2)
     public void testResponseOnInvalidLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
         dashboardPage.provideInValidLocation(invalidLocation);
     }
 
-    @Test
+    @Test(priority = 3)
     public void testResponseOnEmptyName(){
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
@@ -63,7 +60,7 @@ public class WeatherAppTest extends TestPreparation {
         wait.until(ExpectedConditions.visibilityOfElementLocated(nameDisabledButton));
     }
 
-    @Test
+    @Test(priority = 4)
     public void testRedirectionToTheSpecificDashboardFromSummaryPage(){
         LogInPage logInPage = new LogInPage(driver,wait);
         logInPage.provideUsername(validAdminUsername,true);
@@ -72,7 +69,7 @@ public class WeatherAppTest extends TestPreparation {
         dashboardPage.redirectToTheSpecificDashboard(TestData.rnd);
     }
 
-    @Test
+    @Test(priority = 5)
     public void testRedirectionBetweenSummaryPageAndDashboardPage(){
         LogInPage logInPage = new LogInPage(driver,wait);
         logInPage.provideUsername(validAdminUsername,true);
@@ -82,7 +79,7 @@ public class WeatherAppTest extends TestPreparation {
 
     }
 
-    @Test
+    @Test(priority = 6)
     public void testRedirectionBetweenSummaryPageAndInteractiveMapPage(){
         LogInPage logInPage = new LogInPage(driver,wait);
         logInPage.provideUsername(validAdminUsername,true);
@@ -91,7 +88,7 @@ public class WeatherAppTest extends TestPreparation {
         dashboardPage.redirectBetweenTwoPages(By.xpath(String.format(summaryPageLink, "")),By.xpath(String.format(interactivePageLink, "")),summaryPageText);
     }
 
-    @Test
+    @Test(priority = 7)
     public void testRedirectionBetweenDashboardsPageAndInteractiveMapPage(){
         LogInPage logInPage = new LogInPage(driver,wait);
         logInPage.provideUsername(validAdminUsername,true);
@@ -100,7 +97,7 @@ public class WeatherAppTest extends TestPreparation {
         dashboardPage.redirectBetweenTwoPages(By.xpath(String.format(dashboardPageLink, "")),By.xpath(String.format(interactivePageLink, "")),dashboardPageText);
     }
 
-    @Test
+    @Test(priority = 8)
     public void testRedirectionInteractiveMapPageAndSummaryPage(){
         LogInPage logInPage = new LogInPage(driver,wait);
         logInPage.provideUsername(validAdminUsername,true);
@@ -110,7 +107,7 @@ public class WeatherAppTest extends TestPreparation {
 
     }
 
-    @Test
+    @Test(priority = 9)
     public void testRedirectionInteractiveMapPageAndDashboardPage(){
         LogInPage logInPage = new LogInPage(driver,wait);
         logInPage.provideUsername(validAdminUsername,true);
@@ -120,7 +117,7 @@ public class WeatherAppTest extends TestPreparation {
 
     }
 
-    @After
+    @AfterMethod
     public void tearDown() {
         driver.quit();
     }

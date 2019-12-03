@@ -1,6 +1,7 @@
-import org.junit.Before;
-import org.junit.Test;
 
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 import usersPermissions.EditorUserPermission;
 
 public class EditorUserAssigningPermissionTest extends TestPreparation {
@@ -8,7 +9,7 @@ public class EditorUserAssigningPermissionTest extends TestPreparation {
     private String validDashboardName;
 
 
-    @Before
+    @BeforeMethod
     public void setUp(){
         validDashboardName = "!-auto_test-"+TestData.generateData(8);
         city = TestData.getRandomCity();

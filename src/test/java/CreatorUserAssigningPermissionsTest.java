@@ -1,6 +1,7 @@
-import org.junit.Before;
-import org.junit.Test;
 import org.openqa.selenium.By;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 import usersPermissions.CreatorUserPermission;
 
 public class CreatorUserAssigningPermissionsTest extends TestPreparation {
@@ -8,7 +9,7 @@ public class CreatorUserAssigningPermissionsTest extends TestPreparation {
     private String validDashboardName;
     private By editorUserCheckBox = By.xpath("(//div[@class='body-row' and contains(.,'editor test')]//div[contains(@class,'mat-checkbox-inner-container')])[1]");
     private By readOnlyUserCheckBox = By.xpath("(//div[@class='body-row' and contains(.,'readonly test')]//div[contains(@class,'mat-checkbox-inner-container')])[1]");
-    @Before
+    @BeforeMethod
     public void setUp(){
         validDashboardName = "!-auto_test-"+TestData.generateData(8);
         city = TestData.getRandomCity();
