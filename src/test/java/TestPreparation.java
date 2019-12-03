@@ -1,5 +1,4 @@
-import org.junit.After;
-import org.junit.Before;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -8,6 +7,10 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
 import setup.EnvParams;
 
 import java.io.File;
@@ -28,7 +31,7 @@ public class TestPreparation {
     protected String validEditorPassword;
     protected String validReadOnlyUsername;
     protected String validReadOnlyPassword;
-    @Before
+    @BeforeMethod
     public void basicSetUp() throws IOException {
         envParams = new EnvParams();
         System.setProperty("webdriver.chrome.driver","/home/ubuntu/IdeaProjects/SoftServeInternship/src/test/java/chromedriver");
@@ -52,10 +55,10 @@ public class TestPreparation {
         validEditorPassword = envParams.getEditorPassword();
         validReadOnlyUsername = envParams.getReadOnlyUsername();
         validReadOnlyPassword = envParams.getReadOnlyPassword();
-        wait = new WebDriverWait(driver, 60);
+        wait = new WebDriverWait(driver, 15);
     }
 
-    @After
+    @AfterMethod
     public void tearDown() {
         driver.quit();
     }

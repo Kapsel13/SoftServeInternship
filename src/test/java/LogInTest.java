@@ -1,7 +1,6 @@
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 import pages.DashboardPage;
 import pages.LogInPage;
 
@@ -11,19 +10,19 @@ public class LogInTest extends TestPreparation {
     private String invalidUsername;
     private String invalidPassword;
 
-    @Before
+    @BeforeMethod
     public void setUp() {
         invalidUsername = TestData.generateData(12);
         invalidPassword = TestData.generateData(12);
     }
 
-    @Test
+    @Test(priority = 1)
     public void testResponseOnInvalidAdminUsername(){
         LogInPage logInPage = new LogInPage(driver,wait);
         logInPage.provideUsername(invalidUsername,false);
     }
 
-    @Test
+    @Test(priority = 2)
     public void testResponseOnInvalidAdminPassword() {
         LogInPage logInPage = new LogInPage(driver,wait);
         System.out.println("**********************"+validAdminUsername+"**************");
@@ -31,7 +30,7 @@ public class LogInTest extends TestPreparation {
         logInPage.providePassword(invalidPassword,false);
     }
 
-    @Test
+    @Test(priority = 3)
     public void testResponseOnValidAdminPasswordAndLogOut() {
         LogInPage logInPage = new LogInPage(driver,wait);
         logInPage.provideUsername(validAdminUsername,true);
@@ -40,14 +39,14 @@ public class LogInTest extends TestPreparation {
         dashboardPage.logOut();
     }
 
-    @Test
+    @Test(priority = 4)
     public void testResponseOnInvalidCreatorPassword(){
         LogInPage logInPage = new LogInPage(driver,wait);
         logInPage.provideUsername(validCreatorUsername,true);
         logInPage.providePassword(invalidPassword,false);
     }
 
-    @Test
+    @Test(priority = 5)
     public void testResponseOnValidCreatorPasswordAndLogOut(){
         LogInPage logInPage = new LogInPage(driver,wait);
         logInPage.provideUsername(validCreatorUsername,true);
@@ -56,14 +55,14 @@ public class LogInTest extends TestPreparation {
         dashboardPage.logOut();
     }
 
-    @Test
+    @Test(priority = 6)
     public void testResponseOnInvalidEditorPassword(){
         LogInPage logInPage = new LogInPage(driver,wait);
         logInPage.provideUsername(validEditorUsername,true);
         logInPage.providePassword(invalidPassword,false);
     }
 
-    @Test
+    @Test(priority = 7)
     public void testResponseOnValidEditorPasswordAndLogOut(){
         LogInPage logInPage = new LogInPage(driver,wait);
         logInPage.provideUsername(validEditorUsername,true);
@@ -71,13 +70,13 @@ public class LogInTest extends TestPreparation {
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.logOut();
     }
-    @Test
+    @Test(priority = 8)
     public void testResponseOnInvalidReadOnlyPassword(){
         LogInPage logInPage = new LogInPage(driver,wait);
         logInPage.provideUsername(validReadOnlyUsername,true);
         logInPage.providePassword(invalidPassword,false);
     }
-    @Test
+    @Test(priority = 9)
     public void testResponseOnValidReadOnlyPasswordAndLogOut(){
         LogInPage logInPage = new LogInPage(driver,wait);
         logInPage.provideUsername(validReadOnlyUsername,true);

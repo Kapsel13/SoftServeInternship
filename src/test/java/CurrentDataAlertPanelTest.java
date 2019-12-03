@@ -1,4 +1,4 @@
-import org.junit.Test;
+import org.testng.annotations.Test;
 import pages.DashboardPage;
 import panels.CurrentDataAlertPanel;
 

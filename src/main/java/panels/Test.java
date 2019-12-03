@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class Test {
     protected static Random rnd = new Random();
-    @org.junit.Test
+    @org.testng.annotations.Test
     public void test() {
         try {
             JSONParser jsonParser = new JSONParser();

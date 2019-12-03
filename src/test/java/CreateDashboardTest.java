@@ -1,7 +1,7 @@
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 import org.openqa.selenium.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 import pages.DashboardPage;
 
 public class CreateDashboardTest extends TestPreparation{
@@ -17,7 +17,7 @@ public class CreateDashboardTest extends TestPreparation{
     private String validDashboardName;
     protected By newDashboardText;
 
-    @Before
+    @BeforeMethod
     public void setUp() {
         validDashboardName = "!-auto_test-"+TestData.generateData(8);
         city = TestData.getRandomCity();
@@ -32,7 +32,7 @@ public class CreateDashboardTest extends TestPreparation{
 
     }
 
-    @Test
+    @Test(priority = 1)
     public void testResponseOnCreatingActiveDashboardWithCityAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
@@ -43,7 +43,7 @@ public class CreateDashboardTest extends TestPreparation{
 
     }
 
-    @Test
+    @Test(priority = 2)
     public void testResponseOnCreatingActiveDashboardWithZipCodeAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
@@ -54,7 +54,7 @@ public class CreateDashboardTest extends TestPreparation{
 
     }
 
-    @Test
+    @Test(priority = 3)
     public void testResponseOnCreatingActiveDashboardWithGpsCoordsAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
@@ -65,7 +65,7 @@ public class CreateDashboardTest extends TestPreparation{
 
     }
 
-    @Test
+    @Test(priority = 4)
     public void testResponseOnCreatingActiveDashboardWithIcaoCodeAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
@@ -76,7 +76,7 @@ public class CreateDashboardTest extends TestPreparation{
 
     }
 
-    @Test
+    @Test(priority = 5)
     public void testResponseOnCreatingInActiveDashboardWithCityAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
@@ -87,7 +87,7 @@ public class CreateDashboardTest extends TestPreparation{
 
     }
 
-    @Test
+    @Test(priority = 6)
     public void testResponseOnCreatingInActiveDashboardWithZipCodeAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
@@ -97,7 +97,7 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.createNewDashboard(newDashboardText);
     }
 
-    @Test
+    @Test(priority = 7)
     public void testResponseOnCreatingInActiveDashboardWithIcaoCodeAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
@@ -107,7 +107,7 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.createNewDashboard(newDashboardText);
     }
 
-    @Test
+    @Test(priority = 8)
     public void testResponseOnCreatingInActiveDashboardWithGpsCoordsAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
@@ -117,7 +117,7 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.createNewDashboard(newDashboardText);
     }
 
-    @Test
+    @Test(priority = 9)
     public void testResponseOnCreatingCustomRangeDashboardWithCityAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
@@ -128,7 +128,7 @@ public class CreateDashboardTest extends TestPreparation{
 
     }
 
-    @Test
+    @Test(priority = 10)
     public void testResponseOnCreatingCustomRangeDashboardWithZipCodeAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
@@ -139,7 +139,7 @@ public class CreateDashboardTest extends TestPreparation{
 
     }
 
-    @Test
+    @Test(priority = 11)
     public void testResponseOnCreatingCustomRangeDashboardWithIcaoCodeAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
@@ -150,7 +150,7 @@ public class CreateDashboardTest extends TestPreparation{
 
     }
 
-    @Test
+    @Test(priority = 12)
     public void testResponseOnCreatingCustomRangeDashboardWithGpsCoordsAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
