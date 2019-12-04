@@ -14,19 +14,19 @@ public class CreatorUserAssigningPermissionsTest extends TestPreparation {
         validDashboardName = "!-auto_test-"+TestData.generateData(8);
         city = TestData.getRandomCity();
     }
-    @Test
+    @Test(priority = 1)
     public void testAssigningReadOnlyPermissionToEditorUser(){
         CreatorUserPermission creatorUserPermission = new CreatorUserPermission(driver,wait);
         creatorUserPermission.addPermissionForUserAndLogOut(validCreatorUsername,validCreatorPassword,"",editorUserCheckBox,city,validDashboardName);
         creatorUserPermission.checkAddedPermission(validEditorUsername,validEditorPassword,validDashboardName,"");
     }
-    @Test
+    @Test(priority = 2)
     public void testAssigningEditPermissionToEditorUser(){
         CreatorUserPermission creatorUserPermission = new CreatorUserPermission(driver,wait);
         creatorUserPermission.addPermissionForUserAndLogOut(validCreatorUsername,validCreatorPassword,"edit",editorUserCheckBox,city,validDashboardName);
         creatorUserPermission.checkAddedPermission(validEditorUsername,validEditorPassword,validDashboardName,"edit");
     }
-    @Test
+    @Test(priority = 3)
     public void testAssigningReadOnlyPermissionToReadOnlyUser(){
         CreatorUserPermission creatorUserPermission = new CreatorUserPermission(driver,wait);
         creatorUserPermission.addPermissionForUserAndLogOut(validCreatorUsername,validCreatorPassword,"",readOnlyUserCheckBox,city,validDashboardName);

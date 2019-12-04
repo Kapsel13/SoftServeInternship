@@ -15,14 +15,14 @@ public class EditorUserAssigningPermissionTest extends TestPreparation {
         city = TestData.getRandomCity();
     }
 
-    @Test
+    @Test(priority = 1)
     public void testAssigningReadOnlyPermissionToEditorUser(){
         EditorUserPermission editorUserPermission = new EditorUserPermission(driver,wait);
         editorUserPermission.addPermissionForUserAndLogOut(validEditorUsername,validEditorPassword,"editor");
         editorUserPermission.checkAddedPermission(validEditorUsername,validEditorPassword);
     }
 
-    @Test
+    @Test(priority = 2)
     public void testAssigningReadOnlyPermissionToReadOnlyUser(){
         EditorUserPermission editorUserPermission = new EditorUserPermission(driver,wait);
         editorUserPermission.addPermissionForUserAndLogOut(validEditorUsername,validEditorPassword,"read-only");
