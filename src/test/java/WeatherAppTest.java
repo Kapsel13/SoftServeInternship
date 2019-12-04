@@ -52,7 +52,7 @@ public class WeatherAppTest extends TestPreparation {
         dashboardPage.provideInValidLocation(invalidLocation);
     }
 
-    @Test(priority = 3)
+    /*@Test(priority = 3)
     public void testResponseOnEmptyName(){
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
@@ -115,7 +115,7 @@ public class WeatherAppTest extends TestPreparation {
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.redirectBetweenTwoPages(By.xpath(String.format(interactivePageLink, "")),By.xpath(String.format(dashboardPageLink, "")),canvas);
 
-    }
+    }*/
 
     @AfterMethod
     public void tearDown() {
