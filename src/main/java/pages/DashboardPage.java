@@ -16,9 +16,9 @@ public class DashboardPage extends BasePage{
     protected By usernameInput = By.xpath("//input[@placeholder='Username']");
     protected By loginButton = By.xpath("//button[@class='login-button']");
     protected By dashboardDropdownButton = By.xpath("//button[@id='dashboard-dropdown']");
-    protected By createNewDashboardOption = By.xpath( "//button[contains(@class, 'dropdown-item')]/span[contains(text(), 'Create New Dashboard')]");
-    protected By confirmButton = By.xpath("//button[@class='button-highlight']");
-    protected By searchLocationInput = By.xpath("//input[@placeholder='Search by City, Zip or Lat, Lon']");
+    protected By createNewDashboardOption = By.xpath("//span[contains(text(),'Create New Dashboard')]");
+    protected By confirmButton = By.xpath("(//button[contains(@class,'button-common') and contains(text(),'Next')])[1]");
+    protected By searchLocationInput = By.xpath("//input[@placeholder='Enter city, state, zipcode or lat/long']");
     protected String locationInList = "(//div[contains(@class, 'search-results')]//div[contains(@class, 'location') and contains(text(), '%s')])[1]";
     protected By locationEnabledButton = By.xpath("//div[contains(text(), 'What location would you like to see data for?')]/../../..//button[contains(text(), 'Next')]");
     protected By nameInput = By.xpath("//input[@placeholder='Enter name']");
@@ -40,7 +40,7 @@ public class DashboardPage extends BasePage{
     protected By dashboardPageText = By.xpath("//span[contains(text(),'My Dashboards')]");
     protected By dashboards = By.xpath("((//table[contains(@class, 'dashboard-list-table')]//tr))//td[1]");
     protected String dashboardsInList = "((//table[contains(@class, 'dashboard-list-table')]//tr)[%d])//td[1]";
-    protected By dashboardTag = By.xpath("(//span[@class='dropdown-item-title'])[1]");
+    protected By dashboardTag = By.xpath("(//span[contains(@class,'dropdown-item-title')])[1]");
     protected By summaryPageText = By.xpath("//span[contains(text(),'Summary')]");
     protected By activeDashboard = By.xpath("//div[contains(@class,'dropdown-menu')]//button[not(contains(., '(Inactive)'))]");
     protected String activeDashboardInList = "(//div[contains(@class,'dropdown-menu')]//button[not(contains(., '(Inactive)'))])[%d]";
@@ -133,7 +133,7 @@ public class DashboardPage extends BasePage{
         wait.until(ExpectedConditions.elementToBeClickable(inActiveButton));
         driver.findElement(inActiveButton).click();
         wait.until(ExpectedConditions.elementToBeClickable(driver.findElements(monitorButton).get(3)));
-        driver.findElements(monitorButton).get(3).click();
+        driver.findElements(monitorButton).get(4).click();
     }
 
     public void setCustomRangeMonitoring(Random rnd, String startDate, String endDate){
@@ -160,8 +160,13 @@ public class DashboardPage extends BasePage{
     }
 
     public void redirectBetweenTwoPages(By pageLink, By pageLink2, By pageElement){
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         driver.findElement(pageLink).click();
-        waitUntillAllElementsVisible(Arrays.asList(pageLink,pageElement));
+        waitUntillAllElementsVisible(Arrays.asList(pageLink2,pageElement));
 
         driver.findElement(pageLink2).click();
     }
@@ -176,8 +181,9 @@ public class DashboardPage extends BasePage{
 
         int numberOfDashboards = driver.findElements(dashboards).size();
         int dashboardNumber = rnd.nextInt(numberOfDashboards-1)+1;
-        String dashboardText = driver.findElement(By.xpath(String.format(dashboardsInList,dashboardNumber))).getText();
-        driver.findElement(By.xpath(String.format(dashboardsInList,dashboardNumber))).click();
+        WebElement dashboardElement = scrollElementIntoView(By.xpath(String.format(dashboardsInList,dashboardNumber)));
+        String dashboardText = dashboardElement.getText();
+        dashboardElement.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardTag));
 
         String dashboardTagText = driver.findElement(dashboardTag).getText();
@@ -189,9 +195,10 @@ public class DashboardPage extends BasePage{
     }
 
     public void chooseActiveDashboard(Random rnd){
+        wait.until(ExpectedConditions.elementToBeClickable(dashboardDropdownButton));
         driver.findElement(dashboardDropdownButton).click();
         int activeDashboardsNumber = driver.findElements(activeDashboard).size();
-        int numberOfActiveDashboard = /*rnd.nextInt(activeDashboardsNumber-1)+1;*/8;
+        int numberOfActiveDashboard = rnd.nextInt(activeDashboardsNumber-1)+1;;
         WebElement activeDashboardToClick = scrollElementIntoView(By.xpath(String.format(activeDashboardInList,numberOfActiveDashboard)));
         activeDashboardToClick.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelOption));

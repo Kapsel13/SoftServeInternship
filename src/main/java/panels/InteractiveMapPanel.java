@@ -42,6 +42,11 @@ public class InteractiveMapPanel extends BasePanel {
         wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelButton));
         driver.findElement(addPanelButton).click();
         waitUntillAllElementsVisible(Arrays.asList(interactiveMap,interactiveMapZoom,interactiveMapLayerButton));
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         driver.findElement(mapIcon).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(mapSettingsButton));
         driver.findElement(mapSettingsButton).click();

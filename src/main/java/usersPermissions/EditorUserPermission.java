@@ -15,12 +15,13 @@ public class EditorUserPermission extends BaseUserPermissions {
     private By dashboardDropdownButton = By.xpath("//button[contains(@class,'dropdown-toggle')]");
     private By dashboards = By.xpath("//div[contains(@class,'dropdown-menu')]//button");
     private String specificDashboard = "(//div[contains(@class,'dropdown-menu')]//button)[%d]";
-    private By editOption =By.xpath("//span[@class='dropdown-item-title' and contains(text(),'Edit Selected')]");
+    private By editOption =By.xpath("//span[contains(@class,'dropdown-item-title') and contains(text(),'Edit Selected')]");
     private By confirmNameButton = By.xpath("(//button[contains(text(),'Next')])[1]");
     private By confirmMonitoringButton = By.xpath("(//button[contains(text(),'Next')])[2]");
-    private By readOnlyPermission = By.xpath("(//div[@aria-labelledby='assignPeoplePermissionDropdown']//button[contains(text(),'Read-Only')])[2]");
+    private By readOnlyPermission = By.xpath("//div[@aria-labelledby='assignPeoplePermissionDropdown']//button[contains(text(),'Read-Only')]");
     private By editorUserPermissionDropdown = By.xpath("//div[@class='body-row' and contains(.,'editor test')]//svg-icon");
     private By saveEditionButton = By.xpath("//button[contains(text(),'Save')]");
+    private String dashboardName = "";
     public EditorUserPermission(WebDriver driver, WebDriverWait wait){super(driver, wait);}
 
     public void addPermissionForUserAndLogOut(String username,String password,String permissionUser){
@@ -35,6 +36,7 @@ public class EditorUserPermission extends BaseUserPermissions {
         boolean editableDashboard = false;
         while((dashboardIndex<=numberOfDashboards)&&(!editableDashboard)){
             WebElement dashboardInAList = scrollElementIntoView(By.xpath(String.format(specificDashboard,dashboardIndex)));
+            dashboardName = dashboardInAList.getText();
             dashboardInAList.click();
             wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
             driver.findElement(dashboardDropdownButton).click();
@@ -54,7 +56,7 @@ public class EditorUserPermission extends BaseUserPermissions {
         if(permissionUser.equals("editor")){
             wait.until(ExpectedConditions.visibilityOfElementLocated(editorUserPermissionDropdown));
             driver.findElement(editorUserPermissionDropdown).click();
-            wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(readOnlyPermission));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(readOnlyPermission));
             driver.findElement(readOnlyPermission).click();
         }
         else{
@@ -69,12 +71,31 @@ public class EditorUserPermission extends BaseUserPermissions {
         dashboardPage.logOut();
     }
 
-    public void checkAddedPermission(String username, String password){
+    public void checkAddedPermission(String username, String password,String permissionUser){
         LogInPage logInPage = new LogInPage(driver,wait);
         logInPage.provideUsername(username, true);
         logInPage.providePassword(password, true);
         wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
         driver.findElement(dashboardDropdownButton).click();
+        String specificDashboardName="";
+        if(permissionUser=="readOnly"){
+            int numberOfDashboards = driver.findElements(dashboards).size();
+            boolean dashboardFound = false;
+            int dashboardIndex=1;
+            while((dashboardIndex<=numberOfDashboards)&&(!dashboardFound)){
+                WebElement dashboardInAList = scrollElementIntoView(By.xpath(String.format(specificDashboard,dashboardIndex)));
+                specificDashboardName = dashboardInAList.getText();
+                if(specificDashboardName==dashboardName){
+                    dashboardFound=true;
+                    dashboardInAList.click();
+                }
+                else{
+                    dashboardIndex++;
+                }
+            }
+            wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
+            driver.findElement(dashboardDropdownButton).click();
+        }
         wait.until(ExpectedConditions.invisibilityOfElementLocated(editOption));
     }
 }

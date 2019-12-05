@@ -22,13 +22,13 @@ public class ForecastDataAlertPanel extends BasePanel {
     protected static Random rnd = new Random();
     private By forecastDataAlertPanelOption = By.xpath("//div[@class='panel-title']//span[contains(text(),'Forecast Data')]");
     private By confirmChoosingPanelButton = By.xpath("//input[@value='Ok']");
-    private By selectWeatherTypeButton = By.xpath("//div[@class='phoenix-typeahead__input__arrow']");
-    private By weatherTypes = By.xpath("//input[@class='phoenix-typeahead__list__item ng-star-inserted']");
-    private String weatherTypeInAList = "(//input[@class='phoenix-typeahead__list__item ng-star-inserted'])[%d]";
+    private By selectWeatherTypeButton = By.xpath("//div[@class='phoenix-typeahead-input-arrow']");
+    private By weatherTypes = By.xpath("//input[@class='phoenix-typeahead-list-item ng-star-inserted']");
+    private String weatherTypeInAList = "(//input[@class='phoenix-typeahead-list-item ng-star-inserted'])[%d]";
     private By dataConfirmButton = By.xpath("//form[not(contains(@class,'ng-untouched'))]//button[contains(text(),'Next')]");
     private By triggerTypeConfirmButton = By.xpath("//form[contains(.,'Preview: Alert Mode')]//button[contains(text(),'Next')]");
     private By alertMessageConfirmButton = By.xpath("//form[contains(.,'Preview: Default alert message')]//button[contains(text(),'Next')]");
-    private By notificationConfirmButton = By.xpath("//form[contains(.,'Preview: Email Notification')]//button[contains(text(),'Next')]");
+    private By notificationConfirmButton = By.xpath("(//button[contains(text(),'Next')])[4]");
     private By addPanelButton = By.xpath("//button[contains(text(),'Add Panel')]");
     private By timeOfAlert = By.xpath("(//time[contains(@class,'preview-update-time')])[1]");
     private By titleOfChart = By.xpath("(//span[@class='highcharts-legend-item'])[1]");

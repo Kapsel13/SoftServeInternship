@@ -15,9 +15,9 @@ public class CurrentWeatherConditonsPanel extends BasePanel {
     private By confirmChoosingPanelButton = By.xpath("//input[@value='Ok']");
     private By addPanelButton = By.xpath("//button[contains(text(),'Add Panel')]");
     private By currentWeatherConditionTagText = By.xpath("(//span[contains(text(),'Current Conditions')])[1]");
-    private By usUnitsSign = By.xpath("(//span[@class='units' and contains(text(),'F')])[1]");
+    private By usUnitsSign = By.xpath("(//span[contains(@class,'units') and contains(text(),'F')])[1]");
     private By metricUnitsOption = By.xpath("//div[contains(text(),'Metric')]");
-    private By metricUnitsSign = By.xpath("(//span[@class='units' and contains(text(),'C')])[1]");
+    private By metricUnitsSign = By.xpath("(//span[contains(@class,'units') and contains(text(),'C')])[1]");
     private By temperatureNumber = By.xpath("(//span[@class='primary-temp'])[1]");
     public CurrentWeatherConditonsPanel(WebDriver driver, WebDriverWait wait){
         super(driver,wait);

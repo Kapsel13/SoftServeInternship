@@ -2,6 +2,7 @@ package usersPermissions;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.DashboardPage;
@@ -14,8 +15,9 @@ public class AdminUserPermission extends BaseUserPermissions {
     private By creatorUserPermissionDropdown = By.xpath("//div[@class='body-row' and contains(.,'creator test')]//svg-icon");
     private By editPermission = By.xpath("//div[@aria-labelledby='assignPeoplePermissionDropdown']//button[contains(text(),'Edit')]");
     private By dashboardDropdownButton = By.xpath("//button[contains(@class,'dropdown-toggle')]");
-    private By editOption =By.xpath("//span[@class='dropdown-item-title' and contains(text(),'Edit Selected')]");
+    private By editOption =By.xpath("//span[contains(@class,'dropdown-item-title') and contains(text(),'Edit Selected')]");
     private By deleteOption = By.xpath("//span[@class='dropdown-item-title' and contains(text(),'Delete Selected')]");
+    private String addedDashboard = "//span[contains(@class,'dropdown-item-title') and contains(text(),'%s')]";
     public AdminUserPermission(WebDriver driver, WebDriverWait wait){
         super(driver, wait);
     }
@@ -53,6 +55,16 @@ public class AdminUserPermission extends BaseUserPermissions {
         LogInPage logInPage = new LogInPage(driver, wait);
         logInPage.provideUsername(username, true);
         logInPage.providePassword(password, true);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
+        driver.findElement(dashboardDropdownButton).click();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        BaseUserPermissions baseUserPermissions = new BaseUserPermissions(driver,wait);
+        WebElement dashboardToCheck = baseUserPermissions.scrollElementIntoView(By.xpath(String.format(addedDashboard,validDashboardName)));
+        dashboardToCheck.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
         driver.findElement(dashboardDropdownButton).click();
         if(permissionType.equals("edit")){

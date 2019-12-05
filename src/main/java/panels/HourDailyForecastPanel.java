@@ -12,7 +12,7 @@ public class HourDailyForecastPanel extends BasePanel {
     private By confirmChoosingPanelButton = By.xpath("//input[@value='Ok']");
     private By addPanelButton = By.xpath("//button[contains(text(),'Add Panel')]");
     private By hoursAndDailyForecastPanelOption = By.xpath("//div[@class='panel-title' and contains(., 'Hourly & Daily')]");
-    private By hoursAndDailyForecastTagText = By.xpath("//p[contains(text(),'Hourly Forecast')]");
+    private By hoursAndDailyForecastTagText = By.xpath("(//p[contains(text(),'Hourly')])[1]");
     private By hoursAndDailyForecastTime = By.xpath("(//h3[@class='time'])[1]");
     private By hoursAndDailyForecastMenuHourOption = By.xpath("(//div[contains(@class,'controls') and contains(.,'Hourly')])[1]");
 

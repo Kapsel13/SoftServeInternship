@@ -16,6 +16,7 @@ public class CreatorUserAssigningPermissionsTest extends TestPreparation {
     }
     @Test(priority = 1)
     public void testAssigningReadOnlyPermissionToEditorUser(){
+        System.out.println(city);
         CreatorUserPermission creatorUserPermission = new CreatorUserPermission(driver,wait);
         creatorUserPermission.addPermissionForUserAndLogOut(validCreatorUsername,validCreatorPassword,"",editorUserCheckBox,city,validDashboardName);
         creatorUserPermission.checkAddedPermission(validEditorUsername,validEditorPassword,validDashboardName,"");

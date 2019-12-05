@@ -17,7 +17,7 @@ public class WeatherAppTest extends TestPreparation {
     private By locationDisabledButton = By.xpath("//div[contains(text(), 'What location would you like to see data for?')]/../../..//button[@disabled]");
     private By nameDisabledButton = By.xpath("//div[contains(text(), 'What do you want to call this dashboard?')]/../../..//button[@disabled]");
     private By newDashboardText;
-    private String summaryPageLink = "//div[contains(@class, '%s')]/a[contains(text(),'Summary')]";
+    private By summaryPageLink = By.xpath("//div[contains(@class,'')]/a[contains(text(),'Summary')]");
     private String dashboardPageLink = "//div[contains(@class, '%s')]/a[contains(text(),'Dashboards')]";
     private String interactivePageLink = "//div[contains(@class, '%s')]/a[contains(text(),'Interactive Map')]";
     private By canvas = By.xpath("//canvas[@width='1920']");
@@ -51,15 +51,13 @@ public class WeatherAppTest extends TestPreparation {
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
         dashboardPage.provideInValidLocation(invalidLocation);
     }
-
-    /*@Test(priority = 3)
+    @Test(priority = 3)
     public void testResponseOnEmptyName(){
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
         dashboardPage.selectValidLocation(city,city);
         wait.until(ExpectedConditions.visibilityOfElementLocated(nameDisabledButton));
     }
-
     @Test(priority = 4)
     public void testRedirectionToTheSpecificDashboardFromSummaryPage(){
         LogInPage logInPage = new LogInPage(driver,wait);
@@ -75,7 +73,7 @@ public class WeatherAppTest extends TestPreparation {
         logInPage.provideUsername(validAdminUsername,true);
         logInPage.providePassword(validAdminPassword,true);
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
-        dashboardPage.redirectBetweenTwoPages(By.xpath(String.format(summaryPageLink, "")),By.xpath(String.format(dashboardPageLink, "")),summaryPageText);
+        dashboardPage.redirectBetweenTwoPages(summaryPageLink,By.xpath(String.format(dashboardPageLink, "")),summaryPageText);
 
     }
 
@@ -85,7 +83,7 @@ public class WeatherAppTest extends TestPreparation {
         logInPage.provideUsername(validAdminUsername,true);
         logInPage.providePassword(validAdminPassword,true);
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
-        dashboardPage.redirectBetweenTwoPages(By.xpath(String.format(summaryPageLink, "")),By.xpath(String.format(interactivePageLink, "")),summaryPageText);
+        dashboardPage.redirectBetweenTwoPages(summaryPageLink,By.xpath(String.format(interactivePageLink, "")),summaryPageText);
     }
 
     @Test(priority = 7)
@@ -103,7 +101,7 @@ public class WeatherAppTest extends TestPreparation {
         logInPage.provideUsername(validAdminUsername,true);
         logInPage.providePassword(validAdminPassword,true);
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
-        dashboardPage.redirectBetweenTwoPages(By.xpath(String.format(interactivePageLink, "")),By.xpath(String.format(summaryPageLink, "")),canvas);
+        dashboardPage.redirectBetweenTwoPages(By.xpath(String.format(interactivePageLink, "")),summaryPageLink,canvas);
 
     }
 
@@ -115,7 +113,7 @@ public class WeatherAppTest extends TestPreparation {
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.redirectBetweenTwoPages(By.xpath(String.format(interactivePageLink, "")),By.xpath(String.format(dashboardPageLink, "")),canvas);
 
-    }*/
+    }
 
     @AfterMethod
     public void tearDown() {
