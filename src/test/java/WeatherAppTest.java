@@ -115,9 +115,4 @@ public class WeatherAppTest extends TestPreparation {
         dashboardPage.redirectBetweenTwoPages(By.xpath(String.format(interactivePageLink, "")),By.xpath(String.format(dashboardPageLink, "")),canvas);
 
     }
-
-    @AfterMethod
-    public void tearDown() {
-        driver.quit();
-    }
 }
