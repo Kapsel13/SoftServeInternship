@@ -170,6 +170,11 @@ public class DashboardPage extends BasePage{
             e.printStackTrace();
         }
         driver.findElement(pageLink).click();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         waitUntillAllElementsVisible(Arrays.asList(pageLink2,pageElement));
 
         driver.findElement(pageLink2).click();
@@ -188,6 +193,11 @@ public class DashboardPage extends BasePage{
         WebElement dashboardElement = scrollElementIntoView(By.xpath(String.format(dashboardsInList,dashboardNumber)));
         String dashboardText = dashboardElement.getText();
         dashboardElement.click();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardTag));
 
         String dashboardTagText = driver.findElement(dashboardTag).getText();
