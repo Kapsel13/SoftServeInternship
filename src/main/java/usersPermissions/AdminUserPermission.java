@@ -16,7 +16,7 @@ public class AdminUserPermission extends BaseUserPermissions {
     private By editPermission = By.xpath("//div[@aria-labelledby='assignPeoplePermissionDropdown']//button[contains(text(),'Edit')]");
     private By dashboardDropdownButton = By.xpath("//button[contains(@class,'dropdown-toggle')]");
     private By editOption =By.xpath("//span[contains(@class,'dropdown-item-title') and contains(text(),'Edit Selected')]");
-    private By deleteOption = By.xpath("//span[@class='dropdown-item-title' and contains(text(),'Delete Selected')]");
+    private By deleteOption = By.xpath("//span[contains(@class,'dropdown-item-title') and contains(text(),'Delete Selected')]");
     private String addedDashboard = "//span[contains(@class,'dropdown-item-title') and contains(text(),'%s')]";
     public AdminUserPermission(WebDriver driver, WebDriverWait wait){
         super(driver, wait);

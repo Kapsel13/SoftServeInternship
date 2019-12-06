@@ -4,6 +4,7 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import usersPermissions.BaseUserPermissions;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -25,8 +26,8 @@ public class DashboardPage extends BasePage{
     protected By monitorButton = By.xpath("//button[contains(text(), 'Next')]");
     protected By createButton = By.xpath("//button[contains(text(),'Create')]");
     protected By nameEnabledButton = By.xpath("//div[contains(text(), 'What do you want to call this dashboard?')]/../../..//button[contains(text(), 'Next')]");
-    protected By inActiveButton = By.xpath("//div[contains(text(),'In-Active')]");
-    protected By customRangeButton = By.xpath("//div[contains(text(),'Custom Range')]");
+    protected By inActiveButton = By.xpath("//span[contains(text(),'In-Active')]");
+    protected By customRangeButton = By.xpath("//span[contains(text(),'Custom Range')]");
     protected By startDateInput = By.xpath("//input[@placeholder='Select start date']");
     protected By endDateInput = By.xpath("//input[@placeholder='Select end date']");
     protected String startTimeInList = "(//div[@formgroupname='start']//button[contains(@class,'dropdown-item')])[%d]";
@@ -50,6 +51,9 @@ public class DashboardPage extends BasePage{
     protected By deleteButton = By.xpath("//span[contains(text(),'Delete') and not(contains(text(),'Selected'))]");
     protected By confirmDeletingButton = By.xpath("//button[contains(text(),'YES')]");
     protected By okButton = By.xpath("//button[contains(text(),'OK')]");
+    private String addedDashboard = "//span[contains(@class,'dropdown-item-title') and contains(text(),'%s')]";
+    private By deleteOption = By.xpath("//span[contains(@class,'dropdown-item-title') and contains(text(),'Delete Selected')]");
+    private By deleteConfirm = By.xpath("//button[contains(@class,'button-common') and contains(text(),'Yes')]");
     protected static Random rnd = new Random();
 
     public DashboardPage(WebDriver driver, WebDriverWait wait){
@@ -133,7 +137,7 @@ public class DashboardPage extends BasePage{
         wait.until(ExpectedConditions.elementToBeClickable(inActiveButton));
         driver.findElement(inActiveButton).click();
         wait.until(ExpectedConditions.elementToBeClickable(driver.findElements(monitorButton).get(3)));
-        driver.findElements(monitorButton).get(4).click();
+        driver.findElements(monitorButton).get(3).click();
     }
 
     public void setCustomRangeMonitoring(Random rnd, String startDate, String endDate){
@@ -237,5 +241,21 @@ public class DashboardPage extends BasePage{
         }
     }
 
-
+    public void deleteDashboard(String dashboardName){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
+        driver.findElement(dashboardDropdownButton).click();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        WebElement dashboardToCheck = scrollElementIntoView(By.xpath(String.format(addedDashboard,dashboardName)));
+        dashboardToCheck.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
+        driver.findElement(dashboardDropdownButton).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(deleteOption));
+        driver.findElement(deleteOption).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(deleteConfirm));
+        driver.findElement(deleteConfirm).click();
+    }
 }

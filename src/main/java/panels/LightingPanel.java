@@ -21,7 +21,7 @@ public class LightingPanel extends BasePanel {
     private By confirmMapSettingsButton = By.xpath("//form[contains(.,'Map Style')]//button[contains(text(),'Next')]");
     private By addPanelButton = By.xpath("//button[contains(text(),'Add Panel')]");
     private By headerIcon = By.xpath("(//header[contains(@class,'lightning-header')]//svg-icon)[1]");
-    private By clearStatus = By.xpath("(//div[@class='clear-status'])[1]");
+    private By clearStatus = By.xpath("(//div[contains(@class,'clear-status')])[1]");
     private By lightningRangeUnitsDropdownArrow = By.xpath("//div[contains(@class,'range-radius-units')]//svg-icon");
     private By lightningRangeUnits = By.xpath("//div[contains(@class,'range-radius-units')]//div//button");
     private String lightningRangeUnit = "(//div[contains(@class,'range-radius-units')]//div//button)[%d]";

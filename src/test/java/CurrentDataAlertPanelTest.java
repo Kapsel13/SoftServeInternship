@@ -3,7 +3,7 @@ import pages.DashboardPage;
 import panels.CurrentDataAlertPanel;
 
 public class CurrentDataAlertPanelTest extends TestPreparation {
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testAddingCurrentDataAlertPanel(){
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.beginAddingNewPanel(validAdminUsername,validAdminPassword);

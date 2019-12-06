@@ -3,6 +3,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pages.DashboardPage;
+import pages.LogInPage;
 
 public class CreateDashboardTest extends TestPreparation{
 
@@ -32,7 +33,7 @@ public class CreateDashboardTest extends TestPreparation{
 
     }
 
-    @Test(priority = 1)
+    @Test(retryAnalyzer = Retry.class)
     public void testResponseOnCreatingActiveDashboardWithCityAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
@@ -40,10 +41,15 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.selectValidName(validDashboardName);
         dashboardPage.setActiveMonitoring();
         dashboardPage.createNewDashboard(newDashboardText);
+        dashboardPage.logOut();
+        LogInPage logInPage = new LogInPage(driver, wait);
+        logInPage.provideUsername(validAdminUsername, true);
+        logInPage.providePassword(validAdminPassword, true);
+        dashboardPage.deleteDashboard(validDashboardName);
 
     }
 
-    @Test(priority = 2)
+    @Test(retryAnalyzer = Retry.class)
     public void testResponseOnCreatingActiveDashboardWithZipCodeAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
@@ -51,10 +57,14 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.selectValidName(validDashboardName);
         dashboardPage.setActiveMonitoring();
         dashboardPage.createNewDashboard(newDashboardText);
-
+        dashboardPage.logOut();
+        LogInPage logInPage = new LogInPage(driver, wait);
+        logInPage.provideUsername(validAdminUsername, true);
+        logInPage.providePassword(validAdminPassword, true);
+        dashboardPage.deleteDashboard(validDashboardName);
     }
 
-    @Test(priority = 3)
+    @Test(retryAnalyzer = Retry.class)
     public void testResponseOnCreatingActiveDashboardWithGpsCoordsAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
@@ -62,10 +72,14 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.selectValidName(validDashboardName);
         dashboardPage.setActiveMonitoring();
         dashboardPage.createNewDashboard(newDashboardText);
-
+        dashboardPage.logOut();
+        LogInPage logInPage = new LogInPage(driver, wait);
+        logInPage.provideUsername(validAdminUsername, true);
+        logInPage.providePassword(validAdminPassword, true);
+        dashboardPage.deleteDashboard(validDashboardName);
     }
 
-    @Test(priority = 4)
+    @Test(retryAnalyzer = Retry.class)
     public void testResponseOnCreatingActiveDashboardWithIcaoCodeAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
@@ -73,10 +87,14 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.selectValidName(validDashboardName);
         dashboardPage.setActiveMonitoring();
         dashboardPage.createNewDashboard(newDashboardText);
-
+        dashboardPage.logOut();
+        LogInPage logInPage = new LogInPage(driver, wait);
+        logInPage.provideUsername(validAdminUsername, true);
+        logInPage.providePassword(validAdminPassword, true);
+        dashboardPage.deleteDashboard(validDashboardName);
     }
 
-    @Test(priority = 5)
+    @Test(retryAnalyzer = Retry.class)
     public void testResponseOnCreatingInActiveDashboardWithCityAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
@@ -84,10 +102,14 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.selectValidName(validDashboardName);
         dashboardPage.setInActiveMonitoring();
         dashboardPage.createNewDashboard(newDashboardText);
-
+        dashboardPage.logOut();
+        LogInPage logInPage = new LogInPage(driver, wait);
+        logInPage.provideUsername(validAdminUsername, true);
+        logInPage.providePassword(validAdminPassword, true);
+        dashboardPage.deleteDashboard(validDashboardName);
     }
 
-    @Test(priority = 6)
+    @Test(retryAnalyzer = Retry.class)
     public void testResponseOnCreatingInActiveDashboardWithZipCodeAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
@@ -95,9 +117,14 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.selectValidName(validDashboardName);
         dashboardPage.setInActiveMonitoring();
         dashboardPage.createNewDashboard(newDashboardText);
+        dashboardPage.logOut();
+        LogInPage logInPage = new LogInPage(driver, wait);
+        logInPage.provideUsername(validAdminUsername, true);
+        logInPage.providePassword(validAdminPassword, true);
+        dashboardPage.deleteDashboard(validDashboardName);
     }
 
-    @Test(priority = 7)
+    @Test(retryAnalyzer = Retry.class)
     public void testResponseOnCreatingInActiveDashboardWithIcaoCodeAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
@@ -105,9 +132,14 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.selectValidName(validDashboardName);
         dashboardPage.setInActiveMonitoring();
         dashboardPage.createNewDashboard(newDashboardText);
+        dashboardPage.logOut();
+        LogInPage logInPage = new LogInPage(driver, wait);
+        logInPage.provideUsername(validAdminUsername, true);
+        logInPage.providePassword(validAdminPassword, true);
+        dashboardPage.deleteDashboard(validDashboardName);
     }
 
-    @Test(priority = 8)
+    @Test(retryAnalyzer = Retry.class)
     public void testResponseOnCreatingInActiveDashboardWithGpsCoordsAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
@@ -115,9 +147,14 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.selectValidName(validDashboardName);
         dashboardPage.setInActiveMonitoring();
         dashboardPage.createNewDashboard(newDashboardText);
+        dashboardPage.logOut();
+        LogInPage logInPage = new LogInPage(driver, wait);
+        logInPage.provideUsername(validAdminUsername, true);
+        logInPage.providePassword(validAdminPassword, true);
+        dashboardPage.deleteDashboard(validDashboardName);
     }
 
-    @Test(priority = 9)
+    @Test(retryAnalyzer = Retry.class)
     public void testResponseOnCreatingCustomRangeDashboardWithCityAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
@@ -125,10 +162,14 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.selectValidName(validDashboardName);
         dashboardPage.setCustomRangeMonitoring(TestData.rnd,startDate,endDate);
         dashboardPage.createNewDashboard(newDashboardText);
-
+        dashboardPage.logOut();
+        LogInPage logInPage = new LogInPage(driver, wait);
+        logInPage.provideUsername(validAdminUsername, true);
+        logInPage.providePassword(validAdminPassword, true);
+        dashboardPage.deleteDashboard(validDashboardName);
     }
 
-    @Test(priority = 10)
+    @Test(retryAnalyzer = Retry.class)
     public void testResponseOnCreatingCustomRangeDashboardWithZipCodeAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
@@ -136,10 +177,14 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.selectValidName(validDashboardName);
         dashboardPage.setCustomRangeMonitoring(TestData.rnd,startDate,endDate);
         dashboardPage.createNewDashboard(newDashboardText);
-
+        dashboardPage.logOut();
+        LogInPage logInPage = new LogInPage(driver, wait);
+        logInPage.provideUsername(validAdminUsername, true);
+        logInPage.providePassword(validAdminPassword, true);
+        dashboardPage.deleteDashboard(validDashboardName);
     }
 
-    @Test(priority = 11)
+    @Test(retryAnalyzer = Retry.class)
     public void testResponseOnCreatingCustomRangeDashboardWithIcaoCodeAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
@@ -147,10 +192,14 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.selectValidName(validDashboardName);
         dashboardPage.setCustomRangeMonitoring(TestData.rnd,startDate,endDate);
         dashboardPage.createNewDashboard(newDashboardText);
-
+        dashboardPage.logOut();
+        LogInPage logInPage = new LogInPage(driver, wait);
+        logInPage.provideUsername(validAdminUsername, true);
+        logInPage.providePassword(validAdminPassword, true);
+        dashboardPage.deleteDashboard(validDashboardName);
     }
 
-    @Test(priority = 12)
+    @Test(retryAnalyzer = Retry.class)
     public void testResponseOnCreatingCustomRangeDashboardWithGpsCoordsAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
@@ -158,6 +207,10 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.selectValidName(validDashboardName);
         dashboardPage.setCustomRangeMonitoring(TestData.rnd,startDate,endDate);
         dashboardPage.createNewDashboard(newDashboardText);
-
+        dashboardPage.logOut();
+        LogInPage logInPage = new LogInPage(driver, wait);
+        logInPage.provideUsername(validAdminUsername, true);
+        logInPage.providePassword(validAdminPassword, true);
+        dashboardPage.deleteDashboard(validDashboardName);
     }
 }

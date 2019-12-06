@@ -5,7 +5,7 @@ import panels.CurrentWeatherConditonsPanel;
 
 public class CurrentWeatherConditionsPanelTest extends TestPreparation {
 
-    @Test(priority = 1)
+    @Test(retryAnalyzer = Retry.class)
     public void testAddingCurrentWeatherConditionsPanelWithUsUnits(){
        DashboardPage dashboardPage = new DashboardPage(driver,wait);
        dashboardPage.beginAddingNewPanel(validAdminUsername,validAdminPassword);
@@ -13,7 +13,7 @@ public class CurrentWeatherConditionsPanelTest extends TestPreparation {
        currentWeatherConditonsPanel.addNewCurrentWeatherConditionalPanel("U");
     }
 
-    @Test(priority = 2)
+    @Test(retryAnalyzer = Retry.class)
     public void testAddingCurrentWeatherConditionsPanelWithMetricsUnits(){
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.beginAddingNewPanel(validAdminUsername,validAdminPassword);

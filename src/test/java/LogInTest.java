@@ -16,13 +16,13 @@ public class LogInTest extends TestPreparation {
         invalidPassword = TestData.generateData(12);
     }
 
-    @Test(priority = 1)
+    @Test(retryAnalyzer = Retry.class)
     public void testResponseOnInvalidAdminUsername(){
         LogInPage logInPage = new LogInPage(driver,wait);
         logInPage.provideUsername(invalidUsername,false);
     }
 
-    @Test(priority = 2)
+    @Test(retryAnalyzer = Retry.class)
     public void testResponseOnInvalidAdminPassword() {
         LogInPage logInPage = new LogInPage(driver,wait);
         System.out.println("**********************"+validAdminUsername+"**************");
@@ -30,7 +30,7 @@ public class LogInTest extends TestPreparation {
         logInPage.providePassword(invalidPassword,false);
     }
 
-    @Test(priority = 3)
+    @Test(retryAnalyzer = Retry.class)
     public void testResponseOnValidAdminPasswordAndLogOut() {
         LogInPage logInPage = new LogInPage(driver,wait);
         logInPage.provideUsername(validAdminUsername,true);
@@ -39,14 +39,14 @@ public class LogInTest extends TestPreparation {
         dashboardPage.logOut();
     }
 
-    @Test(priority = 4)
+    @Test(retryAnalyzer = Retry.class)
     public void testResponseOnInvalidCreatorPassword(){
         LogInPage logInPage = new LogInPage(driver,wait);
         logInPage.provideUsername(validCreatorUsername,true);
         logInPage.providePassword(invalidPassword,false);
     }
 
-    @Test(priority = 5)
+    @Test(retryAnalyzer = Retry.class)
     public void testResponseOnValidCreatorPasswordAndLogOut(){
         LogInPage logInPage = new LogInPage(driver,wait);
         logInPage.provideUsername(validCreatorUsername,true);
@@ -55,14 +55,14 @@ public class LogInTest extends TestPreparation {
         dashboardPage.logOut();
     }
 
-    @Test(priority = 6)
+    @Test(retryAnalyzer = Retry.class)
     public void testResponseOnInvalidEditorPassword(){
         LogInPage logInPage = new LogInPage(driver,wait);
         logInPage.provideUsername(validEditorUsername,true);
         logInPage.providePassword(invalidPassword,false);
     }
 
-    @Test(priority = 7)
+    @Test(retryAnalyzer = Retry.class)
     public void testResponseOnValidEditorPasswordAndLogOut(){
         LogInPage logInPage = new LogInPage(driver,wait);
         logInPage.provideUsername(validEditorUsername,true);
@@ -70,13 +70,13 @@ public class LogInTest extends TestPreparation {
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.logOut();
     }
-    @Test(priority = 8)
+    @Test(retryAnalyzer = Retry.class)
     public void testResponseOnInvalidReadOnlyPassword(){
         LogInPage logInPage = new LogInPage(driver,wait);
         logInPage.provideUsername(validReadOnlyUsername,true);
         logInPage.providePassword(invalidPassword,false);
     }
-    @Test(priority = 9)
+    @Test(retryAnalyzer = Retry.class)
     public void testResponseOnValidReadOnlyPasswordAndLogOut(){
         LogInPage logInPage = new LogInPage(driver,wait);
         logInPage.provideUsername(validReadOnlyUsername,true);

@@ -1,5 +1,6 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.testng.IRetryAnalyzer;
 import org.testng.annotations.*;
 import pages.DashboardPage;
 import pages.LogInPage;
@@ -38,27 +39,27 @@ public class WeatherAppTest extends TestPreparation {
         newDashboardText = By.xpath("//span[contains(text(),'"+validDashboardName+"')]");
     }
 
-    @Test(priority = 1)
+    @Test(retryAnalyzer = Retry.class)
     public void testResponseOnEmptyLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
         wait.until(ExpectedConditions.visibilityOfElementLocated(locationDisabledButton));
     }
 
-    @Test(priority = 2)
+    @Test(retryAnalyzer = Retry.class)
     public void testResponseOnInvalidLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
         dashboardPage.provideInValidLocation(invalidLocation);
     }
-    @Test(priority = 3)
+    @Test(retryAnalyzer = Retry.class)
     public void testResponseOnEmptyName(){
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
         dashboardPage.selectValidLocation(city,city);
         wait.until(ExpectedConditions.visibilityOfElementLocated(nameDisabledButton));
     }
-    @Test(priority = 4)
+    @Test(retryAnalyzer = Retry.class)
     public void testRedirectionToTheSpecificDashboardFromSummaryPage(){
         LogInPage logInPage = new LogInPage(driver,wait);
         logInPage.provideUsername(validAdminUsername,true);
@@ -67,7 +68,7 @@ public class WeatherAppTest extends TestPreparation {
         dashboardPage.redirectToTheSpecificDashboard(TestData.rnd);
     }
 
-    @Test(priority = 5)
+    @Test(retryAnalyzer = Retry.class)
     public void testRedirectionBetweenSummaryPageAndDashboardPage(){
         LogInPage logInPage = new LogInPage(driver,wait);
         logInPage.provideUsername(validAdminUsername,true);
@@ -77,7 +78,7 @@ public class WeatherAppTest extends TestPreparation {
 
     }
 
-    @Test(priority = 6)
+    @Test(retryAnalyzer = Retry.class)
     public void testRedirectionBetweenSummaryPageAndInteractiveMapPage(){
         LogInPage logInPage = new LogInPage(driver,wait);
         logInPage.provideUsername(validAdminUsername,true);
@@ -86,7 +87,7 @@ public class WeatherAppTest extends TestPreparation {
         dashboardPage.redirectBetweenTwoPages(summaryPageLink,By.xpath(String.format(interactivePageLink, "")),summaryPageText);
     }
 
-    @Test(priority = 7)
+    @Test(retryAnalyzer = Retry.class)
     public void testRedirectionBetweenDashboardsPageAndInteractiveMapPage(){
         LogInPage logInPage = new LogInPage(driver,wait);
         logInPage.provideUsername(validAdminUsername,true);
@@ -95,7 +96,7 @@ public class WeatherAppTest extends TestPreparation {
         dashboardPage.redirectBetweenTwoPages(By.xpath(String.format(dashboardPageLink, "")),By.xpath(String.format(interactivePageLink, "")),dashboardPageText);
     }
 
-    @Test(priority = 8)
+    @Test(retryAnalyzer = Retry.class)
     public void testRedirectionInteractiveMapPageAndSummaryPage(){
         LogInPage logInPage = new LogInPage(driver,wait);
         logInPage.provideUsername(validAdminUsername,true);
@@ -105,7 +106,7 @@ public class WeatherAppTest extends TestPreparation {
 
     }
 
-    @Test(priority = 9)
+    @Test(retryAnalyzer = Retry.class)
     public void testRedirectionInteractiveMapPageAndDashboardPage(){
         LogInPage logInPage = new LogInPage(driver,wait);
         logInPage.provideUsername(validAdminUsername,true);

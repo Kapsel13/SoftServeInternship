@@ -1,8 +1,11 @@
 import org.openqa.selenium.By;
 
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import pages.DashboardPage;
+import pages.LogInPage;
 import usersPermissions.AdminUserPermission;
 
 
@@ -19,39 +22,69 @@ public class AdminUserAssigningPermissionsTest extends TestPreparation {
         city = TestData.getRandomCity();
     }
 
-    @Test(priority = 1)
+    @Test(retryAnalyzer = Retry.class)
     public void testAssigningReadOnlyPermissionsToCreatorUser(){
         AdminUserPermission adminUserPermission = new AdminUserPermission(driver,wait);
         adminUserPermission.addPermissionForUserAndLogOut(validAdminUsername,validAdminPassword,"creator","",creatorCheckBox,city,validDashboardName);
         adminUserPermission.checkAddedPermission(validCreatorUsername,validCreatorPassword,validDashboardName,"creator","");
+        DashboardPage dashboardPage = new DashboardPage(driver, wait);
+        dashboardPage.logOut();
+        LogInPage logInPage = new LogInPage(driver, wait);
+        logInPage.provideUsername(validAdminUsername, true);
+        logInPage.providePassword(validAdminPassword, true);
+        dashboardPage.deleteDashboard(validDashboardName);
     }
 
-    @Test(priority = 2)
+    @Test(retryAnalyzer = Retry.class)
     public void testAssigningEditPermissionToCreatorUser(){
         AdminUserPermission adminUserPermission = new AdminUserPermission(driver,wait);
         adminUserPermission.addPermissionForUserAndLogOut(validAdminUsername,validAdminPassword,"creator","edit",creatorCheckBox,city,validDashboardName);
         adminUserPermission.checkAddedPermission(validCreatorUsername,validCreatorPassword,validDashboardName,"creator","edit");
+        DashboardPage dashboardPage = new DashboardPage(driver, wait);
+        dashboardPage.logOut();
+        LogInPage logInPage = new LogInPage(driver, wait);
+        logInPage.provideUsername(validAdminUsername, true);
+        logInPage.providePassword(validAdminPassword, true);
+        dashboardPage.deleteDashboard(validDashboardName);
     }
 
-    @Test(priority = 3)
+    @Test(retryAnalyzer = Retry.class)
     public void testAssigningReadOnlyPermissionsToEditorUser(){
         AdminUserPermission adminUserPermission = new AdminUserPermission(driver,wait);
         adminUserPermission.addPermissionForUserAndLogOut(validAdminUsername,validAdminPassword,"editor","",editorUserCheckBox,city,validDashboardName);
         adminUserPermission.checkAddedPermission(validEditorUsername,validEditorPassword,validDashboardName,"editor","");
+        DashboardPage dashboardPage = new DashboardPage(driver, wait);
+        dashboardPage.logOut();
+        LogInPage logInPage = new LogInPage(driver, wait);
+        logInPage.provideUsername(validAdminUsername, true);
+        logInPage.providePassword(validAdminPassword, true);
+        dashboardPage.deleteDashboard(validDashboardName);
     }
 
-    @Test(priority = 4)
+    @Test(retryAnalyzer = Retry.class)
     public void testAssigningEditPermissionsToEditUser(){
         AdminUserPermission adminUserPermission = new AdminUserPermission(driver,wait);
         adminUserPermission.addPermissionForUserAndLogOut(validAdminUsername,validAdminPassword,"editor","edit",editorUserCheckBox,city,validDashboardName);
         adminUserPermission.checkAddedPermission(validEditorUsername,validEditorPassword,validDashboardName,"editor","edit");
+        DashboardPage dashboardPage = new DashboardPage(driver, wait);
+        dashboardPage.logOut();
+        LogInPage logInPage = new LogInPage(driver, wait);
+        logInPage.provideUsername(validAdminUsername, true);
+        logInPage.providePassword(validAdminPassword, true);
+        dashboardPage.deleteDashboard(validDashboardName);
     }
 
-    @Test(priority = 5)
+    @Test(retryAnalyzer = Retry.class)
     public void testAssigningReadOnlyPermissionToReadOnlyUser(){
         AdminUserPermission adminUserPermission = new AdminUserPermission(driver,wait);
         adminUserPermission.addPermissionForUserAndLogOut(validAdminUsername,validAdminPassword,"readOnly","",readOnlyUserCheckBox,city,validDashboardName);
         adminUserPermission.checkAddedPermission(validReadOnlyUsername,validReadOnlyPassword,validDashboardName,"readOnly","");
+        DashboardPage dashboardPage = new DashboardPage(driver, wait);
+        dashboardPage.logOut();
+        LogInPage logInPage = new LogInPage(driver, wait);
+        logInPage.provideUsername(validAdminUsername, true);
+        logInPage.providePassword(validAdminPassword, true);
+        dashboardPage.deleteDashboard(validDashboardName);
     }
 
 }

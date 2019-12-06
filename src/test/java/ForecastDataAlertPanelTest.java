@@ -5,7 +5,7 @@ import panels.ForecastDataAlertPanel;
 
 public class ForecastDataAlertPanelTest extends TestPreparation {
 
- @Test
+ @Test/*(retryAnalyzer = Retry.class)*/
     public void testAddingForecastDataAlertPanel(){
      DashboardPage dashboardPage = new DashboardPage(driver,wait);
      dashboardPage.beginAddingNewPanel(validAdminUsername,validAdminPassword);

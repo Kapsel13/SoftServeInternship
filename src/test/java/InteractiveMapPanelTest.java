@@ -5,7 +5,7 @@ import panels.InteractiveMapPanel;
 public class InteractiveMapPanelTest extends TestPreparation {
 
 
-   @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testAddingInteractiveMapPanel(){
        DashboardPage dashboardPage = new DashboardPage(driver,wait);
        dashboardPage.beginAddingNewPanel(validAdminUsername,validAdminPassword);
