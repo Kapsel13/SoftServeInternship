@@ -44,5 +44,10 @@ public class CreatorUserAssigningPermissionsTest extends TestPreparation {
         logInPage.provideUsername(validAdminUsername, true);
         logInPage.providePassword(validAdminPassword, true);
         dashboardPage.deleteDashboard(validDashboardName);
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
