@@ -43,7 +43,8 @@ public class TestPreparation {
         driver = new ChromeDriver(options);
         driver.manage().timeouts().pageLoadTimeout(10,TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(10000, TimeUnit.MILLISECONDS);
-        driver.manage().window().setSize(new Dimension(1920, 1080));
+        driver.manage().window().maximize();
+        //driver.manage().window().setSize(new Dimension(2040, 1140));
 
 
         driver.get("https://dev.opsdashboard.ibm.com/");
