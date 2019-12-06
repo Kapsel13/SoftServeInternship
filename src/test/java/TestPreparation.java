@@ -1,4 +1,5 @@
 
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -42,7 +43,9 @@ public class TestPreparation {
         driver = new ChromeDriver(options);
         driver.manage().timeouts().pageLoadTimeout(10,TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(10000, TimeUnit.MILLISECONDS);
-        driver.manage().window().maximize();
+        driver.manage().window().setSize(new Dimension(1920, 1080));
+
+
         driver.get("https://dev.opsdashboard.ibm.com/");
         validAdminUsername = envParams.getAdminUsername();
         validAdminPassword = envParams.getAdminPassword();
@@ -52,7 +55,7 @@ public class TestPreparation {
         validEditorPassword = envParams.getEditorPassword();
         validReadOnlyUsername = envParams.getReadOnlyUsername();
         validReadOnlyPassword = envParams.getReadOnlyPassword();
-        wait = new WebDriverWait(driver, 60);
+        wait = new WebDriverWait(driver, 15);
     }
 
     @AfterMethod
