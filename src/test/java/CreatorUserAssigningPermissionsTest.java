@@ -23,30 +23,21 @@ public class CreatorUserAssigningPermissionsTest extends TestPreparation {
         CreatorUserPermission creatorUserPermission = new CreatorUserPermission(driver,wait);
         creatorUserPermission.addPermissionForUserAndLogOut(validCreatorUsername,validCreatorPassword,"",editorUserCheckBox,city,validDashboardName);
         creatorUserPermission.checkAddedPermission(validEditorUsername,validEditorPassword,validDashboardName,"");
-        DashboardPage dashboardPage = new DashboardPage(driver, wait);
-        dashboardPage.logOut();
-        LogInPage logInPage = new LogInPage(driver, wait);
-        logInPage.provideUsername(validAdminUsername, true);
-        logInPage.providePassword(validAdminPassword, true);
-        dashboardPage.deleteDashboard(validDashboardName);
     }
     @Test(retryAnalyzer = Retry.class)
     public void testAssigningEditPermissionToEditorUser(){
         CreatorUserPermission creatorUserPermission = new CreatorUserPermission(driver,wait);
         creatorUserPermission.addPermissionForUserAndLogOut(validCreatorUsername,validCreatorPassword,"edit",editorUserCheckBox,city,validDashboardName);
         creatorUserPermission.checkAddedPermission(validEditorUsername,validEditorPassword,validDashboardName,"edit");
-        DashboardPage dashboardPage = new DashboardPage(driver, wait);
-        dashboardPage.logOut();
-        LogInPage logInPage = new LogInPage(driver, wait);
-        logInPage.provideUsername(validAdminUsername, true);
-        logInPage.providePassword(validAdminPassword, true);
-        dashboardPage.deleteDashboard(validDashboardName);
     }
     @Test(retryAnalyzer = Retry.class)
     public void testAssigningReadOnlyPermissionToReadOnlyUser(){
         CreatorUserPermission creatorUserPermission = new CreatorUserPermission(driver,wait);
         creatorUserPermission.addPermissionForUserAndLogOut(validCreatorUsername,validCreatorPassword,"",readOnlyUserCheckBox,city,validDashboardName);
         creatorUserPermission.checkAddedPermission(validReadOnlyUsername,validReadOnlyPassword,validDashboardName,"");
+    }
+    @AfterMethod
+    public void deleteAddedDashboard(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.logOut();
         LogInPage logInPage = new LogInPage(driver, wait);

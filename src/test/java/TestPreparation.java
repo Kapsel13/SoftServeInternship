@@ -31,7 +31,7 @@ public class TestPreparation {
     @BeforeMethod
     public void basicSetUp() throws IOException {
         envParams = new EnvParams();
-        System.setProperty("webdriver.chrome.driver","/home/ubuntu/IdeaProjects/SoftServeInternship/src/test/java/chromedriver"/*"/Users/mkowal/IdeaProjects/WeatherApplication2/src/test/java/chromedriver")*/);
+        System.setProperty("webdriver.chrome.driver","/home/ubuntu/IdeaProjects/SoftServeInternship/src/test/java/chromedriver"/*"/Users/mkowal/IdeaProjects/WeatherApplication2/src/test/java/chromedriver"*/);
         ChromeOptions options = new ChromeOptions();
         options.setExperimentalOption("useAutomationExtension", false);
         options.addArguments("--headless");

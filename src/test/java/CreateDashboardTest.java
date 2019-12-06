@@ -1,4 +1,5 @@
 import org.openqa.selenium.*;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -41,12 +42,6 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.selectValidName(validDashboardName);
         dashboardPage.setActiveMonitoring();
         dashboardPage.createNewDashboard(newDashboardText);
-        dashboardPage.logOut();
-        LogInPage logInPage = new LogInPage(driver, wait);
-        logInPage.provideUsername(validAdminUsername, true);
-        logInPage.providePassword(validAdminPassword, true);
-        dashboardPage.deleteDashboard(validDashboardName);
-
     }
 
     @Test(retryAnalyzer = Retry.class)
@@ -57,11 +52,6 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.selectValidName(validDashboardName);
         dashboardPage.setActiveMonitoring();
         dashboardPage.createNewDashboard(newDashboardText);
-        dashboardPage.logOut();
-        LogInPage logInPage = new LogInPage(driver, wait);
-        logInPage.provideUsername(validAdminUsername, true);
-        logInPage.providePassword(validAdminPassword, true);
-        dashboardPage.deleteDashboard(validDashboardName);
     }
 
     @Test(retryAnalyzer = Retry.class)
@@ -72,11 +62,6 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.selectValidName(validDashboardName);
         dashboardPage.setActiveMonitoring();
         dashboardPage.createNewDashboard(newDashboardText);
-        dashboardPage.logOut();
-        LogInPage logInPage = new LogInPage(driver, wait);
-        logInPage.provideUsername(validAdminUsername, true);
-        logInPage.providePassword(validAdminPassword, true);
-        dashboardPage.deleteDashboard(validDashboardName);
     }
 
     @Test(retryAnalyzer = Retry.class)
@@ -87,11 +72,6 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.selectValidName(validDashboardName);
         dashboardPage.setActiveMonitoring();
         dashboardPage.createNewDashboard(newDashboardText);
-        dashboardPage.logOut();
-        LogInPage logInPage = new LogInPage(driver, wait);
-        logInPage.provideUsername(validAdminUsername, true);
-        logInPage.providePassword(validAdminPassword, true);
-        dashboardPage.deleteDashboard(validDashboardName);
     }
 
     @Test(retryAnalyzer = Retry.class)
@@ -102,11 +82,6 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.selectValidName(validDashboardName);
         dashboardPage.setInActiveMonitoring();
         dashboardPage.createNewDashboard(newDashboardText);
-        dashboardPage.logOut();
-        LogInPage logInPage = new LogInPage(driver, wait);
-        logInPage.provideUsername(validAdminUsername, true);
-        logInPage.providePassword(validAdminPassword, true);
-        dashboardPage.deleteDashboard(validDashboardName);
     }
 
     @Test(retryAnalyzer = Retry.class)
@@ -117,11 +92,6 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.selectValidName(validDashboardName);
         dashboardPage.setInActiveMonitoring();
         dashboardPage.createNewDashboard(newDashboardText);
-        dashboardPage.logOut();
-        LogInPage logInPage = new LogInPage(driver, wait);
-        logInPage.provideUsername(validAdminUsername, true);
-        logInPage.providePassword(validAdminPassword, true);
-        dashboardPage.deleteDashboard(validDashboardName);
     }
 
     @Test(retryAnalyzer = Retry.class)
@@ -132,11 +102,6 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.selectValidName(validDashboardName);
         dashboardPage.setInActiveMonitoring();
         dashboardPage.createNewDashboard(newDashboardText);
-        dashboardPage.logOut();
-        LogInPage logInPage = new LogInPage(driver, wait);
-        logInPage.provideUsername(validAdminUsername, true);
-        logInPage.providePassword(validAdminPassword, true);
-        dashboardPage.deleteDashboard(validDashboardName);
     }
 
     @Test(retryAnalyzer = Retry.class)
@@ -147,11 +112,6 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.selectValidName(validDashboardName);
         dashboardPage.setInActiveMonitoring();
         dashboardPage.createNewDashboard(newDashboardText);
-        dashboardPage.logOut();
-        LogInPage logInPage = new LogInPage(driver, wait);
-        logInPage.provideUsername(validAdminUsername, true);
-        logInPage.providePassword(validAdminPassword, true);
-        dashboardPage.deleteDashboard(validDashboardName);
     }
 
     @Test(retryAnalyzer = Retry.class)
@@ -162,11 +122,6 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.selectValidName(validDashboardName);
         dashboardPage.setCustomRangeMonitoring(TestData.rnd,startDate,endDate);
         dashboardPage.createNewDashboard(newDashboardText);
-        dashboardPage.logOut();
-        LogInPage logInPage = new LogInPage(driver, wait);
-        logInPage.provideUsername(validAdminUsername, true);
-        logInPage.providePassword(validAdminPassword, true);
-        dashboardPage.deleteDashboard(validDashboardName);
     }
 
     @Test(retryAnalyzer = Retry.class)
@@ -177,11 +132,6 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.selectValidName(validDashboardName);
         dashboardPage.setCustomRangeMonitoring(TestData.rnd,startDate,endDate);
         dashboardPage.createNewDashboard(newDashboardText);
-        dashboardPage.logOut();
-        LogInPage logInPage = new LogInPage(driver, wait);
-        logInPage.provideUsername(validAdminUsername, true);
-        logInPage.providePassword(validAdminPassword, true);
-        dashboardPage.deleteDashboard(validDashboardName);
     }
 
     @Test(retryAnalyzer = Retry.class)
@@ -192,11 +142,6 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.selectValidName(validDashboardName);
         dashboardPage.setCustomRangeMonitoring(TestData.rnd,startDate,endDate);
         dashboardPage.createNewDashboard(newDashboardText);
-        dashboardPage.logOut();
-        LogInPage logInPage = new LogInPage(driver, wait);
-        logInPage.provideUsername(validAdminUsername, true);
-        logInPage.providePassword(validAdminPassword, true);
-        dashboardPage.deleteDashboard(validDashboardName);
     }
 
     @Test(retryAnalyzer = Retry.class)
@@ -207,6 +152,10 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.selectValidName(validDashboardName);
         dashboardPage.setCustomRangeMonitoring(TestData.rnd,startDate,endDate);
         dashboardPage.createNewDashboard(newDashboardText);
+    }
+    @AfterMethod
+    public void deleteAddedDashboard(){
+        DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.logOut();
         LogInPage logInPage = new LogInPage(driver, wait);
         logInPage.provideUsername(validAdminUsername, true);
