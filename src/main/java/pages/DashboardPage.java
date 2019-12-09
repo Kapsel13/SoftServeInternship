@@ -223,13 +223,6 @@ public class DashboardPage extends BasePage{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        try {
-            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelOption));
     }
 
     public void beginAddingNewPanel(String validUsername,String validPassword) {

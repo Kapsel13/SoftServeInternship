@@ -41,6 +41,11 @@ public class InteractiveMapPanel extends BasePanel {
         String chooseMapStyle = chooseRandomOption(mapStyle,specificMapStyle,"mapStyle: ",1);
         wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelButton));
         driver.findElement(addPanelButton).click();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         waitUntillAllElementsVisible(Arrays.asList(interactiveMap,interactiveMapZoom,interactiveMapLayerButton));
         try {
             Thread.sleep(3000);
