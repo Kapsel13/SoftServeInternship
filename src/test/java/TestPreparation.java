@@ -60,9 +60,6 @@ public class TestPreparation {
         validReadOnlyUsername = envParams.getReadOnlyUsername();
         validReadOnlyPassword = envParams.getReadOnlyPassword();
         wait = new WebDriverWait(driver, 15);
-        //File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        //FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
-        //FileUtils.moveFile(srcFile,new File("/home/ubuntu/IdeaProjects/SoftServeInternship/src/test/java/screenshot.png"));
     }
 
     @AfterMethod
