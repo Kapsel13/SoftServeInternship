@@ -165,13 +165,13 @@ public class DashboardPage extends BasePage{
 
     public void redirectBetweenTwoPages(By pageLink, By pageLink2, By pageElement){
         try {
-            Thread.sleep(3000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         driver.findElement(pageLink).click();
         try {
-            Thread.sleep(3000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
