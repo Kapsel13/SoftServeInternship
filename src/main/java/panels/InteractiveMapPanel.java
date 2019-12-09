@@ -31,9 +31,13 @@ public class InteractiveMapPanel extends BasePanel {
     }
 
 
-    public void addNewInteractiveMapPanel() throws IOException {
+    public void addNewInteractiveMapPanel() {
         File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
+        try {
+            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         wait.until(ExpectedConditions.visibilityOfElementLocated(interactiveMapPanelOption));
         driver.findElement(interactiveMapPanelOption).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(confirmChoosingPanelButton));
