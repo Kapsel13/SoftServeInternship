@@ -194,7 +194,7 @@ public class DashboardPage extends BasePage{
         String dashboardText = dashboardElement.getText();
         dashboardElement.click();
         try {
-            Thread.sleep(3000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
