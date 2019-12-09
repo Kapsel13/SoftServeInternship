@@ -1,5 +1,8 @@
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Dimension;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -57,6 +60,8 @@ public class TestPreparation {
         validReadOnlyUsername = envParams.getReadOnlyUsername();
         validReadOnlyPassword = envParams.getReadOnlyPassword();
         wait = new WebDriverWait(driver, 15);
+        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(srcFile,new File("/Users/mkowal/IdeaProjects/WeatherApplication2/src/test/java/screenshot.png"));
     }
 
     @AfterMethod
