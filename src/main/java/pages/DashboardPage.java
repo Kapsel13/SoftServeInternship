@@ -218,6 +218,12 @@ public class DashboardPage extends BasePage{
         int numberOfActiveDashboard = rnd.nextInt(activeDashboardsNumber-1)+1;;
         WebElement activeDashboardToClick = scrollElementIntoView(By.xpath(String.format(activeDashboardInList,numberOfActiveDashboard)));
         activeDashboardToClick.click();
+        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelOption));
     }
 
@@ -227,12 +233,6 @@ public class DashboardPage extends BasePage{
         logInPage.providePassword(validPassword, true);
         chooseActiveDashboard(rnd);
         //deleteAllPanelsFromDashboard();
-        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        try {
-            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelOption));
         driver.findElement(addPanelOption).click();
     }
