@@ -61,7 +61,7 @@ public class TestPreparation {
         validReadOnlyPassword = envParams.getReadOnlyPassword();
         wait = new WebDriverWait(driver, 15);
         File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(srcFile,new File("/Users/mkowal/IdeaProjects/WeatherApplication2/src/test/java/screenshot.png"));
+        FileUtils.copyFile(srcFile,new File("/home/ubuntu/IdeaProjects/SoftServeInternship/src/test/java/screenshot.png"));
     }
 
     @AfterMethod
