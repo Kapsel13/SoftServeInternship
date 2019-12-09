@@ -61,7 +61,8 @@ public class TestPreparation {
         validReadOnlyPassword = envParams.getReadOnlyPassword();
         wait = new WebDriverWait(driver, 15);
         File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        FileUtils.moveFile(srcFile,new File("/home/ubuntu/IdeaProjects/SoftServeInternship/src/test/java/screenshot.png"));
+        FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
+        //FileUtils.moveFile(srcFile,new File("/home/ubuntu/IdeaProjects/SoftServeInternship/src/test/java/screenshot.png"));
     }
 
     @AfterMethod
