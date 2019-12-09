@@ -47,7 +47,7 @@ public class TestPreparation {
         driver.manage().timeouts().pageLoadTimeout(10,TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(10000, TimeUnit.MILLISECONDS);
         driver.manage().window().maximize();
-        driver.manage().window().setSize(new Dimension(2100, 1100));
+        driver.manage().window().setSize(new Dimension(2100, 1050));
 
 
         driver.get("https://dev.opsdashboard.ibm.com/");
