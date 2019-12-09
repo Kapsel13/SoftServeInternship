@@ -1,12 +1,12 @@
 package panels;
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -31,7 +31,9 @@ public class InteractiveMapPanel extends BasePanel {
     }
 
 
-    public void addNewInteractiveMapPanel(){
+    public void addNewInteractiveMapPanel() throws IOException {
+        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
         wait.until(ExpectedConditions.visibilityOfElementLocated(interactiveMapPanelOption));
         driver.findElement(interactiveMapPanelOption).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(confirmChoosingPanelButton));

@@ -64,8 +64,6 @@ public class TestPreparation {
 
     @AfterMethod
     public void tearDown() throws IOException {
-        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
         driver.quit();
     }
 
