@@ -217,16 +217,16 @@ public class DashboardPage extends BasePage{
         int activeDashboardsNumber = driver.findElements(activeDashboard).size();
         int numberOfActiveDashboard = rnd.nextInt(activeDashboardsNumber-1)+1;;
         WebElement activeDashboardToClick = scrollElementIntoView(By.xpath(String.format(activeDashboardInList,numberOfActiveDashboard)));
-        activeDashboardToClick.click();
-        try {
-            Thread.sleep(30000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+        activeDashboardToClick.click();
+        try {
+            Thread.sleep(30000);
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
