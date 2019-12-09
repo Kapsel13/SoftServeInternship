@@ -64,6 +64,7 @@ public class TestPreparation {
 
     @AfterMethod
     public void tearDown() throws IOException {
+
         driver.quit();
     }
 
