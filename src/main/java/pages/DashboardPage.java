@@ -250,7 +250,7 @@ public class DashboardPage extends BasePage{
             File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
             try {
                 FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
-            } catch (IOException e) {
+            } catch (IOException ex) {
                 e.printStackTrace();
             }
             wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelOption));
