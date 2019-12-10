@@ -19,7 +19,7 @@ public class InteractiveMapPanel extends BasePanel {
     private By confirmChoosingPanelButton = By.xpath("//input[@value='Ok']");
     private By mapStyleDropdownArrow = By.xpath("//svg-icon[@class='expand-dropdown-icon']");
     private By mapStyle = By.xpath("//div[contains(@class,'w-157')]//button//span[@class='dropdown-item-title']");
-    private By addPanelButton = By.xpath("//button[contains(text(),Add Panel')]");
+    private By addPanelButton = By.xpath("//button[contains(text(),'Add Panel')]");
     private By interactiveMapZoom = By.xpath("(//div[contains(@class,'zoomControlElement')])[1]");
     private By interactiveMapLayerButton = By.xpath("(//div[contains(@class,'layer-button')])[1]");
     private String specificMapStyle = "(//div[contains(@class,'w-157')]//button//span[@class='dropdown-item-title'])[%d]";
