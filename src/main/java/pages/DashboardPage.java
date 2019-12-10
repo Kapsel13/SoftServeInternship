@@ -240,7 +240,7 @@ public class DashboardPage extends BasePage{
         //deleteAllPanelsFromDashboard();
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelOption));
-        }catch (NoSuchElementException e){
+        }catch (TimeoutException e){
             driver.navigate().refresh();
             try {
                 Thread.sleep(5000);
