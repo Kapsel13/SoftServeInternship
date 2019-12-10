@@ -219,17 +219,6 @@ public class DashboardPage extends BasePage{
         int numberOfActiveDashboard = rnd.nextInt(activeDashboardsNumber-1)+1;;
         WebElement activeDashboardToClick = scrollElementIntoView(By.xpath(String.format(activeDashboardInList,numberOfActiveDashboard)));
         activeDashboardToClick.click();
-        /*try {
-            Thread.sleep(60000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        try {
-            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }*/
     }
 
     public void beginAddingNewPanel(String validUsername,String validPassword) {
@@ -242,17 +231,12 @@ public class DashboardPage extends BasePage{
             wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelOption));
         }catch (TimeoutException e){
             driver.navigate().refresh();
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
-            }
-            File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+            /*File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
             try {
                 FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
             } catch (IOException ex) {
                 e.printStackTrace();
-            }
+            }*/
             wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelOption));
         }
         driver.findElement(addPanelOption).click();
