@@ -242,6 +242,17 @@ public class DashboardPage extends BasePage{
             wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelOption));
         }catch (NoSuchElementException e){
             driver.navigate().refresh();
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
+            File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+            try {
+                FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelOption));
         }
         driver.findElement(addPanelOption).click();
