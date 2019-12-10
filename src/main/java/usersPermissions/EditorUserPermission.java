@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class EditorUserPermission extends BaseUserPermissions {
     private By readOnlyUserCheckBox = By.xpath("(//div[@class='body-row' and contains(.,'readonly test')]//div[contains(@class,'mat-checkbox-inner-container')])[1]");
-    private By dashboardDropdownButton = By.xpath("//button[contains(@class,'dropdown-toggle')]");
+    private By dashboardDropdownButton = By.xpath("//button[@id='dashboard-dropdown']");
     private By dashboards = By.xpath("//div[contains(@class,'dropdown-menu')]//button");
     private String specificDashboard = "(//div[contains(@class,'dropdown-menu')]//button)[%d]";
     private By editOption =By.xpath("//span[contains(@class,'dropdown-item-title') and contains(text(),'Edit Selected')]");
