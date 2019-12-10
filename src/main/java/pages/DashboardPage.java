@@ -48,7 +48,7 @@ public class DashboardPage extends BasePage{
     protected By summaryPageText = By.xpath("//span[contains(text(),'Summary')]");
     protected By activeDashboard = By.xpath("//div[contains(@class,'dropdown-menu')]//button[not(contains(., '(Inactive)'))]");
     protected String activeDashboardInList = "(//div[contains(@class,'dropdown-menu')]//button[not(contains(., '(Inactive)'))])[%d]";
-    protected By addPanelOption = By.xpath("//span[contains(text(),'Add Panel')]");
+    protected By addPanelOption = By.xpath("//span[contains(@class,'dashboard-new-btn')]");
     protected By panelMenu = By.xpath("//div[@class='header-menu-icon']");
     protected By specificPanelMenu = By.xpath("(//div[@class='header-menu-icon'])[1]");
     protected By deleteButton = By.xpath("//span[contains(text(),'Delete') and not(contains(text(),'Selected'))]");
