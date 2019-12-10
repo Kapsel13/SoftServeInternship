@@ -1,13 +1,14 @@
 package usersPermissions;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.DashboardPage;
 import pages.LogInPage;
+
+import java.io.File;
+import java.io.IOException;
 
 
 public class EditorUserPermission extends BaseUserPermissions {
@@ -29,6 +30,17 @@ public class EditorUserPermission extends BaseUserPermissions {
         logInPage.provideUsername(username,true);
         logInPage.providePassword(password,true);
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
         driver.findElement(dashboardDropdownButton).click();
         int numberOfDashboards = driver.findElements(dashboards).size();

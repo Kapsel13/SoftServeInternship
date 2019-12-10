@@ -218,15 +218,9 @@ public class DashboardPage extends BasePage{
         int numberOfActiveDashboard = rnd.nextInt(activeDashboardsNumber-1)+1;;
         WebElement activeDashboardToClick = scrollElementIntoView(By.xpath(String.format(activeDashboardInList,numberOfActiveDashboard)));
         activeDashboardToClick.click();
-        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         try {
             Thread.sleep(60000);
         } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        try {
-            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
-        } catch (IOException e) {
             e.printStackTrace();
         }
     }
