@@ -10,6 +10,7 @@ import usersPermissions.BaseUserPermissions;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.NoSuchElementException;
 import java.util.Random;
 
 public class DashboardPage extends BasePage{
@@ -218,7 +219,7 @@ public class DashboardPage extends BasePage{
         int numberOfActiveDashboard = rnd.nextInt(activeDashboardsNumber-1)+1;;
         WebElement activeDashboardToClick = scrollElementIntoView(By.xpath(String.format(activeDashboardInList,numberOfActiveDashboard)));
         activeDashboardToClick.click();
-        try {
+        /*try {
             Thread.sleep(60000);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -228,7 +229,7 @@ public class DashboardPage extends BasePage{
             FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     public void beginAddingNewPanel(String validUsername,String validPassword) {
@@ -237,7 +238,12 @@ public class DashboardPage extends BasePage{
         logInPage.providePassword(validPassword, true);
         chooseActiveDashboard(rnd);
         //deleteAllPanelsFromDashboard();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelOption));
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelOption));
+        }catch (NoSuchElementException e){
+            driver.navigate().refresh();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelOption));
+        }
         driver.findElement(addPanelOption).click();
     }
 
