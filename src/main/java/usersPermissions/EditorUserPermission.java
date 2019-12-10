@@ -31,7 +31,7 @@ public class EditorUserPermission extends BaseUserPermissions {
         logInPage.providePassword(password,true);
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         try {
-            Thread.sleep(3000);
+            Thread.sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
