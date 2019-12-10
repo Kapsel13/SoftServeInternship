@@ -15,7 +15,7 @@ public class InteractiveMapPanel extends BasePanel {
 
     protected static Random rnd = new Random();
     private By interactiveMapPanelOption = By.xpath("//div[@class='panel-title' and contains(., 'Interactive Map')]");
-    private By interactiveMap = By.xpath("//canvas");
+    private By interactiveMap = By.xpath("//canvas[@class='mapboxgl-canvas']");
     private By confirmChoosingPanelButton = By.xpath("//input[@value='Ok']");
     private By mapStyleDropdownArrow = By.xpath("//svg-icon[@class='expand-dropdown-icon']");
     private By mapStyle = By.xpath("//div[contains(@class,'w-157')]//button//span[@class='dropdown-item-title']");
