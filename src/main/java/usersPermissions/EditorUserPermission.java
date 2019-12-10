@@ -30,15 +30,9 @@ public class EditorUserPermission extends BaseUserPermissions {
         logInPage.provideUsername(username,true);
         logInPage.providePassword(password,true);
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
-        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         try {
             Thread.sleep(60000);
         } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        try {
-            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
-        } catch (IOException e) {
             e.printStackTrace();
         }
         wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
