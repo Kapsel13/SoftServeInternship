@@ -32,7 +32,7 @@ public class EditorUserPermission extends BaseUserPermissions {
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         try {
-            Thread.sleep(5000);
+            Thread.sleep(15000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
