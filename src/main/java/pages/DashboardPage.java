@@ -174,13 +174,12 @@ public class DashboardPage extends BasePage{
             e.printStackTrace();
         }
         driver.findElement(pageLink).click();
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        try{
+            waitUntillAllElementsVisible(Arrays.asList(pageLink2,pageElement));
+        }catch (TimeoutException e){
+            driver.navigate().refresh();
+            waitUntillAllElementsVisible(Arrays.asList(pageLink2,pageElement));
         }
-        waitUntillAllElementsVisible(Arrays.asList(pageLink2,pageElement));
-
         driver.findElement(pageLink2).click();
     }
 
