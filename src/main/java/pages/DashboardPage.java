@@ -201,8 +201,12 @@ public class DashboardPage extends BasePage{
         WebElement dashboardElement = scrollElementIntoView(By.xpath(String.format(dashboardsInList,dashboardNumber)));
         String dashboardText = dashboardElement.getText();
         dashboardElement.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardTag));
-
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardTag));
+        }catch (TimeoutException e) {
+            driver.navigate().refresh();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardTag));
+        }
         String dashboardTagText = driver.findElement(dashboardTag).getText();
         if(dashboardText.contains("(Inactive)")) {
             dashboardTagText = dashboardTagText + "  (Inactive)";
