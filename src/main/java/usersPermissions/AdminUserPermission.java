@@ -1,6 +1,7 @@
 package usersPermissions;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -55,13 +56,14 @@ public class AdminUserPermission extends BaseUserPermissions {
         LogInPage logInPage = new LogInPage(driver, wait);
         logInPage.provideUsername(username, true);
         logInPage.providePassword(password, true);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
-        driver.findElement(dashboardDropdownButton).click();
         try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
         }
+        catch (TimeoutException e) {
+            driver.navigate().refresh();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
+        }
+        driver.findElement(dashboardDropdownButton).click();
         BaseUserPermissions baseUserPermissions = new BaseUserPermissions(driver,wait);
         WebElement dashboardToCheck = baseUserPermissions.scrollElementIntoView(By.xpath(String.format(addedDashboard,validDashboardName)));
         dashboardToCheck.click();
