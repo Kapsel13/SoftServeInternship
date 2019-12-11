@@ -15,6 +15,7 @@ public class EnvParams {
     private String editorPassword;
     private String readOnlyUsername;
     private String readOnlyPassword;
+    private String chromeDriver;
 
     public EnvParams() {
         try {
@@ -28,6 +29,7 @@ public class EnvParams {
             editorPassword = props.getProperty("editorPassword");
             readOnlyUsername = props.getProperty("readOnlyUsername");
             readOnlyPassword = props.getProperty("readOnlyPassword");
+            chromeDriver = props.getProperty("chromeDriver");
         }
         catch (IOException e){
             adminUsername = System.getProperty("adminUsername");
@@ -38,6 +40,7 @@ public class EnvParams {
             editorPassword = System.getProperty("editorPassword");
             readOnlyUsername = System.getProperty("readOnlyUsername");
             readOnlyPassword = System.getProperty("readOnlyPassword");
+            chromeDriver = System.getProperty("chromeDriver");
         }
     }
 
@@ -65,4 +68,5 @@ public class EnvParams {
     public String getReadOnlyPassword() {
         return readOnlyPassword;
     }
+    public String getChromeDriver() {return chromeDriver;}
 }

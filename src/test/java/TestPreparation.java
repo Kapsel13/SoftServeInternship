@@ -32,10 +32,12 @@ public class TestPreparation {
     protected String validEditorPassword;
     protected String validReadOnlyUsername;
     protected String validReadOnlyPassword;
+    protected String chromeDriverPath;
     @BeforeMethod
     public void basicSetUp() throws IOException {
         envParams = new EnvParams();
-        System.setProperty("webdriver.chrome.driver","/home/ubuntu/IdeaProjects/SoftServeInternship/src/test/java/chromedriver"/*"/Users/mkowal/IdeaProjects/WeatherApplication2/src/test/java/chromedriver"*/);
+        chromeDriverPath = envParams.getChromeDriver();
+        System.setProperty("webdriver.chrome.driver",chromeDriverPath);
         ChromeOptions options = new ChromeOptions();
         options.setExperimentalOption("useAutomationExtension", false);
         options.addArguments("--headless");
