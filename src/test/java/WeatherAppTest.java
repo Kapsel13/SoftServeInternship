@@ -21,7 +21,7 @@ public class WeatherAppTest extends TestPreparation {
     private By summaryPageLink = By.xpath("//div[contains(@class,'')]/a[contains(text(),'Summary')]");
     private String dashboardPageLink = "//div[contains(@class, '%s')]/a[contains(text(),'Dashboards')]";
     private String interactivePageLink = "//div[contains(@class, '%s')]/a[contains(text(),'Interactive Map')]";
-    private By canvas = By.xpath("//canvas");
+    private By canvas = By.xpath("//div[@id='mapContainer']");
     private By summaryPageText = By.xpath("//span[contains(text(),'Summary')]");
     private By dashboardPageText = By.xpath("//span[contains(text(),'My Dashboards')]");
     private By dashboards = By.xpath("((//table[contains(@class, 'dashboard-list-table')]//tr))//td[1]");
