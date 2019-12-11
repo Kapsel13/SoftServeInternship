@@ -189,19 +189,18 @@ public class DashboardPage extends BasePage{
 
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(summaryPageLink, ""))));
         driver.findElement(By.xpath(String.format(summaryPageLink, ""))).click();
-        waitUntillAllElementsVisible(Arrays.asList(By.xpath(String.format(summaryPageLink, "active")),summaryPageText));
-
-
+        try {
+            waitUntillAllElementsVisible(Arrays.asList(By.xpath(String.format(summaryPageLink, "active")), summaryPageText));
+        }
+        catch (TimeoutException e) {
+            driver.navigate().refresh();
+            waitUntillAllElementsVisible(Arrays.asList(By.xpath(String.format(summaryPageLink, "active")), summaryPageText));
+        }
         int numberOfDashboards = driver.findElements(dashboards).size();
         int dashboardNumber = rnd.nextInt(numberOfDashboards-1)+1;
         WebElement dashboardElement = scrollElementIntoView(By.xpath(String.format(dashboardsInList,dashboardNumber)));
         String dashboardText = dashboardElement.getText();
         dashboardElement.click();
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardTag));
 
         String dashboardTagText = driver.findElement(dashboardTag).getText();
