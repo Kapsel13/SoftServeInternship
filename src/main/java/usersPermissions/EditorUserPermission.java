@@ -30,12 +30,12 @@ public class EditorUserPermission extends BaseUserPermissions {
         logInPage.provideUsername(username,true);
         logInPage.providePassword(password,true);
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
-        try {
-            Thread.sleep(60000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        try{
+            wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
+        }catch(TimeoutException e){
+            driver.navigate().refresh();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
         }
-        wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
         driver.findElement(dashboardDropdownButton).click();
         int numberOfDashboards = driver.findElements(dashboards).size();
         int dashboardIndex = 1;
@@ -44,7 +44,12 @@ public class EditorUserPermission extends BaseUserPermissions {
             WebElement dashboardInAList = scrollElementIntoView(By.xpath(String.format(specificDashboard,dashboardIndex)));
             dashboardName = dashboardInAList.getText();
             dashboardInAList.click();
-            wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
+            try{
+                wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
+            }catch(TimeoutException e){
+                driver.navigate().refresh();
+                wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
+            }
             driver.findElement(dashboardDropdownButton).click();
             try {
                 wait.until(ExpectedConditions.visibilityOfElementLocated(editOption));
