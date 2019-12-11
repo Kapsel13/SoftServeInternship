@@ -46,17 +46,12 @@ public class InteractiveMapPanel extends BasePanel {
         }
         catch (TimeoutException e){
             driver.navigate().refresh();
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
-            }
-            File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+            /*File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
             try {
                 FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
             } catch (IOException ex) {
                 e.printStackTrace();
-            }
+            }*/
             waitUntillAllElementsVisible(Arrays.asList(interactiveMap, interactiveMapZoom, interactiveMapLayerButton));
         }
         driver.findElement(mapIcon).click();
