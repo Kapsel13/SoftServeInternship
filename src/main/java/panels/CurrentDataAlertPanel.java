@@ -4,6 +4,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -179,6 +180,12 @@ public class CurrentDataAlertPanel extends BasePanel {
         }
         wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelButton));
         driver.findElement(addPanelButton).click();
+        try{
+            waitUntillAllElementsVisible(Arrays.asList(timeOfAlert,unitsOfAlert));
+        }catch(TimeoutException e){
+            driver.navigate().refresh();
+            waitUntillAllElementsVisible(Arrays.asList(timeOfAlert,unitsOfAlert));
+        }
         waitUntillAllElementsVisible(Arrays.asList(timeOfAlert,unitsOfAlert));
         int panelHeadersNumber = driver.findElements(panelHeaders).size();
         String panelHeaderText = "";
