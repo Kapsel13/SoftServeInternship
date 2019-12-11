@@ -1,5 +1,6 @@
 package panels;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -151,7 +152,13 @@ public class LightingPanel extends BasePanel {
         }
         wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelButton));
         driver.findElement(addPanelButton).click();
-        waitUntillAllElementsVisible(Arrays.asList(headerIcon,clearStatus));
+        try {
+            waitUntillAllElementsVisible(Arrays.asList(headerIcon, clearStatus));
+        }
+        catch (TimeoutException e){
+            driver.navigate().refresh();
+            waitUntillAllElementsVisible(Arrays.asList(headerIcon, clearStatus));
+        }
     }
     public void addRange(){
         List<String> rangeInfo = addNewRange();
