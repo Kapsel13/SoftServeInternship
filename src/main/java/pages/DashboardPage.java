@@ -263,7 +263,12 @@ public class DashboardPage extends BasePage{
     }
 
     public void deleteDashboard(String dashboardName){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
+        try{
+            wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
+        }catch(TimeoutException e){
+            driver.navigate().refresh();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
+        }
         driver.findElement(dashboardDropdownButton).click();
         try {
             Thread.sleep(2000);
