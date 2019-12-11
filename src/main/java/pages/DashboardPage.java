@@ -55,7 +55,7 @@ public class DashboardPage extends BasePage{
     protected By deleteButton = By.xpath("//span[contains(text(),'Delete') and not(contains(text(),'Selected'))]");
     protected By confirmDeletingButton = By.xpath("//button[contains(text(),'YES')]");
     protected By okButton = By.xpath("//button[contains(text(),'OK')]");
-    private String addedDashboard = "//span[contains(@class,'dropdown-item-title') and contains(text(),%s)]";
+    private String addedDashboard = "//span[contains(@class,'dropdown-item-title') and contains(text(),'%s')]";
     private By deleteOption = By.xpath("//span[contains(@class,'dropdown-item-title') and contains(text(),'Delete Selected')]");
     private By deleteConfirm = By.xpath("//button[contains(@class,'button-common') and contains(text(),'Yes')]");
     protected static Random rnd = new Random();
