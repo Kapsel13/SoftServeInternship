@@ -271,7 +271,7 @@ public class DashboardPage extends BasePage{
         }
         driver.findElement(dashboardDropdownButton).click();
         try {
-            Thread.sleep(2000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
