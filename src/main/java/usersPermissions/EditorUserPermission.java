@@ -23,6 +23,7 @@ public class EditorUserPermission extends BaseUserPermissions {
     private By editorUserPermissionDropdown = By.xpath("//div[@class='body-row' and contains(.,'editor test')]//svg-icon");
     private By saveEditionButton = By.xpath("//button[contains(text(),'Save')]");
     private String dashboardName = "";
+    private String editedDashboard = "//span[contains(@class,'dropdown-item-title') and contains(text(),'%s')]";
     public EditorUserPermission(WebDriver driver, WebDriverWait wait){super(driver, wait);}
 
     public void addPermissionForUserAndLogOut(String username,String password,String permissionUser){
@@ -88,9 +89,14 @@ public class EditorUserPermission extends BaseUserPermissions {
         logInPage.providePassword(password, true);
         wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
         driver.findElement(dashboardDropdownButton).click();
-        String specificDashboardName="";
+        //String specificDashboardName="";
         if(permissionUser=="readOnly"){
-            int numberOfDashboards = driver.findElements(dashboards).size();
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            /*int numberOfDashboards = driver.findElements(dashboards).size();
             boolean dashboardFound = false;
             int dashboardIndex=1;
             while((dashboardIndex<=numberOfDashboards)&&(!dashboardFound)){
@@ -103,7 +109,10 @@ public class EditorUserPermission extends BaseUserPermissions {
                 else{
                     dashboardIndex++;
                 }
-            }
+            }*/
+            BaseUserPermissions baseUserPermissions = new BaseUserPermissions(driver,wait);
+            WebElement dashboardToCheck = baseUserPermissions.scrollElementIntoView(By.xpath(String.format(editedDashboard,dashboardName)));
+            dashboardToCheck.click();
             wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
             driver.findElement(dashboardDropdownButton).click();
         }
