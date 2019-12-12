@@ -38,17 +38,17 @@ public class TestPreparation {
         envParams = new EnvParams();
         chromeDriverPath = envParams.getChromeDriver();
         System.setProperty("webdriver.chrome.driver",chromeDriverPath);
-        ChromeOptions options = new ChromeOptions();
+        /*ChromeOptions options = new ChromeOptions();
         options.setExperimentalOption("useAutomationExtension", false);
         options.addArguments("--headless");
         options.addArguments("--disable-extensions");
         options.addArguments("--disable-gpu");
         options.addArguments("--disable-dev-shm-usage");
-        options.addArguments("--no-sandbox");
-        driver = new ChromeDriver(options);
-        driver.manage().timeouts().pageLoadTimeout(10,TimeUnit.SECONDS);
+        options.addArguments("--no-sandbox");*/
+        driver = new ChromeDriver(/*options*/);
+        //driver.manage().timeouts().pageLoadTimeout(10,TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(10000, TimeUnit.MILLISECONDS);
-        driver.manage().window().setSize(new Dimension(2100, 1050));
+        //driver.manage().window().setSize(new Dimension(2100, 1050));
 
 
         driver.get("https://dev.opsdashboard.ibm.com/");

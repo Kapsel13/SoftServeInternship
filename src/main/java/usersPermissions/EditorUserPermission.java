@@ -41,6 +41,7 @@ public class EditorUserPermission extends BaseUserPermissions {
         int numberOfDashboards = driver.findElements(dashboards).size();
         int dashboardIndex = 1;
         boolean editableDashboard = false;
+        System.out.println("Before the loop");
         while((dashboardIndex<=numberOfDashboards)&&(!editableDashboard)){
             WebElement dashboardInAList = scrollElementIntoView(By.xpath(String.format(specificDashboard,dashboardIndex)));
             dashboardName = dashboardInAList.getText();
@@ -60,7 +61,9 @@ public class EditorUserPermission extends BaseUserPermissions {
             catch(TimeoutException e){
                 dashboardIndex++;
             }
+            System.out.println("After loop iteration");
         }
+        System.out.println("After the loop");
         wait.until(ExpectedConditions.visibilityOfElementLocated(confirmNameButton));
         driver.findElement(confirmNameButton).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(confirmMonitoringButton));
@@ -81,6 +84,7 @@ public class EditorUserPermission extends BaseUserPermissions {
         }
         catch (InterruptedException e){}
         dashboardPage.logOut();
+        System.out.println("After first method");
     }
 
     public void checkAddedPermission(String username, String password,String permissionUser){
@@ -117,5 +121,6 @@ public class EditorUserPermission extends BaseUserPermissions {
             driver.findElement(dashboardDropdownButton).click();
         }
         wait.until(ExpectedConditions.invisibilityOfElementLocated(editOption));
+        System.out.println("After second method");
     }
 }
