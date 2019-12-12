@@ -28,7 +28,7 @@ public class InteractiveMapPage extends BasePage {
     private String layerName = "";
     private By layerToDeleteName = By.xpath("//div[@class='headerContent']//span[@class='title']");
     public InteractiveMapPage(WebDriver driver, WebDriverWait wait){super(driver,wait);}
-    public void addNewLayerToInteractiveMapPage(String validUsername,String validPassword){
+    public void beginTestInteractiveMapPage(String validUsername,String validPassword){
         LogInPage logInPage = new LogInPage(driver,wait);
         logInPage.provideUsername(validUsername,true);
         logInPage.providePassword(validPassword,true);
@@ -39,6 +39,9 @@ public class InteractiveMapPage extends BasePage {
         }
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(interactivePageLink,""))));
         driver.findElement(By.xpath(String.format(interactivePageLink,""))).click();
+    }
+    public void addNewLayerToInteractiveMapPage(String validUsername,String validPassword){
+        beginTestInteractiveMapPage(validUsername,validPassword);
         wait.until(ExpectedConditions.visibilityOfElementLocated(layerOption));
         driver.findElement(layerOption).click();
         wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(filter));
@@ -54,16 +57,7 @@ public class InteractiveMapPage extends BasePage {
     }
     public void deleteLayerFromInteractiveMapPage(String validUsername,String validPassword){
         boolean delete = true;
-        LogInPage logInPage = new LogInPage(driver,wait);
-        logInPage.provideUsername(validUsername,true);
-        logInPage.providePassword(validPassword,true);
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(interactivePageLink,""))));
-        driver.findElement(By.xpath(String.format(interactivePageLink,""))).click();
+        beginTestInteractiveMapPage(validUsername,validPassword);
         try{
             wait.until(ExpectedConditions.visibilityOfElementLocated(layerIconContainer));
         }catch(TimeoutException e){
