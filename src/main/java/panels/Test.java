@@ -28,4 +28,9 @@ public class Test {
         } catch (IOException | ParseException e) {
         }
     }
+    @org.testng.annotations.Test
+    public void three(){
+        int filterIndex = rnd.nextInt(3)+1;
+        System.out.println(filterIndex);
+    }
 }

@@ -19,8 +19,8 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class ForecastDataAlertPanel extends BasePanel {
-
     protected static Random rnd = new Random();
+
     private By forecastDataAlertPanelOption = By.xpath("//div[@class='panel-title']//span[contains(text(),'Forecast Data')]");
     private By confirmChoosingPanelButton = By.xpath("//input[@value='Ok']");
     private By selectWeatherTypeButton = By.xpath("//div[@class='phoenix-typeahead-input-arrow']");
