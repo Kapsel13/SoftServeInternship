@@ -119,6 +119,12 @@ public class InteractiveMapPage extends BasePage {
         try{wait.until(ExpectedConditions.visibilityOfElementLocated(map));}
         catch(TimeoutException e){
             driver.navigate().refresh();
+            File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+            try {
+                FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
             wait.until(ExpectedConditions.visibilityOfElementLocated(map));
         }
         wait.until(ExpectedConditions.visibilityOfElementLocated(map));
