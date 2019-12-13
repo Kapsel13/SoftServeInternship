@@ -111,6 +111,11 @@ public class InteractiveMapPage extends BasePage {
     }
     public void setLocationPinsToInteractiveMapPage(String validUsername,String validPassword){
         beginTestInteractiveMapPage(validUsername,validPassword);
+        try {
+            Thread.sleep(60000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
