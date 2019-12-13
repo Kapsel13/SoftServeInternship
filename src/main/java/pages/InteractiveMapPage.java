@@ -117,7 +117,7 @@ public class InteractiveMapPage extends BasePage {
         }
         File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         try {
-            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot1.png"));
+            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -127,7 +127,7 @@ public class InteractiveMapPage extends BasePage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot2.png"));
         } catch (IOException ex) {
