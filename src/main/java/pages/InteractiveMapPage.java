@@ -116,7 +116,11 @@ public class InteractiveMapPage extends BasePage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        wait.until(ExpectedConditions.visibilityOfElementLocated(mapSettingsIcon));
+        try{wait.until(ExpectedConditions.visibilityOfElementLocated(mapSettingsIcon));}
+        catch(TimeoutException e){
+            driver.navigate().refresh();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(mapSettingsIcon));
+        }
         driver.findElement(mapSettingsIcon).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(viewLocationPinsOption));
         driver.findElement(viewLocationPinsOption).click();
@@ -140,7 +144,11 @@ public class InteractiveMapPage extends BasePage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        wait.until(ExpectedConditions.visibilityOfElementLocated(mapSettingsIcon));
+        try{wait.until(ExpectedConditions.visibilityOfElementLocated(mapSettingsIcon));}
+        catch(TimeoutException e){
+            driver.navigate().refresh();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(mapSettingsIcon));
+        }
         driver.findElement(mapSettingsIcon).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(rangeRingsOpiton));
         driver.findElement(rangeRingsOpiton).click();
@@ -155,7 +163,11 @@ public class InteractiveMapPage extends BasePage {
     }
     public void setMapTypeSettingsToInteractiveMapPage(String validUsername,String validPassword){
         beginTestInteractiveMapPage(validUsername,validPassword);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(mapSettingsIcon));
+        try{wait.until(ExpectedConditions.visibilityOfElementLocated(mapSettingsIcon));}
+        catch(TimeoutException e){
+            driver.navigate().refresh();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(mapSettingsIcon));
+        }
         driver.findElement(mapSettingsIcon).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(mapTypeDropdownIcon));
         driver.findElement(mapTypeDropdownIcon).click();
@@ -173,7 +185,11 @@ public class InteractiveMapPage extends BasePage {
     }
     public void setTempUnitSettingsToInteractiveMapPage(String validUsername,String validPassword){
         beginTestInteractiveMapPage(validUsername,validPassword);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(mapSettingsIcon));
+        try{wait.until(ExpectedConditions.visibilityOfElementLocated(mapSettingsIcon));}
+        catch(TimeoutException e){
+            driver.navigate().refresh();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(mapSettingsIcon));
+        }
         driver.findElement(mapSettingsIcon).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(editOption));
         driver.findElement(editOption).click();
@@ -193,7 +209,11 @@ public class InteractiveMapPage extends BasePage {
     }
     public void setDistanceUnitSettingsToInteractiveMapPage(String validUsername,String validPassword){
         beginTestInteractiveMapPage(validUsername,validPassword);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(mapSettingsIcon));
+        try{wait.until(ExpectedConditions.visibilityOfElementLocated(mapSettingsIcon));}
+        catch(TimeoutException e){
+            driver.navigate().refresh();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(mapSettingsIcon));
+        }
         driver.findElement(mapSettingsIcon).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(editOption));
         driver.findElement(editOption).click();
@@ -221,7 +241,11 @@ public class InteractiveMapPage extends BasePage {
     }
     public void setHeightUnitSettingsToInteractiveMapPage(String validUsername,String validPassword){
         beginTestInteractiveMapPage(validUsername,validPassword);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(mapSettingsIcon));
+        try{wait.until(ExpectedConditions.visibilityOfElementLocated(mapSettingsIcon));}
+        catch(TimeoutException e){
+            driver.navigate().refresh();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(mapSettingsIcon));
+        }
         driver.findElement(mapSettingsIcon).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(editOption));
         driver.findElement(editOption).click();
@@ -246,7 +270,11 @@ public class InteractiveMapPage extends BasePage {
     }
     public void setPressureSettingsToInteractiveMap(String validUsername,String validPassword){
         beginTestInteractiveMapPage(validUsername,validPassword);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(mapSettingsIcon));
+        try{wait.until(ExpectedConditions.visibilityOfElementLocated(mapSettingsIcon));}
+        catch(TimeoutException e){
+            driver.navigate().refresh();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(mapSettingsIcon));
+        }
         driver.findElement(mapSettingsIcon).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(editOption));
         driver.findElement(editOption).click();
@@ -271,7 +299,11 @@ public class InteractiveMapPage extends BasePage {
     }
     public void setSpeedSettingsToInteractiveMap(String validUsername,String validPassword){
         beginTestInteractiveMapPage(validUsername,validPassword);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(mapSettingsIcon));
+        try{wait.until(ExpectedConditions.visibilityOfElementLocated(mapSettingsIcon));}
+        catch(TimeoutException e){
+            driver.navigate().refresh();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(mapSettingsIcon));
+        }
         driver.findElement(mapSettingsIcon).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(editOption));
         driver.findElement(editOption).click();
