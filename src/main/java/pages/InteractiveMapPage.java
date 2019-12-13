@@ -117,7 +117,13 @@ public class InteractiveMapPage extends BasePage {
             ex.printStackTrace();
         }*/
         try {
-            Thread.sleep(10000);
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        driver.navigate().refresh();
+        try {
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
