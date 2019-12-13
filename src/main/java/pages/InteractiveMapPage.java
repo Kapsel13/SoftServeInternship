@@ -116,6 +116,12 @@ public class InteractiveMapPage extends BasePage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        driver.navigate().refresh();
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
