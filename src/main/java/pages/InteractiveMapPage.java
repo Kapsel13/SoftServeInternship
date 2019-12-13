@@ -116,16 +116,16 @@ public class InteractiveMapPage extends BasePage {
         } catch (IOException ex) {
             ex.printStackTrace();
         }*/
-        try{wait.until(ExpectedConditions.visibilityOfElementLocated(map));}
-        catch(TimeoutException e){
-            driver.navigate().refresh();
-            File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-            try {
-                FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-            wait.until(ExpectedConditions.visibilityOfElementLocated(map));
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
         wait.until(ExpectedConditions.visibilityOfElementLocated(map));
         WebElement element = driver.findElement(map);
