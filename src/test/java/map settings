@@ -1,0 +1,8 @@
+this.map["opsdashboard-imap"].isLocationPinsOn
+this.map["opsdashboard-imap"].areRangeRingsOn
+this.map["opsdashboard-imap"].mapTypeId
+this.map["opsdashboard-imap"].tempUnit
+this.map["opsdashboard-imap"].distanceUnit
+this.map["opsdashboard-imap"].heightUnit
+this.map["opsdashboard-imap"].pressureUnit
+this.map["opsdashboard-imap"].speedUnit
