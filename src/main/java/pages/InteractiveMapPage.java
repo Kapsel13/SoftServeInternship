@@ -10,6 +10,7 @@ import org.testng.Assert;
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Time;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -110,19 +111,22 @@ public class InteractiveMapPage extends BasePage {
     }
     public void setLocationPinsToInteractiveMapPage(String validUsername,String validPassword){
         beginTestInteractiveMapPage(validUsername,validPassword);
-        driver.navigate().refresh();
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        try{wait.until(ExpectedConditions.visibilityOfElementLocated(map));}
+        catch(TimeoutException e){
+            driver.navigate().refresh();
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
+            File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+            try {
+                FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            wait.until(ExpectedConditions.visibilityOfElementLocated(map));
         }
-        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        try {
-            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        wait.until(ExpectedConditions.visibilityOfElementLocated(map));
         WebElement element = driver.findElement(map);
         driver.manage().window().fullscreen();
         String locationPinsSettingsBefore = ((JavascriptExecutor) driver).executeScript("return this.map[\"opsdashboard-imap\"].isLocationPinsOn",element).toString();
