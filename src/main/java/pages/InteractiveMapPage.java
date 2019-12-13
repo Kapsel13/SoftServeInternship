@@ -115,6 +115,12 @@ public class InteractiveMapPage extends BasePage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot1.png"));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
         driver.navigate().refresh();
         try {
             Thread.sleep(2000);
@@ -123,7 +129,7 @@ public class InteractiveMapPage extends BasePage {
         }
         File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         try {
-            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
+            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot2.png"));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
