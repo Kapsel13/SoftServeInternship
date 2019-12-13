@@ -110,11 +110,16 @@ public class InteractiveMapPage extends BasePage {
     }
     public void setLocationPinsToInteractiveMapPage(String validUsername,String validPassword){
         beginTestInteractiveMapPage(validUsername,validPassword);
-        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        /*File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
         } catch (IOException ex) {
             ex.printStackTrace();
+        }*/
+        try{wait.until(ExpectedConditions.visibilityOfElementLocated(map));}
+        catch(TimeoutException e){
+            driver.navigate().refresh();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(map));
         }
         wait.until(ExpectedConditions.visibilityOfElementLocated(map));
         WebElement element = driver.findElement(map);
