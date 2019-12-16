@@ -29,7 +29,7 @@ public class InteractiveMapPage extends BasePage {
     private By deleteLayerIcon = By.xpath("//mat-icon[contains(@class,'trash-icon')]");
     private String layerName = "";
     private By layerToDeleteName = By.xpath("//div[@class='headerContent']//span[@class='title']");
-    private By map = By.xpath("//canvas");
+    private By map = By.xpath("//div[@id='mapContainer']");
     private By mapSettingsIcon = By.xpath("//div[@class='map-settings']");
     private By viewLocationPinsOption = By.xpath("(//span[@class='toggle']//mat-icon[contains(@class,'ng-star-inserted')])[2]");
     private By rangeRingsOpiton = By.xpath("(//span[@class='toggle']//mat-icon[contains(@class,'ng-star-inserted')])[1]");
@@ -120,17 +120,6 @@ public class InteractiveMapPage extends BasePage {
         try{wait.until(ExpectedConditions.visibilityOfElementLocated(map));}
         catch(TimeoutException e){
             driver.navigate().refresh();
-            try {
-                Thread.sleep(10000);
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
-            }
-            File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-            try {
-                FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
             wait.until(ExpectedConditions.visibilityOfElementLocated(map));
         }
         WebElement element = driver.findElement(map);
