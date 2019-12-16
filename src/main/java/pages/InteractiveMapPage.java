@@ -120,6 +120,11 @@ public class InteractiveMapPage extends BasePage {
         try{wait.until(ExpectedConditions.visibilityOfElementLocated(map));}
         catch(TimeoutException e){
             driver.navigate().refresh();
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
             wait.until(ExpectedConditions.visibilityOfElementLocated(map));
         }
         WebElement element = driver.findElement(map);
