@@ -59,7 +59,7 @@ public class InteractiveMapPage extends BasePage {
         logInPage.provideUsername(validUsername,true);
         logInPage.providePassword(validPassword,true);
         try {
-            Thread.sleep(30000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -70,13 +70,18 @@ public class InteractiveMapPage extends BasePage {
             ex.printStackTrace();
         }
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(interactivePageLink,""))));
+        driver.findElement(By.xpath(String.format(interactivePageLink,""))).click();
+        try {
+            Thread.sleep(180000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot2.png"));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        driver.findElement(By.xpath(String.format(interactivePageLink,""))).click();
     }
     public void addNewLayerToInteractiveMapPage(String validUsername,String validPassword){
         beginTestInteractiveMapPage(validUsername,validPassword);
