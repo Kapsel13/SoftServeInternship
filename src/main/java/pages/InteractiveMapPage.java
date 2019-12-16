@@ -66,6 +66,17 @@ public class InteractiveMapPage extends BasePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(interactivePageLink,""))));
         driver.findElement(By.xpath(String.format(interactivePageLink,""))).click();
         driver.navigate().refresh();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot3.png"));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
     public void addNewLayerToInteractiveMapPage(String validUsername,String validPassword){
         beginTestInteractiveMapPage(validUsername,validPassword);
@@ -112,17 +123,6 @@ public class InteractiveMapPage extends BasePage {
     }
     public void setLocationPinsToInteractiveMapPage(String validUsername,String validPassword){
         beginTestInteractiveMapPage(validUsername,validPassword);
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        try {
-            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot3.png"));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
         try{wait.until(ExpectedConditions.visibilityOfElementLocated(map));}
         catch(TimeoutException e){
             driver.navigate().refresh();
