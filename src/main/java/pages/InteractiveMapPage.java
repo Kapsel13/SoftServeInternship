@@ -64,8 +64,7 @@ public class InteractiveMapPage extends BasePage {
             e.printStackTrace();
         }
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(interactivePageLink,""))));
-        Actions act = new Actions(driver);
-        act.moveToElement(driver.findElement(By.xpath(String.format(interactivePageLink,"")))).doubleClick().perform();
+        driver.findElement(By.xpath(String.format(interactivePageLink,""))).click();
         File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
@@ -76,7 +75,7 @@ public class InteractiveMapPage extends BasePage {
         catch(TimeoutException e){
             driver.navigate().refresh();
             try {
-                Thread.sleep(10000);
+                Thread.sleep(5000);
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
