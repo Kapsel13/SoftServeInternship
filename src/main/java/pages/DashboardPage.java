@@ -181,12 +181,6 @@ public class DashboardPage extends BasePage{
             waitUntillAllElementsVisible(Arrays.asList(pageLink2,pageElement));
         }
         driver.findElement(pageLink2).click();
-        driver.navigate().refresh();
-        try {
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
