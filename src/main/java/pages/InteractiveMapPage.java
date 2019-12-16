@@ -69,18 +69,9 @@ public class InteractiveMapPage extends BasePage {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(interactivePageLink,""))));
         driver.findElement(By.xpath(String.format(interactivePageLink,""))).click();
-        try {
-            Thread.sleep(180000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         driver.navigate().refresh();
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot2.png"));
