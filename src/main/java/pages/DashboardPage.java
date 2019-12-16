@@ -175,9 +175,6 @@ public class DashboardPage extends BasePage{
         }
         driver.findElement(pageLink).click();
         try{
-            waitUntillAllElementsVisible(Arrays.asList(pageLink2,pageElement));
-        }catch (TimeoutException e){
-            driver.navigate().refresh();
             try {
                 Thread.sleep(5000);
             } catch (InterruptedException ex) {
@@ -189,6 +186,9 @@ public class DashboardPage extends BasePage{
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
+            waitUntillAllElementsVisible(Arrays.asList(pageLink2,pageElement));
+        }catch (TimeoutException e){
+            driver.navigate().refresh();
             waitUntillAllElementsVisible(Arrays.asList(pageLink2,pageElement));
         }
         driver.findElement(pageLink2).click();
