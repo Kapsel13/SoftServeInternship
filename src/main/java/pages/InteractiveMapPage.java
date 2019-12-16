@@ -122,7 +122,6 @@ public class InteractiveMapPage extends BasePage {
             driver.navigate().refresh();
             wait.until(ExpectedConditions.visibilityOfElementLocated(map));
         }
-        System.out.println("jkjkbnbjsnsjndjsknbjkjhnldbnsl");
         WebElement element = driver.findElement(map);
         driver.manage().window().fullscreen();
         String locationPinsSettingsBefore = ((JavascriptExecutor) driver).executeScript("return this.map[\"opsdashboard-imap\"].isLocationPinsOn",element).toString();
@@ -139,12 +138,6 @@ public class InteractiveMapPage extends BasePage {
         driver.findElement(mapSettingsIcon).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(viewLocationPinsOption));
         driver.findElement(viewLocationPinsOption).click();
-        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        try {
-            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
         String locationPinsSettingsAfter = ((JavascriptExecutor) driver).executeScript("return this.map[\"opsdashboard-imap\"].isLocationPinsOn",element).toString();
         if(locationPinsSettingsBefore == "false")
         {
@@ -276,6 +269,12 @@ public class InteractiveMapPage extends BasePage {
         WebElement heightUnit = driver.findElement(By.xpath(String.format(specificHeightUnit,indexOfHeightUnits)));
         String heightUnitText = heightUnit.getText();
         heightUnit.click();
+        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
         wait.until(ExpectedConditions.visibilityOfElementLocated(doneButton));
         driver.findElement(doneButton).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(map));
