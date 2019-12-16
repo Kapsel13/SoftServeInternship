@@ -63,16 +63,17 @@ public class InteractiveMapPage extends BasePage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(interactivePageLink,""))));
-        driver.findElement(By.xpath(String.format(interactivePageLink,""))).click();
-        try {
-            Thread.sleep(30000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         try {
-            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot3.png"));
+            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(interactivePageLink,""))));
+        driver.findElement(By.xpath(String.format(interactivePageLink,""))).click();
+        srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot2.png"));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
