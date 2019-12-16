@@ -70,13 +70,13 @@ public class InteractiveMapPage extends BasePage {
             ex.printStackTrace();
         }
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(interactivePageLink,""))));
-        driver.findElement(By.xpath(String.format(interactivePageLink,""))).click();
         srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot2.png"));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+        driver.findElement(By.xpath(String.format(interactivePageLink,""))).click();
     }
     public void addNewLayerToInteractiveMapPage(String validUsername,String validPassword){
         beginTestInteractiveMapPage(validUsername,validPassword);
