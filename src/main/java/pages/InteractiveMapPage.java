@@ -110,9 +110,10 @@ public class InteractiveMapPage extends BasePage {
         }
     }
     public void setLocationPinsToInteractiveMapPage(String validUsername,String validPassword){
+        driver.navigate().refresh();
         beginTestInteractiveMapPage(validUsername,validPassword);
         try {
-            Thread.sleep(60000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
