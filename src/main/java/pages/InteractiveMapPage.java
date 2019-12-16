@@ -76,8 +76,8 @@ public class InteractiveMapPage extends BasePage {
             driver.navigate().refresh();
             try {
                 Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
             }
             srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
             try {
