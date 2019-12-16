@@ -125,6 +125,12 @@ public class InteractiveMapPage extends BasePage {
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
+            File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+            try {
+                FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
             wait.until(ExpectedConditions.visibilityOfElementLocated(map));
         }
         WebElement element = driver.findElement(map);
