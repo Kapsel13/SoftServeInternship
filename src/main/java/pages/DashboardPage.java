@@ -180,8 +180,8 @@ public class DashboardPage extends BasePage{
             driver.navigate().refresh();
             try {
                 Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
             }
             File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
             try {
