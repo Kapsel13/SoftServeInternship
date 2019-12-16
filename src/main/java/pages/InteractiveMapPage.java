@@ -17,7 +17,7 @@ import java.util.Random;
 
 public class InteractiveMapPage extends BasePage {
     protected static Random rnd = new Random();
-    private String interactivePageLink = "//div[contains(@class, '%s')]/a[contains(text(),'Interactive Map')]";
+    private By interactivePageLink = By.xpath("//div[contains(@class, '')]/a[contains(text(),'Interactive Map')]");
     private By layerOption = By.xpath("//mat-icon[contains(@class,'options-toggle-icon-off')]");
     private By filter = By.xpath("//mat-chip");
     private String specificFilter = "(//mat-chip)[%d]";
@@ -69,19 +69,19 @@ public class InteractiveMapPage extends BasePage {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(interactivePageLink,""))));
-        driver.findElement(By.xpath(String.format(interactivePageLink,""))).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(interactivePageLink));
+        driver.findElement(interactivePageLink).click();
         try{wait.until(ExpectedConditions.visibilityOfElementLocated(map));}
         catch(TimeoutException e){
             driver.navigate().refresh();
             try {
                 Thread.sleep(5000);
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
             srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
             try {
-                FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot2.png"));
+                FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
