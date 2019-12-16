@@ -8,6 +8,11 @@ public class InteractiveMapPageLayersTest extends TestPreparation {
         interactiveMapPage.addNewLayerToInteractiveMapPage(validAdminUsername,validAdminPassword);
 
     }
+   @Test(retryAnalyzer = Retry.class)
+   public void testSettingLightningIconTypeToInteractiveMapPage(){
+       InteractiveMapPage interactiveMapPage = new InteractiveMapPage(driver,wait);
+       interactiveMapPage.setLightningIconTypeToInteractiveMapPage(validAdminUsername,validAdminPassword);
+   }
     @Test(retryAnalyzer = Retry.class)
     public void testDeletingLayerFromInteractiveMapPage(){
         InteractiveMapPage interactiveMapPage = new InteractiveMapPage(driver,wait);

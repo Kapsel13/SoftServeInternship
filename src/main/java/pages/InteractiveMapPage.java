@@ -23,6 +23,7 @@ public class InteractiveMapPage extends BasePage {
     private String specificFilter = "(//mat-chip)[%d]";
     private By layer = By.xpath("//div[@class='left']//div[contains(@class,'select-layer-button')]");
     private String specificLayer = "(//div[@class='left']//div[contains(@class,'select-layer-button')])[%d]";
+    private By lightningObservedLayer = By.xpath("//div[@class='left']//div[contains(@class,'select-layer-button') and contains(.,'Lightning (observed)')]");
     private By layerIconContainer = By.xpath("//div[contains(@class,'layer-icon')]");
     private String specificLayerIconContainer = "(//div[contains(@class,'layer-icon')])[%d]";
     private String layerIcon = "//mat-icon[@title='%s']";
@@ -48,6 +49,9 @@ public class InteractiveMapPage extends BasePage {
     private String specificPressureUnit = "((//div[@class='switch'])[5]/button)[%d]";
     private By speedUnits = By.xpath("(//div[@class='switch'])[6]/button");
     private String specificSpeedUnit = "((//div[@class='switch'])[6]/button)[%d]";
+    private By lightningCircleIcon = By.xpath("//div[@class='options']//mat-icon[@ng-reflect-svg-icon='LightningCircleIcon']");
+    private By lightningStrikeIcon = By.xpath("//div[@class='options']//mat-icon[@ng-reflect-svg-icon='LightningStrikeIcon']");
+    private By lightningCrossIcon = By.xpath("//div[@class='options']//mat-icon[@ng-reflect-svg-icon='LightningCrossIcon']");
     public InteractiveMapPage(WebDriver driver, WebDriverWait wait){super(driver,wait);}
     public WebElement scrollElementIntoView(By by) {
         WebElement webElement = driver.findElement(by);
@@ -84,13 +88,6 @@ public class InteractiveMapPage extends BasePage {
         WebElement layer = driver.findElement(By.xpath(String.format(specificLayer,layerIndex)));
         layerName = layer.getText();
         layer.click();
-        System.out.println("jkmjjjnnbsjfnbhios");
-        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        try {
-            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
         driver.navigate().refresh();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(layerIcon,layerName))));
     }
@@ -350,5 +347,37 @@ public class InteractiveMapPage extends BasePage {
         if(speedUnitText == "KNOTS"){
             Assert.assertEquals(speedUnitSetting,"knots");
         }
+    }
+    public void setLightningIconTypeToInteractiveMapPage(String validUsername,String validPassword){
+        beginTestInteractiveMapPage(validUsername,validPassword);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(layerOption));
+        driver.findElement(layerOption).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(lightningObservedLayer));
+        driver.findElement(lightningObservedLayer).click();
+        driver.navigate().refresh();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(layerIcon,"Lightning (observed)"))));
+        Actions action = new Actions(driver);
+        WebElement lightningLayer = driver.findElement(By.xpath(String.format(layerIcon,"Lightning (observed)")));
+        action.moveToElement(lightningLayer).perform();
+        waitUntillAllElementsVisible(Arrays.asList(lightningCircleIcon,lightningStrikeIcon,lightningCrossIcon));
+        int lightningIconTypeOption = rnd.nextInt(3)+1;
+        String lightningIconType = "";
+        if(lightningIconTypeOption == 1){
+            driver.findElement(lightningCircleIcon).click();
+            lightningIconType = "Circle_";
+        }
+        if(lightningIconTypeOption == 2){
+            driver.findElement(lightningStrikeIcon).click();
+            lightningIconType = "Strike_";
+        }
+        if(lightningIconTypeOption == 3){
+            driver.findElement(lightningCrossIcon).click();
+            lightningIconType = "X_";
+        }
+        wait.until(ExpectedConditions.visibilityOfElementLocated(map));
+        WebElement element = driver.findElement(map);
+        driver.manage().window().fullscreen();
+        String lightningIconTypeSettings = ((JavascriptExecutor) driver).executeScript("return this.map[\"opsdashboard-imap\"].currentLightningIconType",element).toString();
+        Assert.assertEquals(lightningIconType,lightningIconTypeSettings);
     }
 }

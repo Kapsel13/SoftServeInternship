@@ -50,7 +50,6 @@ public class TestPreparation {
         driver.manage().timeouts().implicitlyWait(10000, TimeUnit.MILLISECONDS);
         driver.manage().window().setSize(new Dimension(2100, 1050));
 
-
         driver.get("https://dev.opsdashboard.ibm.com/");
         validAdminUsername = envParams.getAdminUsername();
         validAdminPassword = envParams.getAdminPassword();
