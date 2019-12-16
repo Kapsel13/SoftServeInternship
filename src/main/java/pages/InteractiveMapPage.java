@@ -65,9 +65,8 @@ public class InteractiveMapPage extends BasePage {
         }
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(interactivePageLink,""))));
         driver.findElement(By.xpath(String.format(interactivePageLink,""))).click();
-        driver.navigate().refresh();
         try {
-            Thread.sleep(5000);
+            Thread.sleep(30000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
