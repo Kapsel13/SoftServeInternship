@@ -66,6 +66,7 @@ public class InteractiveMapPage extends BasePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(interactivePageLink));
         Actions act = new Actions(driver);
         act.doubleClick(driver.findElement(interactivePageLink));
+        System.out.println("jkldnnjdbnnfskdfnkbdfjlnbljknjkldfngndn");
         try{wait.until(ExpectedConditions.visibilityOfElementLocated(map));}
         catch(TimeoutException e){
             driver.navigate().refresh();
