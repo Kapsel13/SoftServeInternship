@@ -113,7 +113,7 @@ public class InteractiveMapPage extends BasePage {
         driver.navigate().refresh();
         beginTestInteractiveMapPage(validUsername,validPassword);
         try {
-            Thread.sleep(30000);
+            Thread.sleep(60000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
