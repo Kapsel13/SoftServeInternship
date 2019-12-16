@@ -64,8 +64,9 @@ public class InteractiveMapPage extends BasePage {
             e.printStackTrace();
         }
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(interactivePageLink,""))));
-        Actions act = new Actions(driver);
-        act.doubleClick(driver.findElement(By.xpath(String.format(interactivePageLink,""))));
+        driver.findElement(By.xpath(String.format(interactivePageLink,""))).click();
+        /*Actions act = new Actions(driver);
+        act.doubleClick(driver.findElement(By.xpath(String.format(interactivePageLink,""))));*/
         File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
