@@ -59,7 +59,7 @@ public class InteractiveMapPage extends BasePage {
         logInPage.provideUsername(validUsername,true);
         logInPage.providePassword(validPassword,true);
         try {
-            Thread.sleep(10000);
+            Thread.sleep(30000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
