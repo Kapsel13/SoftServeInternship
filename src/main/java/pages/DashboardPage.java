@@ -181,12 +181,6 @@ public class DashboardPage extends BasePage{
             waitUntillAllElementsVisible(Arrays.asList(pageLink2,pageElement));
         }
         driver.findElement(pageLink2).click();
-        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        try {
-            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
     }
 
     public void redirectToTheSpecificDashboard(Random rnd){

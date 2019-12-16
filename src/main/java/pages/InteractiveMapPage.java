@@ -75,7 +75,7 @@ public class InteractiveMapPage extends BasePage {
         catch(TimeoutException e){
             driver.navigate().refresh();
             try {
-                Thread.sleep(5000);
+                Thread.sleep(10000);
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
