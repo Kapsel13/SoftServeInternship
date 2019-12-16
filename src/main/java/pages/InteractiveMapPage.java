@@ -65,28 +65,12 @@ public class InteractiveMapPage extends BasePage {
         }
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(interactivePageLink,""))));
         driver.findElement(By.xpath(String.format(interactivePageLink,""))).click();
-        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        /*File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
         } catch (IOException ex) {
             ex.printStackTrace();
-        }
-        try{wait.until(ExpectedConditions.visibilityOfElementLocated(map));}
-        catch(TimeoutException e){
-            driver.navigate().refresh();
-            try {
-                Thread.sleep(10000);
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
-            }
-            srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-            try {
-                FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot2.png"));
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-            wait.until(ExpectedConditions.visibilityOfElementLocated(map));
-        }
+        }*/
     }
     public void addNewLayerToInteractiveMapPage(String validUsername,String validPassword){
         beginTestInteractiveMapPage(validUsername,validPassword);
