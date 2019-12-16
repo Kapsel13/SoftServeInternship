@@ -84,6 +84,13 @@ public class InteractiveMapPage extends BasePage {
         WebElement layer = driver.findElement(By.xpath(String.format(specificLayer,layerIndex)));
         layerName = layer.getText();
         layer.click();
+        System.out.println("jkmjjjnnbsjfnbhios");
+        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
         driver.navigate().refresh();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(layerIcon,layerName))));
     }
@@ -269,12 +276,6 @@ public class InteractiveMapPage extends BasePage {
         WebElement heightUnit = driver.findElement(By.xpath(String.format(specificHeightUnit,indexOfHeightUnits)));
         String heightUnitText = heightUnit.getText();
         heightUnit.click();
-        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        try {
-            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
         wait.until(ExpectedConditions.visibilityOfElementLocated(doneButton));
         driver.findElement(doneButton).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(map));
