@@ -69,7 +69,6 @@ public class InteractiveMapPage extends BasePage {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(interactivePageLink,""))));
         driver.findElement(By.xpath(String.format(interactivePageLink,""))).click();
         try {
             Thread.sleep(180000);
