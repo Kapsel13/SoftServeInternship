@@ -176,7 +176,7 @@ public class DashboardPage extends BasePage{
         driver.findElement(pageLink).click();
         try{
             try {
-                Thread.sleep(10000);
+                Thread.sleep(20000);
             } catch (InterruptedException ex) {
                 ex.printStackTrace();
             }
