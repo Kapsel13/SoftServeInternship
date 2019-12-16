@@ -81,7 +81,7 @@ public class InteractiveMapPage extends BasePage {
             }
             srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
             try {
-                FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
+                FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot2.png"));
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
