@@ -1,6 +1,9 @@
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
+import pages.DashboardPage;
 import pages.InteractiveMapPage;
+
+import javax.swing.plaf.basic.BasicListUI;
 
 public class InteractiveMapPageLayersTest extends TestPreparation {
     @Test(retryAnalyzer = Retry.class)
@@ -22,6 +25,7 @@ public class InteractiveMapPageLayersTest extends TestPreparation {
     @AfterMethod
     public void deleteLayer(){
         InteractiveMapPage interactiveMapPage = new InteractiveMapPage(driver,wait);
+        interactiveMapPage.logOut();
         interactiveMapPage.deleteLayerFromInteractiveMapPage(validAdminUsername,validAdminPassword);
     }
 }

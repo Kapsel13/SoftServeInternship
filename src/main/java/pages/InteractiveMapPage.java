@@ -52,6 +52,10 @@ public class InteractiveMapPage extends BasePage {
     private By lightningCircleIcon = By.xpath("//div[@class='options']//mat-icon[@ng-reflect-svg-icon='LightningCircleIcon']");
     private By lightningStrikeIcon = By.xpath("//div[@class='options']//mat-icon[@ng-reflect-svg-icon='LightningStrikeIcon']");
     private By lightningCrossIcon = By.xpath("//div[@class='options']//mat-icon[@ng-reflect-svg-icon='LightningCrossIcon']");
+    protected By settingsIcon = By.xpath("//section[@class='settings-icon-container']");
+    protected By signOutLabel = By.xpath("//label[contains(text(),'Sign out')]");
+    protected By usernameInput = By.xpath("//input[@placeholder='Username']");
+    protected By loginButton = By.xpath("//button[@class='login-button']");
     public InteractiveMapPage(WebDriver driver, WebDriverWait wait){super(driver,wait);}
     public WebElement scrollElementIntoView(By by) {
         WebElement webElement = driver.findElement(by);
@@ -385,5 +389,11 @@ public class InteractiveMapPage extends BasePage {
         driver.manage().window().fullscreen();
         String lightningIconTypeSettings = ((JavascriptExecutor) driver).executeScript("return this.map[\"opsdashboard-imap\"].currentLightningIconType",element).toString();
         Assert.assertEquals(lightningIconType,lightningIconTypeSettings);
+    }
+    public void logOut(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(settingsIcon));
+        driver.findElement(settingsIcon).click();
+        driver.findElement(signOutLabel).click();
+        waitUntillAllElementsVisible(Arrays.asList(usernameInput,loginButton));
     }
 }
