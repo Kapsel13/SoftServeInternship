@@ -4,6 +4,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.DashboardPage;
 import pages.LogInPage;
+import panels.CurrentDataAlertPanel;
+import panels.ForecastDataAlertPanel;
 
 //TODO
 //test create dashboard cancel on last step
@@ -15,6 +17,7 @@ public class WeatherAppNegativeTests extends TestPreparation {
     private String city;
     private String validDashboardName;
     private String date;
+    private String invalidWeatherType;
     @BeforeMethod
     public void setUp() {
         invalidLocation = TestData.generateData(8);
@@ -49,5 +52,21 @@ public class WeatherAppNegativeTests extends TestPreparation {
         dashboardPage.selectValidLocation(city,city);
         dashboardPage.selectValidName(validDashboardName);
         dashboardPage.setInvalidCustomRangeTime(date);
+    }
+    @Test(retryAnalyzer = Retry.class)
+    public void testResponseOnInvalidCurrentDataPanelType(){
+        invalidWeatherType = TestData.generateData(12);
+        DashboardPage dashboardPage = new DashboardPage(driver,wait);
+        dashboardPage.beginAddingNewPanel(validAdminUsername,validAdminPassword);
+        CurrentDataAlertPanel currentDataAlertPanel = new CurrentDataAlertPanel(driver,wait);
+        currentDataAlertPanel.provideInvalidPanelType(invalidWeatherType);
+    }
+    @Test(retryAnalyzer = Retry.class)
+    public void testResponseOnInvalidForecastDataPanelType(){
+        invalidWeatherType = TestData.generateData(12);
+        DashboardPage dashboardPage = new DashboardPage(driver,wait);
+        dashboardPage.beginAddingNewPanel(validAdminUsername,validAdminPassword);
+        ForecastDataAlertPanel forecastDataAlertPanel = new ForecastDataAlertPanel(driver,wait);
+        forecastDataAlertPanel.provideInvalidPanelType(invalidWeatherType);
     }
 }

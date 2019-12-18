@@ -49,6 +49,8 @@ public class CurrentDataAlertPanel extends BasePanel {
     private By messageArea = By.xpath("//textarea");
     private By rejectNotificationSending = By.xpath("(//div[@class='mat-button-toggle-label-content' and contains(text(),'No')])[2]");
     private By alertPreview = By.xpath("//div[@class='mat-button-toggle-label-content' and contains(text(),'Alert')]");
+    private By selectWeatherInput = By.xpath("//input[@placeholder='Select weather option']");
+    private By  disabledConfirmPanelTypeButton = By.xpath("//form[not(contains(@class,'ng-touched'))]//button[contains(text(),'Next')]");
     public CurrentDataAlertPanel(WebDriver driver, WebDriverWait wait){
         super(driver,wait);
     }
@@ -196,6 +198,15 @@ public class CurrentDataAlertPanel extends BasePanel {
             panelHeaderText = driver.findElement(panelHeader2).getText();
         }
         Assert.assertEquals(weatherTypeText,panelHeaderText);
+    }
+    public void provideInvalidPanelType(String invalidWeatherOption){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(currentDataAlertPanelOption));
+        driver.findElement(currentDataAlertPanelOption).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(confirmChoosingPanelButton));
+        driver.findElement(confirmChoosingPanelButton).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(selectWeatherInput));
+        driver.findElement(selectWeatherInput).sendKeys(invalidWeatherOption);
+        wait.until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(disabledConfirmPanelTypeButton)));
     }
 
 }
