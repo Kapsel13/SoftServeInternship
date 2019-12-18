@@ -28,9 +28,7 @@ public class Retry implements IRetryAnalyzer {
                 iTestResult.setStatus(ITestResult.FAILURE);
                 return false;
             }
-            else {
-                return true;
-            }
+            count++;
         }
         else{
             iTestResult.setStatus(ITestResult.SUCCESS);
