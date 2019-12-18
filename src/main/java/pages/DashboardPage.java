@@ -10,7 +10,6 @@ import usersPermissions.BaseUserPermissions;
 import java.io.File;
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.NoSuchElementException;
 import java.util.Random;
 
 public class DashboardPage extends BasePage{
@@ -58,6 +57,12 @@ public class DashboardPage extends BasePage{
     private String addedDashboard = "//span[contains(@class,'dropdown-item-title') and contains(text(),'%s')]";
     private By deleteOption = By.xpath("//span[contains(@class,'dropdown-item-title') and contains(text(),'Delete Selected')]");
     private By deleteConfirm = By.xpath("//button[contains(@class,'button-common') and contains(text(),'Yes')]");
+    private By closeCreateDashboardWindowIcon = By.xpath("//mat-icon[contains(text(),'clear')]");
+    private By closeCreateDashboardWindowButton = By.xpath("//button[contains(text(),'Yes')]");
+    private String specificDashboard = "//span[contains(@class,'prevent-native-tooltip') and contains(text(),'%s')]";
+    private By dashboard = By.xpath("//span[contains(@class,'prevent-native-tooltip')]");
+    private String dashboardInAList = "(//span[contains(@class,'prevent-native-tooltip')])[%d]";
+    private By closeDeleteDashboardWindowIcon = By.xpath("//mat-icon[contains(text(),'clear')]");
     protected static Random rnd = new Random();
 
     public DashboardPage(WebDriver driver, WebDriverWait wait){
@@ -287,5 +292,41 @@ public class DashboardPage extends BasePage{
         driver.findElement(deleteOption).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(deleteConfirm));
         driver.findElement(deleteConfirm).click();
+    }
+
+    public void closeCreateDashboardWindow(String dashboardName){
+        Boolean dashboardCreated  = true;
+        wait.until(ExpectedConditions.visibilityOfElementLocated(closeCreateDashboardWindowIcon));
+        driver.findElement(closeCreateDashboardWindowIcon).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(closeCreateDashboardWindowButton));
+        driver.findElement(closeCreateDashboardWindowButton).click();
+        driver.navigate().refresh();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
+        driver.findElement(dashboardDropdownButton).click();
+        try{
+            scrollElementIntoView(By.xpath(String.format(specificDashboard,dashboardName)));
+        }catch(NoSuchElementException e){
+            dashboardCreated = false;
+        }
+        Assert.assertFalse(dashboardCreated);
+    }
+    public void closeDeleteDashboardOperationOnRandomDashboard(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
+        driver.findElement(dashboardDropdownButton).click();
+        int numberOfDashboards = driver.findElements(dashboard).size();
+        int indexOfDashboard = rnd.nextInt(numberOfDashboards-1)+1;
+        WebElement randomDashboard = scrollElementIntoView(By.xpath(String.format(dashboardInAList,indexOfDashboard)));
+        String dashboardName = randomDashboard.getText();
+        randomDashboard.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
+        driver.findElement(dashboardDropdownButton).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(deleteOption));
+        driver.findElement(deleteOption).click();
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(closeDeleteDashboardWindowIcon));
+        driver.findElement(closeDeleteDashboardWindowIcon).click();
+        driver.navigate().refresh();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
+        driver.findElement(dashboardDropdownButton).click();
+        wait.until(ExpectedConditions.visibilityOf(scrollElementIntoView(By.xpath(String.format(specificDashboard,dashboardName)))));
     }
 }
