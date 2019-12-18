@@ -11,7 +11,7 @@ public class Retry implements IRetryAnalyzer {
 
     @Override
     public boolean retry(ITestResult iTestResult) {
-        if (!iTestResult.isSuccess()) {                      //Check if test not succeed
+        /*if (!iTestResult.isSuccess()) {                      //Check if test not succeed
             if (count < maxTry) {                            //Check if maxtry count is reached
                 count++;                                     //Increase the maxTry count by 1
                 iTestResult.setStatus(ITestResult.FAILURE);  //Mark test as failed
@@ -22,7 +22,20 @@ public class Retry implements IRetryAnalyzer {
         } else {
             iTestResult.setStatus(ITestResult.SUCCESS);      //If test passes, TestNG marks it as passed
         }
-        return false;
+        return false;*/
+        if(count<maxTry){
+            if(!iTestResult.isSuccess()){
+                iTestResult.setStatus(ITestResult.FAILURE);
+                return false;
+            }
+            else {
+                return true;
+            }
+        }
+        else{
+            iTestResult.setStatus(ITestResult.SUCCESS);
+            return false;
+        }
     }
 
 }
