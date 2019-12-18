@@ -14,11 +14,13 @@ public class WeatherAppNegativeTests extends TestPreparation {
     private String invalidLocation;
     private String city;
     private String validDashboardName;
+    private String date;
     @BeforeMethod
     public void setUp() {
         invalidLocation = TestData.generateData(8);
         city = TestData.getRandomCity();
         validDashboardName = "!-auto_test-"+TestData.generateData(8);
+        date = TestData.getRandomStartDate();
     }
     @Test(retryAnalyzer = Retry.class)
     public void testResponseOnEmptyLocation(){
@@ -41,20 +43,11 @@ public class WeatherAppNegativeTests extends TestPreparation {
         wait.until(ExpectedConditions.visibilityOfElementLocated(nameDisabledButton));
     }
     @Test(retryAnalyzer = Retry.class)
-    public void testResponseOnCLosingCreateDashboardWindow(){
+    public void testResponseOnInvalidCustomRangeEndTime(){
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
         dashboardPage.selectValidLocation(city,city);
         dashboardPage.selectValidName(validDashboardName);
-        dashboardPage.setActiveMonitoring();
-        dashboardPage.closeCreateDashboardWindow(validDashboardName);
-    }
-    @Test(retryAnalyzer = Retry.class)
-    public void testResponseOnClosingDeleteDashboardWindow(){
-        LogInPage logInPage = new LogInPage(driver,wait);
-        logInPage.provideUsername(validAdminUsername,true);
-        logInPage.providePassword(validAdminPassword,true);
-        DashboardPage dashboardPage = new DashboardPage(driver,wait);
-        dashboardPage.closeDeleteDashboardOperationOnRandomDashboard();
+        dashboardPage.setInvalidCustomRangeTime(date);
     }
 }

@@ -153,6 +153,24 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.setCustomRangeMonitoring(TestData.rnd,startDate,endDate);
         dashboardPage.createNewDashboard(newDashboardText);
     }
+    @Test(retryAnalyzer = Retry.class)
+    public void testResponseOnCLosingCreateDashboardWindow(){
+        DashboardPage dashboardPage = new DashboardPage(driver,wait);
+        dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
+        dashboardPage.selectValidLocation(city,city);
+        dashboardPage.selectValidName(validDashboardName);
+        dashboardPage.setActiveMonitoring();
+        dashboardPage.closeCreateDashboardWindow(validDashboardName);
+    }
+    @Test(retryAnalyzer = Retry.class)
+    public void testResponseOnClosingDeleteDashboardWindow(){
+        LogInPage logInPage = new LogInPage(driver,wait);
+        logInPage.provideUsername(validAdminUsername,true);
+        logInPage.providePassword(validAdminPassword,true);
+        DashboardPage dashboardPage = new DashboardPage(driver,wait);
+        dashboardPage.closeDeleteDashboardOperationOnRandomDashboard();
+    }
+
     @AfterMethod
     public void deleteAddedDashboard(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);

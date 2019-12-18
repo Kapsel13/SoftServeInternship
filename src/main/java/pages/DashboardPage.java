@@ -329,4 +329,22 @@ public class DashboardPage extends BasePage{
         driver.findElement(dashboardDropdownButton).click();
         wait.until(ExpectedConditions.visibilityOf(scrollElementIntoView(By.xpath(String.format(specificDashboard,dashboardName)))));
     }
+    public void setInvalidCustomRangeTime(String data){
+        wait.until(ExpectedConditions.elementToBeClickable(customRangeButton));
+        driver.findElement(customRangeButton).click();
+        int startTimesNumber = rnd.nextInt(driver.findElements(startTimes).size())+1;
+        int endTimesNumber = 1;
+        if(startTimesNumber != 1){
+            endTimesNumber = rnd.nextInt(startTimesNumber-1)+1;
+        }
+        driver.findElement(startDateInput).sendKeys(data);
+        driver.findElement(endDateInput).sendKeys(data);
+        driver.findElement(startTimesArrow).click();
+        WebElement startTimeElement = scrollElementIntoView(By.xpath(String.format(startTimeInList,startTimesNumber)));
+        startTimeElement.click();
+        driver.findElement(endTimesArrow).click();
+        WebElement endTimeElement = scrollElementIntoView(By.xpath(String.format(endTimeInList,endTimesNumber)));
+        endTimeElement.click();
+        wait.until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(driver.findElements(monitorButton).get(3))));
+    }
 }

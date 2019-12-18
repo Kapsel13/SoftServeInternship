@@ -8,7 +8,6 @@ public class TestData {
      protected static List<String> icaoCodes = Arrays.asList("EDDB","YSBK","JFK","EGLL");
      protected static List<String> startDate = Arrays.asList("11/11/2014","05/22/2015","07/13/2015","04/26/2016");
      protected static List<String> endDate = Arrays.asList("02/13/2017","08/21/2017","10/28/2018","06/19/2017");
-
      protected static Random rnd = new Random();
 
     public  static String generateData(int limit) {
