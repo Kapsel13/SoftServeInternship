@@ -291,6 +291,7 @@ public class SummaryPage extends BasePage {
             e.printStackTrace();
         }
         int numberOfOptions = driver.findElements(filterAlertTypeOption).size();
+        System.out.println(numberOfOptions);
         int randomIndex = rnd.nextInt(numberOfOptions-1)+1;
         WebElement chosenOption = scrollElementIntoView(By.xpath(String.format(specificAlertTypeOption,randomIndex)));
         String alertTypeText = chosenOption.getText();
