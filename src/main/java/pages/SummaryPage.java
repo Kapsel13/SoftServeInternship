@@ -1,14 +1,14 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
 
 public class SummaryPage extends BasePage {
@@ -210,6 +210,17 @@ public class SummaryPage extends BasePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(filterByCriticalAlertsButton));
         driver.findElement(filterByCriticalAlertsButton).click();
         driver.navigate().refresh();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
         int numberOfDashboards = driver.findElements(dashboardLocation).size();
         int index = 1;
         int criticalAlertsNumber = 0;
