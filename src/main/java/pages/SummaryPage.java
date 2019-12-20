@@ -215,12 +215,6 @@ public class SummaryPage extends BasePage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        try {
-            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
         int numberOfDashboards = driver.findElements(dashboardLocation).size();
         int index = 1;
         int criticalAlertsNumber = 0;
