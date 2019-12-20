@@ -206,11 +206,6 @@ public class SummaryPage extends BasePage {
             e.printStackTrace();
         }
         driver.navigate().refresh();
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         try {
             FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
