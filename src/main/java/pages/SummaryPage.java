@@ -206,12 +206,6 @@ public class SummaryPage extends BasePage {
             e.printStackTrace();
         }
         driver.navigate().refresh();
-        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        try {
-            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
         wait.until(ExpectedConditions.visibilityOfElementLocated(filteringButton));
         driver.findElement(filteringButton).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(filterByCriticalAlertsButton));
@@ -249,6 +243,7 @@ public class SummaryPage extends BasePage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        driver.navigate().refresh();
         wait.until(ExpectedConditions.visibilityOfElementLocated(filteringButton));
         driver.findElement(filteringButton).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(numberOfAlertsDropdown));
@@ -285,6 +280,7 @@ public class SummaryPage extends BasePage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        driver.navigate().refresh();
         wait.until(ExpectedConditions.visibilityOfElementLocated(filteringButton));
         driver.findElement(filteringButton).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(alertTypeOption));
