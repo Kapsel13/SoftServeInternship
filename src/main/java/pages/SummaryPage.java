@@ -249,8 +249,13 @@ public class SummaryPage extends BasePage {
         int numberOfOptions = driver.findElements(filterByNumberOfAlertsOption).size();
         int randomIndex = rnd.nextInt(numberOfOptions-1)+1;
         WebElement specificOption = scrollElementIntoView(By.xpath(String.format(specificFilterByNumberOfAlertsOption,randomIndex)));
+        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
         int specificNumberOfAlerts = Integer.parseInt(specificOption.getText().substring(0,1));
-        System.out.println("**********"+specificNumberOfAlerts+"*****");
         specificOption.click();
         int index = 1;
         int numberOfDashboards = driver.findElements(dashboardLocation).size();
