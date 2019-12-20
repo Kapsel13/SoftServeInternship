@@ -49,7 +49,7 @@ public class TestPreparation {
         driver.manage().timeouts().pageLoadTimeout(10,TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(10000, TimeUnit.MILLISECONDS);
         driver.manage().window().setSize(new Dimension(2100, 1050));
-        //river.manage().window().maximize();
+        //driver.manage().window().maximize();
 
         driver.get("https://dev.opsdashboard.ibm.com/");
         validAdminUsername = envParams.getAdminUsername();
