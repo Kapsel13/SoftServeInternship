@@ -13,9 +13,7 @@ public class LogInPage extends BasePage {
     protected By loginError = By.xpath("//div[@class='error']");
 
     protected By loginInput = By.xpath("//input[@class='text-line']");
-    protected By dashboardDropdownButton = By.xpath("//button[@id='dashboard-dropdown']");
     protected By loginButton = By.xpath("//button[@class='login-button']");
-    protected By dashboardPageText = By.xpath("//span[contains(text(),'My Dashboards')]");
     protected By pageTitle = By.xpath("//div[@class='phoenix-product-name' and contains(.,'IBM')]");
     protected By settingsIcon = By.xpath("//section[@class='settings-icon-container']");
 

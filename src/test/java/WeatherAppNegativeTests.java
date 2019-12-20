@@ -3,13 +3,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pages.DashboardPage;
-import pages.LogInPage;
 import panels.CurrentDataAlertPanel;
 import panels.ForecastDataAlertPanel;
 
-//TODO
-//test create dashboard cancel on last step
-//test delete dashboard cancel on last step
 public class WeatherAppNegativeTests extends TestPreparation {
     private By locationDisabledButton = By.xpath("//div[contains(text(), 'What location would you like to see data for?')]/../../..//button[@disabled]");
     private By nameDisabledButton = By.xpath("//div[contains(text(), 'What do you want to call this dashboard?')]/../../..//button[@disabled]");

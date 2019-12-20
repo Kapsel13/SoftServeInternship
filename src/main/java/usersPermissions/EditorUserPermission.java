@@ -1,14 +1,11 @@
 package usersPermissions;
 
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.DashboardPage;
 import pages.LogInPage;
 
-import java.io.File;
-import java.io.IOException;
 
 
 public class EditorUserPermission extends BaseUserPermissions {
@@ -93,27 +90,12 @@ public class EditorUserPermission extends BaseUserPermissions {
         logInPage.providePassword(password, true);
         wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
         driver.findElement(dashboardDropdownButton).click();
-        //String specificDashboardName="";
         if(permissionUser=="readOnly"){
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            /*int numberOfDashboards = driver.findElements(dashboards).size();
-            boolean dashboardFound = false;
-            int dashboardIndex=1;
-            while((dashboardIndex<=numberOfDashboards)&&(!dashboardFound)){
-                WebElement dashboardInAList = scrollElementIntoView(By.xpath(String.format(specificDashboard,dashboardIndex)));
-                specificDashboardName = dashboardInAList.getText();
-                if(specificDashboardName==dashboardName){
-                    dashboardFound=true;
-                    dashboardInAList.click();
-                }
-                else{
-                    dashboardIndex++;
-                }
-            }*/
             BaseUserPermissions baseUserPermissions = new BaseUserPermissions(driver,wait);
             WebElement dashboardToCheck = baseUserPermissions.scrollElementIntoView(By.xpath(String.format(editedDashboard,dashboardName)));
             dashboardToCheck.click();

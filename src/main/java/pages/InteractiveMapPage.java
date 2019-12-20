@@ -7,10 +7,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
-import java.sql.Time;
 import java.util.Arrays;
 import java.util.Random;
 

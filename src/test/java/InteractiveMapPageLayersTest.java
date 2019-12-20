@@ -1,30 +1,30 @@
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pages.DashboardPage;
 import pages.InteractiveMapPage;
 
-import javax.swing.plaf.basic.BasicListUI;
 
 public class InteractiveMapPageLayersTest extends TestPreparation {
+    InteractiveMapPage interactiveMapPage;
+    @BeforeMethod
+    public void setUp(){
+        interactiveMapPage = new InteractiveMapPage(driver,wait);
+    }
     @Test(retryAnalyzer = Retry.class)
     public void testAddingNewLayerToInteractiveMapPage(){
-        InteractiveMapPage interactiveMapPage = new InteractiveMapPage(driver,wait);
         interactiveMapPage.addNewLayerToInteractiveMapPage(validAdminUsername,validAdminPassword);
 
     }
    @Test(retryAnalyzer = Retry.class)
    public void testSettingLightningIconTypeToInteractiveMapPage(){
-       InteractiveMapPage interactiveMapPage = new InteractiveMapPage(driver,wait);
        interactiveMapPage.setLightningIconTypeToInteractiveMapPage(validAdminUsername,validAdminPassword);
    }
     @Test(retryAnalyzer = Retry.class)
     public void testDeletingLayerFromInteractiveMapPage(){
-        InteractiveMapPage interactiveMapPage = new InteractiveMapPage(driver,wait);
         interactiveMapPage.deleteLayerFromInteractiveMapPage(validAdminUsername,validAdminPassword);
     }
     @AfterMethod
     public void deleteLayer(){
-        InteractiveMapPage interactiveMapPage = new InteractiveMapPage(driver,wait);
         interactiveMapPage.logOut();
         interactiveMapPage.deleteLayerFromInteractiveMapPage(validAdminUsername,validAdminPassword);
     }

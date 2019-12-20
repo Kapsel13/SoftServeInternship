@@ -1,6 +1,5 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.testng.IRetryAnalyzer;
 import org.testng.annotations.*;
 import pages.DashboardPage;
 import pages.LogInPage;
@@ -24,10 +23,6 @@ public class WeatherAppTest extends TestPreparation {
     private By canvas = By.xpath("//div[@id='mapContainer']");
     private By summaryPageText = By.xpath("//span[contains(text(),'Summary')]");
     private By dashboardPageText = By.xpath("//span[contains(text(),'My Dashboards')]");
-    private By dashboards = By.xpath("((//table[contains(@class, 'dashboard-list-table')]//tr))//td[1]");
-    private String dashboardsInList = "((//table[contains(@class, 'dashboard-list-table')]//tr)[%d])//td[1]";
-    private By dashboardTag = By.xpath("(//span[@class='dropdown-item-title'])[1]");
-
 
     @BeforeMethod
     public void setUp() {

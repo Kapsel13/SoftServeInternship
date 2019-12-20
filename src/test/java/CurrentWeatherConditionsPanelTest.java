@@ -1,6 +1,5 @@
 import org.testng.annotations.Test;
 import pages.DashboardPage;
-import panels.CurrentDataAlertPanel;
 import panels.CurrentWeatherConditonsPanel;
 
 public class CurrentWeatherConditionsPanelTest extends TestPreparation {

@@ -77,9 +77,6 @@ public class CurrentDataAlertPanel extends BasePanel {
         if(weatherTypeText.contains("Hr")){
             weatherTypeText = weatherTypeText.replace("Hr"," Hr");
         }
-        /*if(weatherTypeText.contains("st")){
-            weatherTypeText = weatherTypeText.replace("st"," st");
-        }*/
         weatherType.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(dataConfirmButton));
         driver.findElement(dataConfirmButton).click();

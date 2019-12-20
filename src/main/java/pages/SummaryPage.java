@@ -1,14 +1,11 @@
 package pages;
 
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.Random;
 
 public class SummaryPage extends BasePage {
@@ -44,7 +41,7 @@ public class SummaryPage extends BasePage {
         return webElement;
     }
 
-    public void sortDashboardsAlphabetically(){
+    public void redirectToSummaryPage(){
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
@@ -57,6 +54,9 @@ public class SummaryPage extends BasePage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+    public void sortDashboardsAlphabetically(){
+        redirectToSummaryPage();
         wait.until(ExpectedConditions.visibilityOfElementLocated(sortingButton));
         int numberOfDashboards = driver.findElements(dashboardLocation).size();
         int index = 2;
@@ -76,18 +76,7 @@ public class SummaryPage extends BasePage {
         Assert.assertTrue(sortedAlphabetically);
     }
     public void sortDashboardInReverseAlphabeticalOrder(){
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        wait.until(ExpectedConditions.visibilityOfElementLocated(summaryPageLink));
-        driver.findElement(summaryPageLink).click();
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        redirectToSummaryPage();
         wait.until(ExpectedConditions.visibilityOfElementLocated(sortingButton));
         driver.findElement(sortingButton).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(reverseAlphabeticalOrderButton));
@@ -115,18 +104,7 @@ public class SummaryPage extends BasePage {
         Assert.assertTrue(sortedReverseAlphabetically);
     }
     public void sortDashboardByNumberOfAlerts(){
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        wait.until(ExpectedConditions.visibilityOfElementLocated(summaryPageLink));
-        driver.findElement(summaryPageLink).click();
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        redirectToSummaryPage();
         wait.until(ExpectedConditions.visibilityOfElementLocated(sortingButton));
         driver.findElement(sortingButton).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(sortByNumberOfAlertsButton));
@@ -154,18 +132,7 @@ public class SummaryPage extends BasePage {
         Assert.assertTrue(sortedByNumberOfAlerts);
     }
     public void sortDashboardsByNumberOfCriticalAlerts(){
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        wait.until(ExpectedConditions.visibilityOfElementLocated(summaryPageLink));
-        driver.findElement(summaryPageLink).click();
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+       redirectToSummaryPage();
         wait.until(ExpectedConditions.visibilityOfElementLocated(sortingButton));
         driver.findElement(sortingButton).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(sortByNumberOfCriticalAlertsButton));
@@ -193,18 +160,7 @@ public class SummaryPage extends BasePage {
         Assert.assertTrue(sortByNumberOfCriticalAlerts);
     }
     public void filterDashboardsByCriticalAlerts(){
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        wait.until(ExpectedConditions.visibilityOfElementLocated(summaryPageLink));
-        driver.findElement(summaryPageLink).click();
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        redirectToSummaryPage();
         driver.navigate().refresh();
         wait.until(ExpectedConditions.visibilityOfElementLocated(filteringButton));
         driver.findElement(filteringButton).click();
@@ -231,18 +187,7 @@ public class SummaryPage extends BasePage {
         Assert.assertTrue(containCriticalAlert);
     }
     public void filterDashboardsByNumberOfAlerts(){
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        wait.until(ExpectedConditions.visibilityOfElementLocated(summaryPageLink));
-        driver.findElement(summaryPageLink).click();
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        redirectToSummaryPage();
         driver.navigate().refresh();
         wait.until(ExpectedConditions.visibilityOfElementLocated(filteringButton));
         driver.findElement(filteringButton).click();
@@ -268,18 +213,7 @@ public class SummaryPage extends BasePage {
         Assert.assertTrue(containSpecificNumberOfAlerts);
     }
     public void filterDashboardByAlertType(){
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        wait.until(ExpectedConditions.visibilityOfElementLocated(summaryPageLink));
-        driver.findElement(summaryPageLink).click();
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        redirectToSummaryPage();
         driver.navigate().refresh();
         wait.until(ExpectedConditions.visibilityOfElementLocated(filteringButton));
         driver.findElement(filteringButton).click();
@@ -291,8 +225,7 @@ public class SummaryPage extends BasePage {
             e.printStackTrace();
         }
         int numberOfOptions = driver.findElements(filterAlertTypeOption).size();
-        System.out.println(numberOfOptions);
-        int randomIndex = rnd.nextInt(numberOfOptions-1)+1;
+        int randomIndex = rnd.nextInt(numberOfOptions-1)+2;
         WebElement chosenOption = scrollElementIntoView(By.xpath(String.format(specificAlertTypeOption,randomIndex)));
         String alertTypeText = chosenOption.getText();
         chosenOption.click();
