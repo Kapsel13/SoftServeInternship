@@ -37,7 +37,7 @@ public class ActiveDashboardsNumberTest extends TestPreparation {
         testArguments.put("startDateBeforeCurrentDate",startDateBeforeCurrentDate);
         testArguments.put("endDateAfterCurrentDate",endDateAfterCurrentDate);
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testNumberOfActiveDashboardsAfterAddingActiveDashboard(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.getNumberOfActiveDashboardsBeforeAction(validAdminUsername,validAdminPassword);
@@ -51,7 +51,7 @@ public class ActiveDashboardsNumberTest extends TestPreparation {
         dashboardPage.createNewDashboard(newDashboardText);
         dashboardPage.checkNumberOfActiveDashboardsAfterAction(1);
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testNumberOfActiveDashboardsAfterAddingInActiveDashboard(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.getNumberOfActiveDashboardsBeforeAction(validAdminUsername,validAdminPassword);
@@ -65,7 +65,7 @@ public class ActiveDashboardsNumberTest extends TestPreparation {
         dashboardPage.createNewDashboard(newDashboardText);
         dashboardPage.checkNumberOfActiveDashboardsAfterAction(0);
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testNumberOfActiveDashboardsAfterDeletingActiveDashboard(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.getNumberOfActiveDashboardsBeforeAction(validAdminUsername,validAdminPassword);
@@ -77,7 +77,7 @@ public class ActiveDashboardsNumberTest extends TestPreparation {
         dashboardPage.deleteSpecificDashboard();
         dashboardPage.checkNumberOfActiveDashboardsAfterAction(-1);
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testNumberOfActiveDashboardsAfterDeletingInActiveDashboard(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.getNumberOfActiveDashboardsBeforeAction(validAdminUsername,validAdminPassword);
@@ -89,7 +89,7 @@ public class ActiveDashboardsNumberTest extends TestPreparation {
         dashboardPage.deleteSpecificDashboard();
         dashboardPage.checkNumberOfActiveDashboardsAfterAction(0);
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testNumberOfActiveDashboardsAfterChangingActiveDashboardIntoInActive(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.getNumberOfActiveDashboardsBeforeAction(validAdminUsername,validAdminPassword);
@@ -101,7 +101,7 @@ public class ActiveDashboardsNumberTest extends TestPreparation {
         dashboardPage.editSpecificDashboard("inActive");
         dashboardPage.checkNumberOfActiveDashboardsAfterAction(-1);
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testNumberOfActiveDashboardsAfterChangingInActiveDashboardIntoActive(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.getNumberOfActiveDashboardsBeforeAction(validAdminUsername,validAdminPassword);
@@ -113,7 +113,7 @@ public class ActiveDashboardsNumberTest extends TestPreparation {
         dashboardPage.editSpecificDashboard("Active");
         dashboardPage.checkNumberOfActiveDashboardsAfterAction(1);
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testNumberOfActiveDashboardsAfterAddingDashboardWithCustomRangeContainsCurrentData(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.getNumberOfActiveDashboardsBeforeAction(validAdminUsername,validAdminPassword);
