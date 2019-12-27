@@ -35,26 +35,6 @@ public class WeatherAppTest extends TestPreparation {
     }
 
     @Test(retryAnalyzer = Retry.class)
-    public void testResponseOnEmptyLocation(){
-        DashboardPage dashboardPage = new DashboardPage(driver,wait);
-        dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(locationDisabledButton));
-    }
-
-    @Test(retryAnalyzer = Retry.class)
-    public void testResponseOnInvalidLocation(){
-        DashboardPage dashboardPage = new DashboardPage(driver,wait);
-        dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
-        dashboardPage.provideInValidLocation(invalidLocation);
-    }
-    @Test(retryAnalyzer = Retry.class)
-    public void testResponseOnEmptyName(){
-        DashboardPage dashboardPage = new DashboardPage(driver,wait);
-        dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
-        dashboardPage.selectValidLocation(city,city);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(nameDisabledButton));
-    }
-    @Test(retryAnalyzer = Retry.class)
     public void testRedirectionToTheSpecificDashboardFromSummaryPage(){
         LogInPage logInPage = new LogInPage(driver,wait);
         logInPage.provideUsername(validAdminUsername,true);

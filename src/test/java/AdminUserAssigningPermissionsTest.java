@@ -16,6 +16,7 @@ public class AdminUserAssigningPermissionsTest extends TestPreparation {
     private By creatorCheckBox = By.xpath("(//div[@class='body-row' and contains(.,'creator test')]//div[contains(@class,'mat-checkbox-inner-container')])[1]");
     private By editorUserCheckBox = By.xpath("(//div[@class='body-row' and contains(.,'editor test')]//div[contains(@class,'mat-checkbox-inner-container')])[1]");
     private By readOnlyUserCheckBox = By.xpath("(//div[@class='body-row' and contains(.,'readonly test')]//div[contains(@class,'mat-checkbox-inner-container')])[1]");
+    AdminUserPermission adminUserPermission;
     @BeforeMethod
     public void setUp(){
         validDashboardName = "!-auto_test-"+TestData.generateData(8);

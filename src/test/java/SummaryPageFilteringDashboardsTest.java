@@ -14,14 +14,17 @@ public class SummaryPageFilteringDashboardsTest extends TestPreparation{
     }
     @Test
     public void testResponseOnFilteringDashboardsByCriticalAlerts(){
+        summaryPage = new SummaryPage(driver,wait);
         summaryPage.filterDashboardsByCriticalAlerts();
     }
     @Test
     public void testResponseOnFilteringDashboardsByNumberOfAlerts(){
+        summaryPage = new SummaryPage(driver,wait);
         summaryPage.filterDashboardsByNumberOfAlerts();
     }
     @Test
     public void testResponseOnFilteringDashboardsByTypeOfAlert(){
+        summaryPage = new SummaryPage(driver,wait);
         summaryPage.filterDashboardByAlertType();
     }
 }

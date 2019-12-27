@@ -1,18 +1,10 @@
 <suite name="softwaretestingmaterial">
+    <listeners>
+        <listener class-name="MyTransformer"/>
+    </listeners>
     <test name="Test">
         <classes>
             <class name="LogInTest" />
-            <class name ="WeatherAppTest" />
-            <class name="AdminUserAssigningPermissionsTest"/>
-            <class name="CreateDashboardTest"/>
-            <class name="CreatorUserAssigningPermissionsTest"/>
-            <class name="CurrentDataAlertPanelTest"/>
-            <class name="CurrentWeatherConditionsPanelTest"/>
-            <class name="EditorUserAssigningPermissionTest"/>
-            <class name="ForecastDataAlertPanelTest"/>
-            <class name="HourDailyForecastPanelTest"/>
-            <class name="InteractiveMapPanelTest"/>
-            <class name="LightingPanelTest"/>
         </classes>
     </test>
 </suite>

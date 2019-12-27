@@ -26,7 +26,7 @@ public class DashboardPage extends BasePage{
     protected By createButton = By.xpath("//button[contains(text(),'Create')]");
     protected By nameEnabledButton = By.xpath("//div[contains(text(), 'What do you want to call this dashboard?')]/../../..//button[contains(text(), 'Next')]");
     protected By inActiveButton = By.xpath("//span[contains(text(),'In-Active')]");
-    protected By customRangeButton = By.xpath("//span[contains(text(),'Custom Range')]");
+    protected By customRangeButton = By.xpath("//div[contains(text(),'Custom Range')]");
     protected By startDateInput = By.xpath("//input[@placeholder='Select start date']");
     protected By endDateInput = By.xpath("//input[@placeholder='Select end date']");
     protected String startTimeInList = "(//div[@formgroupname='start']//button[contains(@class,'dropdown-item')])[%d]";
@@ -59,8 +59,15 @@ public class DashboardPage extends BasePage{
     private By dashboard = By.xpath("//span[contains(@class,'prevent-native-tooltip')]");
     private String dashboardInAList = "(//span[contains(@class,'prevent-native-tooltip')])[%d]";
     private By closeDeleteDashboardWindowIcon = By.xpath("//mat-icon[contains(text(),'clear')]");
+    private By activeDashboardsNumberInformation = By.xpath("//p[@class='limits-description-txt']");
     protected static Random rnd = new Random();
-
+    int numberOfActiveDashboardsBefore;
+    private String inActiveDashboardInAList = "(//div[contains(@class,'dropdown-menu')]//button[contains(., '(Inactive)')])[%d]";
+    private By inActiveDashboard = By.xpath("//div[contains(@class,'dropdown-menu')]//button[contains(., '(Inactive)')]");
+    private By editOption = By.xpath("//span[contains(@class,'dropdown-item-title') and contains(text(),'Edit Selected')]");
+    private By activeButton = By.xpath("//div[@class='mat-button-toggle-label-content' and contains(text(),'Active')]");
+    private By confirmEditButton = By.xpath("//button[contains(text(),'Save')]");
+    private By editMonitoringButton = By.xpath("(//button[contains(text(), 'Next')])[2]");
     public DashboardPage(WebDriver driver, WebDriverWait wait){
         super(driver,wait);
     }
@@ -224,6 +231,20 @@ public class DashboardPage extends BasePage{
         activeDashboardToClick.click();
     }
 
+    public void chooseInActiveDashboard(Random rnd){
+        wait.until(ExpectedConditions.elementToBeClickable(dashboardDropdownButton));
+        driver.findElement(dashboardDropdownButton).click();
+        int inActiveDashboardsNumber = driver.findElements(inActiveDashboard).size();
+        int numberOfInActiveDashboard = 0;
+        if(inActiveDashboardsNumber == 1){
+            numberOfInActiveDashboard = 1;
+        }
+        else {
+            numberOfInActiveDashboard = rnd.nextInt(inActiveDashboardsNumber-1)+1;;
+        }
+        WebElement inActiveDashboardToClick = scrollElementIntoView(By.xpath(String.format(inActiveDashboardInAList,numberOfInActiveDashboard)));
+        inActiveDashboardToClick.click();
+    }
     public void beginAddingNewPanel(String validUsername,String validPassword) {
         LogInPage logInPage = new LogInPage(driver, wait);
         logInPage.provideUsername(validUsername, true);
@@ -325,22 +346,93 @@ public class DashboardPage extends BasePage{
         driver.findElement(dashboardDropdownButton).click();
         wait.until(ExpectedConditions.visibilityOf(scrollElementIntoView(By.xpath(String.format(specificDashboard,dashboardName)))));
     }
-    public void setInvalidCustomRangeTime(String data){
+    public void setInvalidCustomRangeTime(String data) {
         wait.until(ExpectedConditions.elementToBeClickable(customRangeButton));
         driver.findElement(customRangeButton).click();
-        int startTimesNumber = rnd.nextInt(driver.findElements(startTimes).size())+1;
+        int startTimesNumber = rnd.nextInt(driver.findElements(startTimes).size()) + 1;
         int endTimesNumber = 1;
-        if(startTimesNumber != 1){
-            endTimesNumber = rnd.nextInt(startTimesNumber-1)+1;
+        if (startTimesNumber != 1) {
+            endTimesNumber = rnd.nextInt(startTimesNumber - 1) + 1;
         }
         driver.findElement(startDateInput).sendKeys(data);
         driver.findElement(endDateInput).sendKeys(data);
         driver.findElement(startTimesArrow).click();
-        WebElement startTimeElement = scrollElementIntoView(By.xpath(String.format(startTimeInList,startTimesNumber)));
+        WebElement startTimeElement = scrollElementIntoView(By.xpath(String.format(startTimeInList, startTimesNumber)));
         startTimeElement.click();
         driver.findElement(endTimesArrow).click();
-        WebElement endTimeElement = scrollElementIntoView(By.xpath(String.format(endTimeInList,endTimesNumber)));
+        WebElement endTimeElement = scrollElementIntoView(By.xpath(String.format(endTimeInList, endTimesNumber)));
         endTimeElement.click();
         wait.until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(driver.findElements(monitorButton).get(3))));
+    }
+    public void getNumberOfActiveDashboardsBeforeAction(String validUsername,String validPassword){
+        LogInPage logInPage = new LogInPage(driver, wait);
+        logInPage.provideUsername(validUsername,true);
+        logInPage.providePassword(validPassword,true);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(settingsIcon));
+        driver.findElement(settingsIcon).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(activeDashboardsNumberInformation));
+        WebElement activeDashboardsNumber = driver.findElement(activeDashboardsNumberInformation);
+        numberOfActiveDashboardsBefore = Integer.parseInt(activeDashboardsNumber.getText().substring(0,2));
+    }
+    public void checkNumberOfActiveDashboardsAfterAction(int action){
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        wait.until(ExpectedConditions.visibilityOfElementLocated(settingsIcon));
+        driver.findElement(settingsIcon).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(activeDashboardsNumberInformation));
+        WebElement activeDashboardsNumber = driver.findElement(activeDashboardsNumberInformation);
+        int numberOfActiveDashboardsAfter = Integer.parseInt(activeDashboardsNumber.getText().substring(0,2));
+        if(action == 1) {
+            Assert.assertEquals(numberOfActiveDashboardsBefore + 1, numberOfActiveDashboardsAfter);
+        }
+        if(action == 0){
+            Assert.assertEquals(numberOfActiveDashboardsBefore,numberOfActiveDashboardsAfter);
+        }
+        if(action == -1){
+            System.out.println(numberOfActiveDashboardsBefore);
+            System.out.println(numberOfActiveDashboardsAfter);
+            Assert.assertEquals(numberOfActiveDashboardsBefore - 1, numberOfActiveDashboardsAfter);
+        }
+    }
+    public void deleteSpecificDashboard(){
+        try{
+            wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
+        }catch(TimeoutException e){
+            driver.navigate().refresh();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
+        }
+        driver.findElement(dashboardDropdownButton).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(deleteOption));
+        driver.findElement(deleteOption).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(deleteConfirm));
+        driver.findElement(deleteConfirm).click();
+    }
+    public void editSpecificDashboard(String transformTo){
+        try{
+            wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
+        }catch(TimeoutException e){
+            driver.navigate().refresh();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
+        }
+        driver.findElement(dashboardDropdownButton).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(editOption));
+        driver.findElement(editOption).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(nameEnabledButton));
+        driver.findElement(nameEnabledButton).click();
+        if(transformTo == "inActive"){
+            wait.until(ExpectedConditions.visibilityOfElementLocated(inActiveButton));
+            driver.findElement(inActiveButton).click();
+        }
+        if(transformTo == "Active"){
+            wait.until(ExpectedConditions.visibilityOfElementLocated(activeButton));
+            driver.findElement(activeButton).click();
+        }
+        wait.until(ExpectedConditions.visibilityOfElementLocated(editMonitoringButton));
+        driver.findElement(editMonitoringButton).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(confirmEditButton));
+        driver.findElement(confirmEditButton).click();
     }
 }
