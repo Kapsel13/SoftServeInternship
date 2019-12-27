@@ -129,7 +129,7 @@ public class ActiveDashboardsNumberTest extends TestPreparation {
         dashboardPage.createNewDashboard(newDashboardText);
         dashboardPage.checkNumberOfActiveDashboardsAfterAction(1);
     }
-    @Test
+    /*@Test
     public void testNumberOfActiveDashboardsAfterAddingDashboardWithCustomRangeNotContainsCurrentData(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.getNumberOfActiveDashboardsBeforeAction(validAdminUsername,validAdminPassword);
@@ -144,5 +144,6 @@ public class ActiveDashboardsNumberTest extends TestPreparation {
         System.out.println("endTime: "+testArguments.get("endDate"));
         dashboardPage.createNewDashboard(newDashboardText);
         dashboardPage.checkNumberOfActiveDashboardsAfterAction(0);
-    }
+    }*/
+
 }
