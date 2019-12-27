@@ -98,7 +98,7 @@ public class ActiveDashboardsNumberTest extends TestPreparation {
         logInPage.provideUsername(validAdminUsername,true);
         logInPage.providePassword(validAdminPassword,true);
         dashboardPage.chooseActiveDashboard(rnd);
-        dashboardPage.editSpecificDashboard("inActive");
+        dashboardPage.editSpecificDashboard("inActive",rnd,startDate,endDate);
         dashboardPage.checkNumberOfActiveDashboardsAfterAction(-1);
     }
     @Test(retryAnalyzer = Retry.class)
@@ -110,7 +110,7 @@ public class ActiveDashboardsNumberTest extends TestPreparation {
         logInPage.provideUsername(validAdminUsername,true);
         logInPage.providePassword(validAdminPassword,true);
         dashboardPage.chooseInActiveDashboard(rnd);
-        dashboardPage.editSpecificDashboard("Active");
+        dashboardPage.editSpecificDashboard("Active",rnd,startDate,endDate);
         dashboardPage.checkNumberOfActiveDashboardsAfterAction(1);
     }
     @Test(retryAnalyzer = Retry.class)
@@ -129,21 +129,19 @@ public class ActiveDashboardsNumberTest extends TestPreparation {
         dashboardPage.createNewDashboard(newDashboardText);
         dashboardPage.checkNumberOfActiveDashboardsAfterAction(1);
     }
-    /*@Test
-    public void testNumberOfActiveDashboardsAfterAddingDashboardWithCustomRangeNotContainsCurrentData(){
+    @Test(retryAnalyzer = Retry.class)
+    public void testNumberOfActiveDashboardsAfterChangingInActiveDashboardIntoCustomRange(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.getNumberOfActiveDashboardsBeforeAction(validAdminUsername,validAdminPassword);
         dashboardPage.logOut();
-        dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
-        dashboardPage.selectValidLocation(city,city);
-        System.out.println("dashboardLocation: "+testArguments.get("city"));
-        dashboardPage.selectValidName(validDashboardName);
-        System.out.println("dashboardName: "+testArguments.get("dashboardName"));
-        dashboardPage.setCustomRangeMonitoring(rnd,startDate,endDate);
+        LogInPage logInPage = new LogInPage(driver,wait);
+        logInPage.provideUsername(validAdminUsername,true);
+        logInPage.providePassword(validAdminPassword,true);
+        dashboardPage.chooseInActiveDashboard(rnd);
+        dashboardPage.editSpecificDashboard("Custom Range",rnd,startDate,endDate);
         System.out.println("startTime: "+testArguments.get("startDate"));
-        System.out.println("endTime: "+testArguments.get("endDate"));
-        dashboardPage.createNewDashboard(newDashboardText);
-        dashboardPage.checkNumberOfActiveDashboardsAfterAction(0);
-    }*/
+        System.out.println("end time: "+testArguments.get("endDate"));
+        dashboardPage.checkNumberOfActiveDashboardsAfterAction(1);
+    }
 
 }

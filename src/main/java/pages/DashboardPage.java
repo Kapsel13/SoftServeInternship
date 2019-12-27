@@ -410,7 +410,7 @@ public class DashboardPage extends BasePage{
         wait.until(ExpectedConditions.visibilityOfElementLocated(deleteConfirm));
         driver.findElement(deleteConfirm).click();
     }
-    public void editSpecificDashboard(String transformTo){
+    public void editSpecificDashboard(String transformTo,Random rnd,String startDate,String endDate){
         try{
             wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
         }catch(TimeoutException e){
@@ -429,6 +429,13 @@ public class DashboardPage extends BasePage{
         if(transformTo == "Active"){
             wait.until(ExpectedConditions.visibilityOfElementLocated(activeButton));
             driver.findElement(activeButton).click();
+        }
+        if(transformTo == "Custom Range"){
+            wait.until(ExpectedConditions.elementToBeClickable(customRangeButton));
+            driver.findElement(customRangeButton).click();
+            int startTimesNumber = rnd.nextInt(driver.findElements(startTimes).size())+1;
+            int endTimesNumber = rnd.nextInt(driver.findElements(endTimes).size())+1;
+            setCustomRangeDateAndTime(startTimesNumber,endTimesNumber,startDate,endDate);
         }
         wait.until(ExpectedConditions.visibilityOfElementLocated(editMonitoringButton));
         driver.findElement(editMonitoringButton).click();
