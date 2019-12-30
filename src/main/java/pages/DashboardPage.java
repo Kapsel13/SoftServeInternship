@@ -1,10 +1,13 @@
 package pages;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -295,6 +298,13 @@ public class DashboardPage extends BasePage{
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
+        }
+        System.out.println("Tonto");
+        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
         wait.until(ExpectedConditions.visibilityOf(scrollElementIntoView(By.xpath(String.format(addedDashboard,dashboardName)))));
         WebElement dashboardToCheck = scrollElementIntoView(By.xpath(String.format(addedDashboard,dashboardName)));
