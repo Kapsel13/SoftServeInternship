@@ -28,4 +28,12 @@ public class SummaryPageSliderTest extends TestPreparation {
         SummaryPage summaryPage = new SummaryPage(driver,wait);
         summaryPage.checkSettingSlider("tomorrow");
     }
+    @Test(retryAnalyzer = Retry.class)
+    public void testResponseOnSettingSliderAll(){
+        LogInPage logInPage = new LogInPage(driver,wait);
+        logInPage.provideUsername(validAdminUsername,true);
+        logInPage.providePassword(validAdminPassword,true);
+        SummaryPage summaryPage = new SummaryPage(driver,wait);
+        summaryPage.checkSettingSlider("all");
+    }
 }

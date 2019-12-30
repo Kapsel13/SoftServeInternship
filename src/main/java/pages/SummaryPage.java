@@ -6,6 +6,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class SummaryPage extends BasePage {
@@ -34,11 +36,16 @@ public class SummaryPage extends BasePage {
     private By nowOption = By.xpath("//span[contains(text(),'Now')]");
     private By todayOption = By.xpath("//span[contains(text(),'Today')]");
     private By tomorrowOption = By.xpath("//span[contains(text(),'Tomorrow')]");
+    private By allOption = By.xpath("//span[contains(text(),'All')]");
     private By alertContainer = By.xpath("//div[@class='icon-container']");
     private String specificAlertContainer = "(//div[@class='icon-container'])[%d]";
     private By validNowToolTip = By.xpath("//span[contains(text(),'Valid Now')]");
     private By validTodayToolTip = By.xpath("//span[contains(text(),'Valid Today')]");
     private By validTomorrowToolTip = By.xpath("//span[contains(text(),'Valid Tomorrow')]");
+    private By dashboardOnSummaryPage = By.xpath("//div[@class='ps-content']//tr");
+    private By dashboardPageLink = By.xpath("//a[contains(text(),'Dashboards')]");
+    protected By dashboardDropdownButton = By.xpath("//button[@id='dashboard-dropdown']");
+    private By dashboardOnDashboardsPage = By.xpath("//div[@class='ps-content']//button");
     public SummaryPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }
@@ -266,40 +273,53 @@ public class SummaryPage extends BasePage {
     }
     public void checkSettingSlider(String time){
         redirectToSummaryPage();
-        if (time == "now") {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(nowOption));
-            driver.findElement(nowOption).click();
+        if(time == "all"){
+            wait.until(ExpectedConditions.visibilityOfElementLocated(allOption));
+            driver.findElement(allOption).click();
+            int numberOnSummaryPage = driver.findElements(dashboardOnSummaryPage).size();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardPageLink));
+            driver.findElement(dashboardPageLink).click();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
+            driver.findElement(dashboardDropdownButton).click();
+            int numberOnDashboardPage = driver.findElements(dashboardOnDashboardsPage).size();
+            Assert.assertEquals(numberOnSummaryPage,numberOnDashboardPage);
         }
-        if(time == "today"){
-            wait.until(ExpectedConditions.visibilityOfElementLocated(todayOption));
-            driver.findElement(todayOption).click();
-        }
-        if(time == "tomorrow"){
-            wait.until(ExpectedConditions.visibilityOfElementLocated(tomorrowOption));
-            driver.findElement(tomorrowOption).click();
-        }
-        int numberOfAlertContainers = driver.findElements(alertContainer).size();
-        int index = 1;
-        boolean expressionNotFound = false;
-        while ((index<=numberOfAlertContainers)&&(!expressionNotFound)){
-            Actions action = new Actions(driver);
-            WebElement alert = scrollElementIntoView(By.xpath(String.format(specificAlertContainer,index)));
-            action.moveToElement(alert).perform();
-            try{
-                if (time == "now") {
-                    wait.until(ExpectedConditions.visibilityOfElementLocated(validNowToolTip));
-                }
-                if(time == "today"){
-                    wait.until(ExpectedConditions.visibilityOfElementLocated(validTodayToolTip));
-                }
-                if(time == "tomorrow"){
-                    wait.until(ExpectedConditions.visibilityOfElementLocated(validTomorrowToolTip));
-                }
-            }catch(TimeoutException e){
-                expressionNotFound = true;
+        else {
+            if (time == "now") {
+                wait.until(ExpectedConditions.visibilityOfElementLocated(nowOption));
+                driver.findElement(nowOption).click();
             }
-            index++;
+            if (time == "today") {
+                wait.until(ExpectedConditions.visibilityOfElementLocated(todayOption));
+                driver.findElement(todayOption).click();
+            }
+            if (time == "tomorrow") {
+                wait.until(ExpectedConditions.visibilityOfElementLocated(tomorrowOption));
+                driver.findElement(tomorrowOption).click();
+            }
+            int numberOfAlertContainers = driver.findElements(alertContainer).size();
+            int index = 1;
+            boolean expressionNotFound = false;
+            while ((index <= numberOfAlertContainers) && (!expressionNotFound)) {
+                Actions action = new Actions(driver);
+                WebElement alert = scrollElementIntoView(By.xpath(String.format(specificAlertContainer, index)));
+                action.moveToElement(alert).perform();
+                try {
+                    if (time == "now") {
+                        wait.until(ExpectedConditions.visibilityOfElementLocated(validNowToolTip));
+                    }
+                    if (time == "today") {
+                        wait.until(ExpectedConditions.visibilityOfElementLocated(validTodayToolTip));
+                    }
+                    if (time == "tomorrow") {
+                        wait.until(ExpectedConditions.visibilityOfElementLocated(validTomorrowToolTip));
+                    }
+                } catch (TimeoutException e) {
+                    expressionNotFound = true;
+                }
+                index++;
+            }
+            Assert.assertFalse(expressionNotFound);
         }
-        Assert.assertFalse(expressionNotFound);
     }
 }

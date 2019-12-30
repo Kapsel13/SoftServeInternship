@@ -47,7 +47,7 @@ public class CreateDashboardTest extends TestPreparation{
         }
     }
 
-    @Test(retryAnalyzer = Retry.class)
+    @Test
     public void testResponseOnCreatingActiveDashboardWithCityAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
