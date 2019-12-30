@@ -307,7 +307,7 @@ public class DashboardPage extends BasePage{
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
-        }catch (NoSuchElementException e){
+        }catch (TimeoutException e){
             wait.until(ExpectedConditions.visibilityOf(scrollElementIntoView(By.xpath(String.format(addedDashboard, dashboardName)))));
         }
         WebElement dashboardToCheck = scrollElementIntoView(By.xpath(String.format(addedDashboard,dashboardName)));
