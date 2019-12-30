@@ -20,7 +20,7 @@ public class CreateDashboardTest extends TestPreparation{
     private String validDashboardName;
     protected By newDashboardText;
     DashboardPage dashboardPage;
-    HashMap<String ,String> testArguments;
+    HashMap<String ,String> testArguments= new HashMap<>();
     @BeforeMethod
     public void setUp() {
         if (testArguments.isEmpty()) {
