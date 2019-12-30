@@ -21,21 +21,23 @@ public class ActiveDashboardsNumberTest extends TestPreparation {
     Random rnd = new Random();
     @BeforeMethod
     public void setUp() {
-        testArguments = new HashMap<>();
-        validDashboardName = "!-auto_test-"+TestData.generateData(8);
-        city = TestData.getRandomCity();
-        startDate = TestData.getRandomStartDate();
-        endDate = TestData.getRandomEndDate();
-        startDateBeforeCurrentDate = TestData.getRandomStartDateBeforeCurrentDate();
-        endDateAfterCurrentDate = TestData.getRandomEndDateAfterCurrentDate();
-        newDashboardText = By.xpath("//span[contains(text(),'"+validDashboardName+"')]");
-        dashboardPage = new DashboardPage(driver,wait);
-        testArguments.put("dashboardName",validDashboardName);
-        testArguments.put("city",city);
-        testArguments.put("startDate",startDate);
-        testArguments.put("endDate",endDate);
-        testArguments.put("startDateBeforeCurrentDate",startDateBeforeCurrentDate);
-        testArguments.put("endDateAfterCurrentDate",endDateAfterCurrentDate);
+        if (testArguments.isEmpty()) {
+            testArguments = new HashMap<>();
+            validDashboardName = "!-auto_test-" + TestData.generateData(8);
+            city = TestData.getRandomCity();
+            startDate = TestData.getRandomStartDate();
+            endDate = TestData.getRandomEndDate();
+            startDateBeforeCurrentDate = TestData.getRandomStartDateBeforeCurrentDate();
+            endDateAfterCurrentDate = TestData.getRandomEndDateAfterCurrentDate();
+            newDashboardText = By.xpath("//span[contains(text(),'" + validDashboardName + "')]");
+            dashboardPage = new DashboardPage(driver, wait);
+            testArguments.put("dashboardName", validDashboardName);
+            testArguments.put("city", city);
+            testArguments.put("startDate", startDate);
+            testArguments.put("endDate", endDate);
+            testArguments.put("startDateBeforeCurrentDate", startDateBeforeCurrentDate);
+            testArguments.put("endDateAfterCurrentDate", endDateAfterCurrentDate);
+        }
     }
     @Test(retryAnalyzer = Retry.class)
     public void testNumberOfActiveDashboardsAfterAddingActiveDashboard(){

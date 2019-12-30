@@ -5,6 +5,8 @@ import org.testng.annotations.Test;
 import pages.DashboardPage;
 import pages.LogInPage;
 
+import java.util.HashMap;
+
 public class CreateDashboardTest extends TestPreparation{
 
     private String city;
@@ -18,19 +20,31 @@ public class CreateDashboardTest extends TestPreparation{
     private String validDashboardName;
     protected By newDashboardText;
     DashboardPage dashboardPage;
+    HashMap<String ,String> testArguments;
     @BeforeMethod
     public void setUp() {
-        validDashboardName = "!-auto_test-"+TestData.generateData(8);
-        city = TestData.getRandomCity();
-        zipCode = TestData.getRandomZipCode();
-        icaoCode = TestData.getRandomIcaoCodes();
-        cityOfZipCode = TestData.cities.get(TestData.zipCodes.indexOf(zipCode));
-        cityOfIcaoCode = TestData.cities.get(TestData.icaoCodes.indexOf(icaoCode));
-        startDate = TestData.getRandomStartDate();
-        endDate = TestData.getRandomEndDate();
-        gpsCoords = TestData.getRandomGpsCoords();
-        newDashboardText = By.xpath("//span[contains(text(),'"+validDashboardName+"')]");
-        dashboardPage = new DashboardPage(driver,wait);
+        if (testArguments.isEmpty()) {
+            validDashboardName = "!-auto_test-" + TestData.generateData(8);
+            city = TestData.getRandomCity();
+            zipCode = TestData.getRandomZipCode();
+            icaoCode = TestData.getRandomIcaoCodes();
+            cityOfZipCode = TestData.cities.get(TestData.zipCodes.indexOf(zipCode));
+            cityOfIcaoCode = TestData.cities.get(TestData.icaoCodes.indexOf(icaoCode));
+            startDate = TestData.getRandomStartDate();
+            endDate = TestData.getRandomEndDate();
+            gpsCoords = TestData.getRandomGpsCoords();
+            newDashboardText = By.xpath("//span[contains(text(),'" + validDashboardName + "')]");
+            dashboardPage = new DashboardPage(driver, wait);
+            testArguments.put("dashboardName", validDashboardName);
+            testArguments.put("city", city);
+            testArguments.put("startDate", startDate);
+            testArguments.put("endDate", endDate);
+            testArguments.put("zipCode",zipCode);
+            testArguments.put("icaoCode",icaoCode);
+            testArguments.put("gpsCoords",gpsCoords);
+            testArguments.put("cityOfZipCode",cityOfZipCode);
+            testArguments.put("cityOfIcaoCode",cityOfIcaoCode);
+        }
     }
 
     @Test(retryAnalyzer = Retry.class)
@@ -38,7 +52,9 @@ public class CreateDashboardTest extends TestPreparation{
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
         dashboardPage.selectValidLocation(city,city);
+        System.out.println("city: "+testArguments.get("city"));
         dashboardPage.selectValidName(validDashboardName);
+        System.out.println("dashboard name: "+testArguments.get("dashboardName"));
         dashboardPage.setActiveMonitoring();
         dashboardPage.createNewDashboard(newDashboardText);
     }
@@ -48,7 +64,10 @@ public class CreateDashboardTest extends TestPreparation{
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
         dashboardPage.selectValidLocation(zipCode,cityOfZipCode);
+        System.out.println("zipCode: "+testArguments.get("zipCode"));
+        System.out.println("cityOfZipCode: "+testArguments.get("cityOfZipCode"));
         dashboardPage.selectValidName(validDashboardName);
+        System.out.println("dashboard name: "+testArguments.get("dashboardName"));
         dashboardPage.setActiveMonitoring();
         dashboardPage.createNewDashboard(newDashboardText);
     }
@@ -58,7 +77,9 @@ public class CreateDashboardTest extends TestPreparation{
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
         dashboardPage.selectValidLocationWithCoordinates(gpsCoords);
+        System.out.println("gpsCoords: "+testArguments.get("gpsCoords"));
         dashboardPage.selectValidName(validDashboardName);
+        System.out.println("dashboard name: "+testArguments.get("dashboardName"));
         dashboardPage.setActiveMonitoring();
         dashboardPage.createNewDashboard(newDashboardText);
     }
@@ -68,7 +89,9 @@ public class CreateDashboardTest extends TestPreparation{
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
         dashboardPage.selectValidLocation(icaoCode,icaoCode);
+        System.out.println("icaoCode: "+testArguments.get("icaoCode"));
         dashboardPage.selectValidName(validDashboardName);
+        System.out.println("dashboard name: "+testArguments.get("dashboardName"));
         dashboardPage.setActiveMonitoring();
         dashboardPage.createNewDashboard(newDashboardText);
     }
@@ -78,7 +101,9 @@ public class CreateDashboardTest extends TestPreparation{
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
         dashboardPage.selectValidLocation(city,city);
+        System.out.println("city: "+testArguments.get("city"));
         dashboardPage.selectValidName(validDashboardName);
+        System.out.println("dashboard name: "+testArguments.get("dashboardName"));
         dashboardPage.setInActiveMonitoring();
         dashboardPage.createNewDashboard(newDashboardText);
     }
@@ -88,7 +113,10 @@ public class CreateDashboardTest extends TestPreparation{
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
         dashboardPage.selectValidLocation(zipCode,cityOfZipCode);
+        System.out.println("zipCode: "+testArguments.get("zipCode"));
+        System.out.println("cityOfZipCode: "+testArguments.get("cityOfZipCode"));
         dashboardPage.selectValidName(validDashboardName);
+        System.out.println("dashboard name: "+testArguments.get("dashboardName"));
         dashboardPage.setInActiveMonitoring();
         dashboardPage.createNewDashboard(newDashboardText);
     }
@@ -98,7 +126,9 @@ public class CreateDashboardTest extends TestPreparation{
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
         dashboardPage.selectValidLocation(icaoCode,icaoCode);
+        System.out.println("icaoCode: "+testArguments.get("icaoCode"));
         dashboardPage.selectValidName(validDashboardName);
+        System.out.println("dashboard name: "+testArguments.get("dashboardName"));
         dashboardPage.setInActiveMonitoring();
         dashboardPage.createNewDashboard(newDashboardText);
     }
@@ -108,7 +138,9 @@ public class CreateDashboardTest extends TestPreparation{
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
         dashboardPage.selectValidLocationWithCoordinates(gpsCoords);
+        System.out.println("gpsCoords: "+testArguments.get("gpsCoords"));
         dashboardPage.selectValidName(validDashboardName);
+        System.out.println("dashboard name: "+testArguments.get("dashboardName"));
         dashboardPage.setInActiveMonitoring();
         dashboardPage.createNewDashboard(newDashboardText);
     }
@@ -118,8 +150,12 @@ public class CreateDashboardTest extends TestPreparation{
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
         dashboardPage.selectValidLocation(city,city);
+        System.out.println("city: "+testArguments.get("city"));
         dashboardPage.selectValidName(validDashboardName);
+        System.out.println("dashboard name: "+testArguments.get("dashboardName"));
         dashboardPage.setCustomRangeMonitoring(TestData.rnd,startDate,endDate);
+        System.out.println("startDate: "+testArguments.get("startDate"));
+        System.out.println("endDate: "+testArguments.get("endDate"));
         dashboardPage.createNewDashboard(newDashboardText);
     }
 
@@ -128,8 +164,13 @@ public class CreateDashboardTest extends TestPreparation{
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
         dashboardPage.selectValidLocation(zipCode,cityOfZipCode);
+        System.out.println("zipCode: "+testArguments.get("zipCode"));
+        System.out.println("cityOfZipCode: "+testArguments.get("cityOfZipCode"));
         dashboardPage.selectValidName(validDashboardName);
+        System.out.println("dashboard name: "+testArguments.get("dashboardName"));
         dashboardPage.setCustomRangeMonitoring(TestData.rnd,startDate,endDate);
+        System.out.println("startDate: "+testArguments.get("startDate"));
+        System.out.println("endDate: "+testArguments.get("endDate"));
         dashboardPage.createNewDashboard(newDashboardText);
     }
 
@@ -138,8 +179,12 @@ public class CreateDashboardTest extends TestPreparation{
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
         dashboardPage.selectValidLocation(icaoCode,icaoCode);
+        System.out.println("icaoCode: "+testArguments.get("icaoCode"));
         dashboardPage.selectValidName(validDashboardName);
+        System.out.println("dashboard name: "+testArguments.get("dashboardName"));
         dashboardPage.setCustomRangeMonitoring(TestData.rnd,startDate,endDate);
+        System.out.println("startDate: "+testArguments.get("startDate"));
+        System.out.println("endDate: "+testArguments.get("endDate"));
         dashboardPage.createNewDashboard(newDashboardText);
     }
 
@@ -148,8 +193,12 @@ public class CreateDashboardTest extends TestPreparation{
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
         dashboardPage.selectValidLocationWithCoordinates(gpsCoords);
+        System.out.println("gpsCoords: "+testArguments.get("gpsCoords"));
         dashboardPage.selectValidName(validDashboardName);
+        System.out.println("dashboard name: "+testArguments.get("dashboardName"));
         dashboardPage.setCustomRangeMonitoring(TestData.rnd,startDate,endDate);
+        System.out.println("startDate: "+testArguments.get("startDate"));
+        System.out.println("endDate: "+testArguments.get("endDate"));
         dashboardPage.createNewDashboard(newDashboardText);
     }
     @Test(retryAnalyzer = Retry.class)
@@ -157,7 +206,9 @@ public class CreateDashboardTest extends TestPreparation{
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
         dashboardPage.selectValidLocation(city,city);
+        System.out.println("city: "+testArguments.get("city"));
         dashboardPage.selectValidName(validDashboardName);
+        System.out.println("dashboard name: "+testArguments.get("dashboardName"));
         dashboardPage.setActiveMonitoring();
         dashboardPage.closeCreateDashboardWindow(validDashboardName);
     }
