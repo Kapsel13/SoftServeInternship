@@ -17,12 +17,11 @@ public class ActiveDashboardsNumberTest extends TestPreparation {
     private String validDashboardName;
     protected By newDashboardText;
     DashboardPage dashboardPage;
-    HashMap<String ,String> testArguments;
+    HashMap<String ,String> testArguments= new HashMap<>();
     Random rnd = new Random();
     @BeforeMethod
     public void setUp() {
         if (testArguments.isEmpty()) {
-            testArguments = new HashMap<>();
             validDashboardName = "!-auto_test-" + TestData.generateData(8);
             city = TestData.getRandomCity();
             startDate = TestData.getRandomStartDate();
