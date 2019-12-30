@@ -299,14 +299,17 @@ public class DashboardPage extends BasePage{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.println("Tonto");
-        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         try {
-            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
-        } catch (IOException ex) {
-            ex.printStackTrace();
+            wait.until(ExpectedConditions.visibilityOf(scrollElementIntoView(By.xpath(String.format(addedDashboard, dashboardName)))));
+            File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+            try {
+                FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }catch (NoSuchElementException e){
+            wait.until(ExpectedConditions.visibilityOf(scrollElementIntoView(By.xpath(String.format(addedDashboard, dashboardName)))));
         }
-        wait.until(ExpectedConditions.visibilityOf(scrollElementIntoView(By.xpath(String.format(addedDashboard,dashboardName)))));
         WebElement dashboardToCheck = scrollElementIntoView(By.xpath(String.format(addedDashboard,dashboardName)));
         dashboardToCheck.click();
         try{
