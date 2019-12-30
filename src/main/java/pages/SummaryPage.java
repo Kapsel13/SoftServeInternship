@@ -279,7 +279,12 @@ public class SummaryPage extends BasePage {
             int numberOnSummaryPage = driver.findElements(dashboardOnSummaryPage).size();
             wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardPageLink));
             driver.findElement(dashboardPageLink).click();
-            wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
+            try{
+                wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
+            }catch(TimeoutException e){
+                driver.navigate().refresh();
+                wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
+            }
             driver.findElement(dashboardDropdownButton).click();
             int numberOnDashboardPage = driver.findElements(dashboardOnDashboardsPage).size();
             Assert.assertEquals(numberOnSummaryPage,numberOnDashboardPage);
