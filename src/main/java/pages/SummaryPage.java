@@ -31,6 +31,14 @@ public class SummaryPage extends BasePage {
     private String specificAlertInDashboardFirstPart = "((//div[@class='summary-icons-container'])[%d]";
     private String specificAlertInDashboardSecondPart = "//div[@class='icon-container'])[%d]";
     private By alertTypeToolTip = By.xpath("//p[contains(@class,'icon-parameter')]");
+    private By nowOption = By.xpath("//span[contains(text(),'Now')]");
+    private By todayOption = By.xpath("//span[contains(text(),'Today')]");
+    private By tomorrowOption = By.xpath("//span[contains(text(),'Tomorrow')]");
+    private By alertContainer = By.xpath("//div[@class='icon-container']");
+    private String specificAlertContainer = "(//div[@class='icon-container'])[%d]";
+    private By validNowToolTip = By.xpath("//span[contains(text(),'Valid Now')]");
+    private By validTodayToolTip = By.xpath("//span[contains(text(),'Valid Today')]");
+    private By validTomorrowToolTip = By.xpath("//span[contains(text(),'Valid Tomorrow')]");
     public SummaryPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }
@@ -255,5 +263,43 @@ public class SummaryPage extends BasePage {
             index++;
         }
         Assert.assertTrue(containsAlertType);
+    }
+    public void checkSettingSlider(String time){
+        redirectToSummaryPage();
+        if (time == "now") {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(nowOption));
+            driver.findElement(nowOption).click();
+        }
+        if(time == "today"){
+            wait.until(ExpectedConditions.visibilityOfElementLocated(todayOption));
+            driver.findElement(todayOption).click();
+        }
+        if(time == "tomorrow"){
+            wait.until(ExpectedConditions.visibilityOfElementLocated(tomorrowOption));
+            driver.findElement(tomorrowOption).click();
+        }
+        int numberOfAlertContainers = driver.findElements(alertContainer).size();
+        int index = 1;
+        boolean expressionNotFound = false;
+        while ((index<=numberOfAlertContainers)&&(!expressionNotFound)){
+            Actions action = new Actions(driver);
+            WebElement alert = scrollElementIntoView(By.xpath(String.format(specificAlertContainer,index)));
+            action.moveToElement(alert).perform();
+            try{
+                if (time == "now") {
+                    wait.until(ExpectedConditions.visibilityOfElementLocated(validNowToolTip));
+                }
+                if(time == "today"){
+                    wait.until(ExpectedConditions.visibilityOfElementLocated(validTodayToolTip));
+                }
+                if(time == "tomorrow"){
+                    wait.until(ExpectedConditions.visibilityOfElementLocated(validTomorrowToolTip));
+                }
+            }catch(TimeoutException e){
+                expressionNotFound = true;
+            }
+            index++;
+        }
+        Assert.assertFalse(expressionNotFound);
     }
 }
