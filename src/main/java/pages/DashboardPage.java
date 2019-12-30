@@ -296,6 +296,7 @@ public class DashboardPage extends BasePage{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        wait.until(ExpectedConditions.visibilityOf(scrollElementIntoView(By.xpath(String.format(addedDashboard,dashboardName)))));
         WebElement dashboardToCheck = scrollElementIntoView(By.xpath(String.format(addedDashboard,dashboardName)));
         dashboardToCheck.click();
         try{
