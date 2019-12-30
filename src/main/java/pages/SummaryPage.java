@@ -285,8 +285,9 @@ public class SummaryPage extends BasePage {
             try{
                 wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
             }catch(TimeoutException e){
+                driver.navigate().refresh();
                 try {
-                    Thread.sleep(10000);
+                    Thread.sleep(30000);
                 } catch (InterruptedException ex) {
                     ex.printStackTrace();
                 }
@@ -296,7 +297,6 @@ public class SummaryPage extends BasePage {
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
-                driver.navigate().refresh();
                 wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
             }
             driver.findElement(dashboardDropdownButton).click();
