@@ -286,6 +286,11 @@ public class SummaryPage extends BasePage {
                 wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
             }catch(TimeoutException e){
                 driver.navigate().refresh();
+                try {
+                    Thread.sleep(10000);
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
                 File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
                 try {
                     FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
