@@ -286,12 +286,12 @@ public class SummaryPage extends BasePage {
                 wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
             }catch(TimeoutException e){
                 driver.navigate().refresh();
-                /*File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+                File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
                 try {
                     FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
                 } catch (IOException ex) {
                     ex.printStackTrace();
-                }*/
+                }
                 wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
             }
             driver.findElement(dashboardDropdownButton).click();
