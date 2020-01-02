@@ -95,6 +95,12 @@ public class DashboardPage extends BasePage{
     }
 
     public void selectValidLocation(String typeOfLocation, String cityOfTypeOfLocation){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(searchLocationInput));
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         driver.findElement(searchLocationInput).sendKeys(typeOfLocation);
         driver.findElement(By.xpath(String.format(locationInList, cityOfTypeOfLocation))).click();
         wait.until(ExpectedConditions.elementToBeClickable(locationEnabledButton));

@@ -47,7 +47,7 @@ public class CreateDashboardTest extends TestPreparation{
         }
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testResponseOnCreatingActiveDashboardWithCityAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
@@ -205,8 +205,9 @@ public class CreateDashboardTest extends TestPreparation{
     public void testResponseOnCLosingCreateDashboardWindow(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
-        dashboardPage.selectValidLocation(city,city);
         System.out.println("city: "+testArguments.get("city"));
+        System.out.println(city);
+        dashboardPage.selectValidLocation(city,city);
         dashboardPage.selectValidName(validDashboardName);
         System.out.println("dashboard name: "+testArguments.get("dashboardName"));
         dashboardPage.setActiveMonitoring();
@@ -221,7 +222,7 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.closeDeleteDashboardOperationOnRandomDashboard();
     }
 
-    @AfterMethod
+    /*@AfterMethod
     public void deleteAddedDashboard(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.logOut();
@@ -234,5 +235,5 @@ public class CreateDashboardTest extends TestPreparation{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 }
