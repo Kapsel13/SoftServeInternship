@@ -46,7 +46,7 @@ public class SummaryPage extends BasePage {
     private By validTodayToolTip = By.xpath("//span[contains(text(),'Valid Today')]");
     private By validTomorrowToolTip = By.xpath("//span[contains(text(),'Valid Tomorrow')]");
     private By dashboardOnSummaryPage = By.xpath("//div[@class='ps-content']//tr");
-    private By dashboardPageLink = By.xpath("//a[contains(text(),'Dashboards')]");
+    private String dashboardPageLink = "//div[contains(@class, '%s')]/a[contains(text(),'Dashboards')]";
     protected By dashboardDropdownButton = By.xpath("//button[@id='dashboard-dropdown']");
     private By dashboardOnDashboardsPage = By.xpath("//div[@class='ps-content']//button");
     public SummaryPage(WebDriver driver, WebDriverWait wait) {
@@ -280,8 +280,8 @@ public class SummaryPage extends BasePage {
             wait.until(ExpectedConditions.visibilityOfElementLocated(allOption));
             driver.findElement(allOption).click();
             int numberOnSummaryPage = driver.findElements(dashboardOnSummaryPage).size();
-            wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardPageLink));
-            driver.findElement(dashboardPageLink).click();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(dashboardPageLink, ""))));
+            driver.findElement(By.xpath(String.format(dashboardPageLink, ""))).click();
             try{
                 File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
                 try {
