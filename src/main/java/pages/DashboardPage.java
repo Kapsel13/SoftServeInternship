@@ -232,6 +232,7 @@ public class DashboardPage extends BasePage{
     }
 
     public void chooseActiveDashboard(Random rnd){
+        System.out.println("mdfgjjjnugjo;nmdjmdotb;");
         wait.until(ExpectedConditions.elementToBeClickable(dashboardDropdownButton));
         driver.findElement(dashboardDropdownButton).click();
         int activeDashboardsNumber = driver.findElements(activeDashboard).size();

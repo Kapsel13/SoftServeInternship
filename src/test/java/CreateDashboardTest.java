@@ -47,7 +47,7 @@ public class CreateDashboardTest extends TestPreparation{
         }
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testResponseOnCreatingActiveDashboardWithCityAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
@@ -59,7 +59,7 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.createNewDashboard(newDashboardText);
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testResponseOnCreatingActiveDashboardWithZipCodeAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
@@ -72,7 +72,7 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.createNewDashboard(newDashboardText);
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testResponseOnCreatingActiveDashboardWithGpsCoordsAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
@@ -84,7 +84,7 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.createNewDashboard(newDashboardText);
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testResponseOnCreatingActiveDashboardWithIcaoCodeAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
@@ -96,7 +96,7 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.createNewDashboard(newDashboardText);
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testResponseOnCreatingInActiveDashboardWithCityAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
@@ -108,7 +108,7 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.createNewDashboard(newDashboardText);
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testResponseOnCreatingInActiveDashboardWithZipCodeAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
@@ -121,7 +121,7 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.createNewDashboard(newDashboardText);
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testResponseOnCreatingInActiveDashboardWithIcaoCodeAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
@@ -133,7 +133,7 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.createNewDashboard(newDashboardText);
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testResponseOnCreatingInActiveDashboardWithGpsCoordsAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
@@ -145,7 +145,7 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.createNewDashboard(newDashboardText);
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testResponseOnCreatingCustomRangeDashboardWithCityAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
@@ -159,7 +159,7 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.createNewDashboard(newDashboardText);
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testResponseOnCreatingCustomRangeDashboardWithZipCodeAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
@@ -174,7 +174,7 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.createNewDashboard(newDashboardText);
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testResponseOnCreatingCustomRangeDashboardWithIcaoCodeAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
@@ -188,7 +188,7 @@ public class CreateDashboardTest extends TestPreparation{
         dashboardPage.createNewDashboard(newDashboardText);
     }
 
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testResponseOnCreatingCustomRangeDashboardWithGpsCoordsAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
@@ -215,5 +215,6 @@ public class CreateDashboardTest extends TestPreparation{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        System.out.println("deleteAddedDashboard");
     }
 }
