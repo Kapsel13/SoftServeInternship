@@ -1,13 +1,10 @@
 import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.testng.annotations.*;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 import pages.DashboardPage;
 import pages.LogInPage;
 
-
-public class WeatherAppTest extends TestPreparation {
-
-
+public class RedirectionBetweenPagesTest extends TestPreparation {
     private String invalidAdminUsername;
     private String invalidAdminPassword;
     private String invalidLocation;
@@ -33,23 +30,13 @@ public class WeatherAppTest extends TestPreparation {
         city = TestData.getRandomCity();
         newDashboardText = By.xpath("//span[contains(text(),'"+validDashboardName+"')]");
     }
-
-    @Test(retryAnalyzer = Retry.class)
-    public void testRedirectionToTheSpecificDashboardFromSummaryPage(){
-        LogInPage logInPage = new LogInPage(driver,wait);
-        logInPage.provideUsername(validAdminUsername,true);
-        logInPage.providePassword(validAdminPassword,true);
-        DashboardPage dashboardPage = new DashboardPage(driver,wait);
-        dashboardPage.redirectToTheSpecificDashboard(TestData.rnd);
-    }
-
     @Test(retryAnalyzer = Retry.class)
     public void testRedirectionBetweenSummaryPageAndDashboardPage(){
         LogInPage logInPage = new LogInPage(driver,wait);
         logInPage.provideUsername(validAdminUsername,true);
         logInPage.providePassword(validAdminPassword,true);
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
-        dashboardPage.redirectBetweenTwoPages(summaryPageLink,By.xpath(String.format(dashboardPageLink, "")),summaryPageText);
+        dashboardPage.redirectBetweenTwoPages(summaryPageLink, By.xpath(String.format(dashboardPageLink, "")),summaryPageText);
 
     }
 
@@ -89,5 +76,13 @@ public class WeatherAppTest extends TestPreparation {
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.redirectBetweenTwoPages(By.xpath(String.format(interactivePageLink, "")),By.xpath(String.format(dashboardPageLink, "")),canvas);
 
+    }
+    @Test(retryAnalyzer = Retry.class)
+    public void testRedirectionToTheSpecificDashboardFromSummaryPage(){
+        LogInPage logInPage = new LogInPage(driver,wait);
+        logInPage.provideUsername(validAdminUsername,true);
+        logInPage.providePassword(validAdminPassword,true);
+        DashboardPage dashboardPage = new DashboardPage(driver,wait);
+        dashboardPage.redirectToTheSpecificDashboard(TestData.rnd);
     }
 }

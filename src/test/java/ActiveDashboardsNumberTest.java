@@ -44,10 +44,10 @@ public class ActiveDashboardsNumberTest extends TestPreparation {
         dashboardPage.getNumberOfActiveDashboardsBeforeAction(validAdminUsername,validAdminPassword);
         dashboardPage.logOut();
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
-        dashboardPage.selectValidLocation(city,city);
         System.out.println("dashboardLocation: "+testArguments.get("city"));
-        dashboardPage.selectValidName(validDashboardName);
+        dashboardPage.selectValidLocation(city,city);
         System.out.println("dashboardName: "+testArguments.get("dashboardName"));
+        dashboardPage.selectValidName(validDashboardName);
         dashboardPage.setActiveMonitoring();
         dashboardPage.createNewDashboard(newDashboardText);
         dashboardPage.checkNumberOfActiveDashboardsAfterAction(1);
@@ -58,10 +58,10 @@ public class ActiveDashboardsNumberTest extends TestPreparation {
         dashboardPage.getNumberOfActiveDashboardsBeforeAction(validAdminUsername,validAdminPassword);
         dashboardPage.logOut();
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
-        dashboardPage.selectValidLocation(city,city);
         System.out.println("dashboardLocation: "+testArguments.get("city"));
-        dashboardPage.selectValidName(validDashboardName);
+        dashboardPage.selectValidLocation(city,city);
         System.out.println("dashboardName: "+testArguments.get("dashboardName"));
+        dashboardPage.selectValidName(validDashboardName);
         dashboardPage.setInActiveMonitoring();
         dashboardPage.createNewDashboard(newDashboardText);
         dashboardPage.checkNumberOfActiveDashboardsAfterAction(0);
@@ -120,13 +120,13 @@ public class ActiveDashboardsNumberTest extends TestPreparation {
         dashboardPage.getNumberOfActiveDashboardsBeforeAction(validAdminUsername,validAdminPassword);
         dashboardPage.logOut();
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
-        dashboardPage.selectValidLocation(city,city);
         System.out.println("dashboardLocation: "+testArguments.get("city"));
-        dashboardPage.selectValidName(validDashboardName);
+        dashboardPage.selectValidLocation(city,city);
         System.out.println("dashboardName: "+testArguments.get("dashboardName"));
-        dashboardPage.setCustomRangeMonitoring(rnd,startDateBeforeCurrentDate,endDateAfterCurrentDate);
+        dashboardPage.selectValidName(validDashboardName);
         System.out.println("startTimeBeforeCurrentDate: "+testArguments.get("startDateBeforeCurrentDate"));
         System.out.println("endTimeAfterCurrentDate: "+testArguments.get("endDateAfterCurrentDate"));
+        dashboardPage.setCustomRangeMonitoring(rnd,startDateBeforeCurrentDate,endDateAfterCurrentDate);
         dashboardPage.createNewDashboard(newDashboardText);
         dashboardPage.checkNumberOfActiveDashboardsAfterAction(1);
     }
@@ -139,9 +139,9 @@ public class ActiveDashboardsNumberTest extends TestPreparation {
         logInPage.provideUsername(validAdminUsername,true);
         logInPage.providePassword(validAdminPassword,true);
         dashboardPage.chooseInActiveDashboard(rnd);
-        dashboardPage.editSpecificDashboard("Custom Range",rnd,startDate,endDate);
         System.out.println("startTime: "+testArguments.get("startDate"));
         System.out.println("end time: "+testArguments.get("endDate"));
+        dashboardPage.editSpecificDashboard("Custom Range",rnd,startDate,endDate);
         dashboardPage.checkNumberOfActiveDashboardsAfterAction(1);
     }
 

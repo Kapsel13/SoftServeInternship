@@ -47,182 +47,162 @@ public class CreateDashboardTest extends TestPreparation{
         }
     }
 
-    @Test(retryAnalyzer = Retry.class)
+    @Test
     public void testResponseOnCreatingActiveDashboardWithCityAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
-        dashboardPage.selectValidLocation(city,city);
         System.out.println("city: "+testArguments.get("city"));
-        dashboardPage.selectValidName(validDashboardName);
+        dashboardPage.selectValidLocation(city,city);
         System.out.println("dashboard name: "+testArguments.get("dashboardName"));
+        dashboardPage.selectValidName(validDashboardName);
         dashboardPage.setActiveMonitoring();
         dashboardPage.createNewDashboard(newDashboardText);
     }
 
-    @Test(retryAnalyzer = Retry.class)
+    @Test
     public void testResponseOnCreatingActiveDashboardWithZipCodeAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
-        dashboardPage.selectValidLocation(zipCode,cityOfZipCode);
         System.out.println("zipCode: "+testArguments.get("zipCode"));
         System.out.println("cityOfZipCode: "+testArguments.get("cityOfZipCode"));
-        dashboardPage.selectValidName(validDashboardName);
+        dashboardPage.selectValidLocation(zipCode,cityOfZipCode);
         System.out.println("dashboard name: "+testArguments.get("dashboardName"));
+        dashboardPage.selectValidName(validDashboardName);
         dashboardPage.setActiveMonitoring();
         dashboardPage.createNewDashboard(newDashboardText);
     }
 
-    @Test(retryAnalyzer = Retry.class)
+    @Test
     public void testResponseOnCreatingActiveDashboardWithGpsCoordsAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
-        dashboardPage.selectValidLocationWithCoordinates(gpsCoords);
         System.out.println("gpsCoords: "+testArguments.get("gpsCoords"));
-        dashboardPage.selectValidName(validDashboardName);
+        dashboardPage.selectValidLocationWithCoordinates(gpsCoords);
         System.out.println("dashboard name: "+testArguments.get("dashboardName"));
+        dashboardPage.selectValidName(validDashboardName);
         dashboardPage.setActiveMonitoring();
         dashboardPage.createNewDashboard(newDashboardText);
     }
 
-    @Test(retryAnalyzer = Retry.class)
+    @Test
     public void testResponseOnCreatingActiveDashboardWithIcaoCodeAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
-        dashboardPage.selectValidLocation(icaoCode,icaoCode);
         System.out.println("icaoCode: "+testArguments.get("icaoCode"));
-        dashboardPage.selectValidName(validDashboardName);
+        dashboardPage.selectValidLocation(icaoCode,icaoCode);
         System.out.println("dashboard name: "+testArguments.get("dashboardName"));
+        dashboardPage.selectValidName(validDashboardName);
         dashboardPage.setActiveMonitoring();
         dashboardPage.createNewDashboard(newDashboardText);
     }
 
-    @Test(retryAnalyzer = Retry.class)
+    @Test
     public void testResponseOnCreatingInActiveDashboardWithCityAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
-        dashboardPage.selectValidLocation(city,city);
         System.out.println("city: "+testArguments.get("city"));
-        dashboardPage.selectValidName(validDashboardName);
+        dashboardPage.selectValidLocation(city,city);
         System.out.println("dashboard name: "+testArguments.get("dashboardName"));
+        dashboardPage.selectValidName(validDashboardName);
         dashboardPage.setInActiveMonitoring();
         dashboardPage.createNewDashboard(newDashboardText);
     }
 
-    @Test(retryAnalyzer = Retry.class)
+    @Test
     public void testResponseOnCreatingInActiveDashboardWithZipCodeAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
-        dashboardPage.selectValidLocation(zipCode,cityOfZipCode);
         System.out.println("zipCode: "+testArguments.get("zipCode"));
         System.out.println("cityOfZipCode: "+testArguments.get("cityOfZipCode"));
-        dashboardPage.selectValidName(validDashboardName);
+        dashboardPage.selectValidLocation(zipCode,cityOfZipCode);
         System.out.println("dashboard name: "+testArguments.get("dashboardName"));
+        dashboardPage.selectValidName(validDashboardName);
         dashboardPage.setInActiveMonitoring();
         dashboardPage.createNewDashboard(newDashboardText);
     }
 
-    @Test(retryAnalyzer = Retry.class)
+    @Test
     public void testResponseOnCreatingInActiveDashboardWithIcaoCodeAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
-        dashboardPage.selectValidLocation(icaoCode,icaoCode);
         System.out.println("icaoCode: "+testArguments.get("icaoCode"));
-        dashboardPage.selectValidName(validDashboardName);
+        dashboardPage.selectValidLocation(icaoCode,icaoCode);
         System.out.println("dashboard name: "+testArguments.get("dashboardName"));
+        dashboardPage.selectValidName(validDashboardName);
         dashboardPage.setInActiveMonitoring();
         dashboardPage.createNewDashboard(newDashboardText);
     }
 
-    @Test(retryAnalyzer = Retry.class)
+    @Test
     public void testResponseOnCreatingInActiveDashboardWithGpsCoordsAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
-        dashboardPage.selectValidLocationWithCoordinates(gpsCoords);
         System.out.println("gpsCoords: "+testArguments.get("gpsCoords"));
-        dashboardPage.selectValidName(validDashboardName);
+        dashboardPage.selectValidLocationWithCoordinates(gpsCoords);
         System.out.println("dashboard name: "+testArguments.get("dashboardName"));
+        dashboardPage.selectValidName(validDashboardName);
         dashboardPage.setInActiveMonitoring();
         dashboardPage.createNewDashboard(newDashboardText);
     }
 
-    @Test(retryAnalyzer = Retry.class)
+    @Test
     public void testResponseOnCreatingCustomRangeDashboardWithCityAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
-        dashboardPage.selectValidLocation(city,city);
         System.out.println("city: "+testArguments.get("city"));
-        dashboardPage.selectValidName(validDashboardName);
+        dashboardPage.selectValidLocation(city,city);
         System.out.println("dashboard name: "+testArguments.get("dashboardName"));
-        dashboardPage.setCustomRangeMonitoring(TestData.rnd,startDate,endDate);
+        dashboardPage.selectValidName(validDashboardName);
         System.out.println("startDate: "+testArguments.get("startDate"));
         System.out.println("endDate: "+testArguments.get("endDate"));
+        dashboardPage.setCustomRangeMonitoring(TestData.rnd,startDate,endDate);
         dashboardPage.createNewDashboard(newDashboardText);
     }
 
-    @Test(retryAnalyzer = Retry.class)
+    @Test
     public void testResponseOnCreatingCustomRangeDashboardWithZipCodeAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
-        dashboardPage.selectValidLocation(zipCode,cityOfZipCode);
         System.out.println("zipCode: "+testArguments.get("zipCode"));
         System.out.println("cityOfZipCode: "+testArguments.get("cityOfZipCode"));
-        dashboardPage.selectValidName(validDashboardName);
+        dashboardPage.selectValidLocation(zipCode,cityOfZipCode);
         System.out.println("dashboard name: "+testArguments.get("dashboardName"));
-        dashboardPage.setCustomRangeMonitoring(TestData.rnd,startDate,endDate);
+        dashboardPage.selectValidName(validDashboardName);
         System.out.println("startDate: "+testArguments.get("startDate"));
         System.out.println("endDate: "+testArguments.get("endDate"));
+        dashboardPage.setCustomRangeMonitoring(TestData.rnd,startDate,endDate);
         dashboardPage.createNewDashboard(newDashboardText);
     }
 
-    @Test(retryAnalyzer = Retry.class)
+    @Test
     public void testResponseOnCreatingCustomRangeDashboardWithIcaoCodeAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
-        dashboardPage.selectValidLocation(icaoCode,icaoCode);
         System.out.println("icaoCode: "+testArguments.get("icaoCode"));
-        dashboardPage.selectValidName(validDashboardName);
+        dashboardPage.selectValidLocation(icaoCode,icaoCode);
         System.out.println("dashboard name: "+testArguments.get("dashboardName"));
-        dashboardPage.setCustomRangeMonitoring(TestData.rnd,startDate,endDate);
+        dashboardPage.selectValidName(validDashboardName);
         System.out.println("startDate: "+testArguments.get("startDate"));
         System.out.println("endDate: "+testArguments.get("endDate"));
+        dashboardPage.setCustomRangeMonitoring(TestData.rnd,startDate,endDate);
         dashboardPage.createNewDashboard(newDashboardText);
     }
 
-    @Test(retryAnalyzer = Retry.class)
+    @Test
     public void testResponseOnCreatingCustomRangeDashboardWithGpsCoordsAsLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
-        dashboardPage.selectValidLocationWithCoordinates(gpsCoords);
         System.out.println("gpsCoords: "+testArguments.get("gpsCoords"));
-        dashboardPage.selectValidName(validDashboardName);
+        dashboardPage.selectValidLocationWithCoordinates(gpsCoords);
         System.out.println("dashboard name: "+testArguments.get("dashboardName"));
-        dashboardPage.setCustomRangeMonitoring(TestData.rnd,startDate,endDate);
+        dashboardPage.selectValidName(validDashboardName);
         System.out.println("startDate: "+testArguments.get("startDate"));
         System.out.println("endDate: "+testArguments.get("endDate"));
+        dashboardPage.setCustomRangeMonitoring(TestData.rnd,startDate,endDate);
         dashboardPage.createNewDashboard(newDashboardText);
     }
-    @Test(retryAnalyzer = Retry.class)
-    public void testResponseOnCLosingCreateDashboardWindow(){
-        DashboardPage dashboardPage = new DashboardPage(driver, wait);
-        dashboardPage.beginCreateDashboardTest(validAdminUsername,validAdminPassword);
-        System.out.println("city: "+testArguments.get("city"));
-        System.out.println(city);
-        dashboardPage.selectValidLocation(city,city);
-        dashboardPage.selectValidName(validDashboardName);
-        System.out.println("dashboard name: "+testArguments.get("dashboardName"));
-        dashboardPage.setActiveMonitoring();
-        dashboardPage.closeCreateDashboardWindow(validDashboardName);
-    }
-    @Test(retryAnalyzer = Retry.class)
-    public void testResponseOnClosingDeleteDashboardWindow(){
-        LogInPage logInPage = new LogInPage(driver,wait);
-        logInPage.provideUsername(validAdminUsername,true);
-        logInPage.providePassword(validAdminPassword,true);
-        DashboardPage dashboardPage = new DashboardPage(driver,wait);
-        dashboardPage.closeDeleteDashboardOperationOnRandomDashboard();
-    }
 
-    /*@AfterMethod
+    @AfterMethod
     public void deleteAddedDashboard(){
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
         dashboardPage.logOut();
@@ -235,5 +215,5 @@ public class CreateDashboardTest extends TestPreparation{
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }*/
+    }
 }
