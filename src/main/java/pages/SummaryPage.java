@@ -280,13 +280,11 @@ public class SummaryPage extends BasePage {
             wait.until(ExpectedConditions.visibilityOfElementLocated(allOption));
             driver.findElement(allOption).click();
             int numberOnSummaryPage = driver.findElements(dashboardOnSummaryPage).size();
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(dashboardPageLink, ""))));
-            driver.findElement(By.xpath(String.format(dashboardPageLink, ""))).click();
+            Actions action = new Actions(driver);
+            WebElement link = driver.findElement(By.xpath(String.format(dashboardPageLink, "")));
+            action.doubleClick(link).perform();
+            //driver.findElement(By.xpath(String.format(dashboardPageLink, ""))).click();
             try{
                 try {
                     Thread.sleep(30000);
@@ -295,7 +293,6 @@ public class SummaryPage extends BasePage {
                 }
                 wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
             }catch(TimeoutException e){
-                //driver.navigate().refresh();
                 try {
                     Thread.sleep(5000);
                 } catch (InterruptedException ex) {
