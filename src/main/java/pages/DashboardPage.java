@@ -206,17 +206,6 @@ public class DashboardPage extends BasePage{
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(summaryPageLink, ""))));
         driver.findElement(By.xpath(String.format(summaryPageLink, ""))).click();
         try {
-            try {
-                Thread.sleep(5000);
-            } catch (InterruptedException ex) {
-                ex.printStackTrace();
-            }
-            File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-            try {
-                FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
             waitUntillAllElementsVisible(Arrays.asList(By.xpath(String.format(summaryPageLink, "active")), summaryPageText));
         }
         catch (TimeoutException e) {
