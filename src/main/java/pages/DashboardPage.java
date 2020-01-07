@@ -206,10 +206,6 @@ public class DashboardPage extends BasePage{
         wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(summaryPageLink, ""))));
         driver.findElement(By.xpath(String.format(summaryPageLink, ""))).click();
         try {
-            waitUntillAllElementsVisible(Arrays.asList(By.xpath(String.format(summaryPageLink, "active")), summaryPageText));
-        }
-        catch (TimeoutException e) {
-            driver.navigate().refresh();
             try {
                 Thread.sleep(5000);
             } catch (InterruptedException ex) {
@@ -221,6 +217,10 @@ public class DashboardPage extends BasePage{
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
+            waitUntillAllElementsVisible(Arrays.asList(By.xpath(String.format(summaryPageLink, "active")), summaryPageText));
+        }
+        catch (TimeoutException e) {
+            driver.navigate().refresh();
             waitUntillAllElementsVisible(Arrays.asList(By.xpath(String.format(summaryPageLink, "active")), summaryPageText));
         }
         int numberOfDashboards = driver.findElements(dashboards).size();
