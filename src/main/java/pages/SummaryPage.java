@@ -49,6 +49,7 @@ public class SummaryPage extends BasePage {
     private String dashboardPageLink = "//div[contains(@class, '%s')]/a[contains(text(),'Dashboards')]";
     protected By dashboardDropdownButton = By.xpath("//button[@id='dashboard-dropdown']");
     private By dashboardOnDashboardsPage = By.xpath("//div[@class='ps-content']//button");
+    private By firstDashboardOnSummaryPage = By.xpath("//tr[2]");
     public SummaryPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }
@@ -280,24 +281,12 @@ public class SummaryPage extends BasePage {
             wait.until(ExpectedConditions.visibilityOfElementLocated(allOption));
             driver.findElement(allOption).click();
             int numberOnSummaryPage = driver.findElements(dashboardOnSummaryPage).size();
-            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(dashboardPageLink, ""))));
-            Actions action = new Actions(driver);
-            WebElement link = driver.findElement(By.xpath(String.format(dashboardPageLink, "")));
-            action.doubleClick(link).perform();
-            //driver.findElement(By.xpath(String.format(dashboardPageLink, ""))).click();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(firstDashboardOnSummaryPage));
+            driver.findElement(firstDashboardOnSummaryPage).click();
             try{
-                try {
-                    Thread.sleep(30000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
                 wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
             }catch(TimeoutException e){
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException ex) {
-                    ex.printStackTrace();
-                }
+                driver.navigate().refresh();
                 File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
                 try {
                     FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
