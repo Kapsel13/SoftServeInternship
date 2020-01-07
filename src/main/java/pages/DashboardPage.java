@@ -210,17 +210,6 @@ public class DashboardPage extends BasePage{
         }
         catch (TimeoutException e) {
             driver.navigate().refresh();
-            waitUntillAllElementsVisible(Arrays.asList(By.xpath(String.format(summaryPageLink, "active")), summaryPageText));
-        }
-        int numberOfDashboards = driver.findElements(dashboards).size();
-        int dashboardNumber = rnd.nextInt(numberOfDashboards-1)+1;
-        WebElement dashboardElement = scrollElementIntoView(By.xpath(String.format(dashboardsInList,dashboardNumber)));
-        String dashboardText = dashboardElement.getText();
-        dashboardElement.click();
-        try {
-            wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardTag));
-        }catch (TimeoutException e) {
-            driver.navigate().refresh();
             try {
                 Thread.sleep(5000);
             } catch (InterruptedException ex) {
@@ -232,6 +221,17 @@ public class DashboardPage extends BasePage{
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
+            waitUntillAllElementsVisible(Arrays.asList(By.xpath(String.format(summaryPageLink, "active")), summaryPageText));
+        }
+        int numberOfDashboards = driver.findElements(dashboards).size();
+        int dashboardNumber = rnd.nextInt(numberOfDashboards-1)+1;
+        WebElement dashboardElement = scrollElementIntoView(By.xpath(String.format(dashboardsInList,dashboardNumber)));
+        String dashboardText = dashboardElement.getText();
+        dashboardElement.click();
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardTag));
+        }catch (TimeoutException e) {
+            driver.navigate().refresh();
             wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardTag));
         }
         String dashboardTagText = driver.findElement(dashboardTag).getText();
