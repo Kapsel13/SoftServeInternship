@@ -10,17 +10,17 @@ public class DuplicateDashboardTest extends TestPreparation {
     public void setUp(){
         rnd = new Random();
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testDuplicateDashboardStartingPoint(){
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.checkDuplicateDashboardStartingPoint(validAdminUsername,validAdminPassword);
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testDuplicateDashboardLocation(){
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.checkDuplicateDashboardLocation(validAdminUsername,validAdminPassword);
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testDuplicateDashboardContent(){
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.checkDuplicateDashboardContent(validAdminUsername,validAdminPassword,rnd);
