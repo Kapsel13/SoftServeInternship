@@ -57,7 +57,7 @@ public class WeatherAppNegativeTests extends TestPreparation {
         CurrentDataAlertPanel currentDataAlertPanel = new CurrentDataAlertPanel(driver,wait);
         currentDataAlertPanel.provideInvalidPanelType(invalidWeatherType);
     }
-    @Test(retryAnalyzer = Retry.class)
+    @Test/*(retryAnalyzer = Retry.class)*/
     public void testResponseOnInvalidForecastDataPanelType(){
         invalidWeatherType = TestData.generateData(12);
         DashboardPage dashboardPage = new DashboardPage(driver,wait);

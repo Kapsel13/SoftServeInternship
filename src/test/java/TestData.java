@@ -20,6 +20,7 @@ public class TestData {
             char dataElement = (char) asciiCode;
             data = data + dataElement;
         }
+        data.replace("'","");
         return data;
     }
 

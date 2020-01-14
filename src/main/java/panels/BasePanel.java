@@ -26,11 +26,6 @@ public class BasePanel {
         }
     }
 
-    protected void waitUntillAllElementsClickable(List<By> elements) {
-        for (By element : elements) {
-            wait.until(ExpectedConditions.elementToBeClickable(element));
-        }
-    }
 
     protected static String generateAdditionalAlertMessage() {
         int dataLength = (int)(Math.random()*(50) );

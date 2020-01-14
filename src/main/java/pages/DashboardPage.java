@@ -1,14 +1,14 @@
 package pages;
 
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.events.WebDriverEventListener;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import java.io.File;
-import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class DashboardPage extends BasePage{
@@ -71,6 +71,20 @@ public class DashboardPage extends BasePage{
     private By activeButton = By.xpath("//div[@class='mat-button-toggle-label-content' and contains(text(),'Active')]");
     private By confirmEditButton = By.xpath("//button[contains(text(),'Save')]");
     private By editMonitoringButton = By.xpath("(//button[contains(text(), 'Next')])[2]");
+    private By dashboardToBeDuplicated = By.xpath("//div[contains(@class,'dropdown-menu')]//button");
+    private String specificDashboardToBeDuplicated = "(//div[contains(@class,'dropdown-menu')]//button)[%d]";
+    private By specificDashboardToBeDuplicatedName = By.xpath("(//span[contains(@class,'prevent-native-tooltip')])[1]");
+    private By duplicateOption = By.xpath("//span[contains(text(),'Duplicate')]");
+    private By startingPoint = By.xpath("//div[@id='selected-title']");
+    private By specificDashboardToBeDuplicateLocation = By.xpath("//div[contains(@class,'dropdown-item-location')]");
+    private By confirmDuplicateDashboardNameButton = By.xpath("//form[contains(.,'What dashboard would you like to use as a starting point?')]//button[contains(text(),'Next')]");
+    private By dashboardLocationInput = By.xpath("//input[@placeholder='Enter city, state, zipcode or lat/long']");
+    private By panelHeader = By.xpath("//p[@class='header-title']");
+    private String specificPanelHeader = "(//p[@class='header-title'])[%d]";
+    private By duplicatePanelHeader = By.xpath("//li[contains(@class,'dashboard-widget-name')]");
+    private String specificDuplicatePanelHeader = "(//li[contains(@class,'dashboard-widget-name')])[%d]";
+    private By forecastPanelHeader = By.xpath("//span[@class='forecast-header-parameter']");
+    private String specificForecastPanelHeader = "(//span[@class='forecast-header-parameter'])[%d]";
     public DashboardPage(WebDriver driver, WebDriverWait wait){
         super(driver,wait);
     }
@@ -197,7 +211,6 @@ public class DashboardPage extends BasePage{
             driver.navigate().refresh();
             waitUntillAllElementsVisible(Arrays.asList(pageLink2,pageElement));
         }
-        driver.findElement(pageLink2).click();
     }
 
     public void redirectToTheSpecificDashboard(Random rnd){
@@ -232,11 +245,15 @@ public class DashboardPage extends BasePage{
     }
 
     public void chooseActiveDashboard(Random rnd){
-        System.out.println("mdfgjjjnugjo;nmdjmdotb;");
         wait.until(ExpectedConditions.elementToBeClickable(dashboardDropdownButton));
         driver.findElement(dashboardDropdownButton).click();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         int activeDashboardsNumber = driver.findElements(activeDashboard).size();
-        int numberOfActiveDashboard = rnd.nextInt(activeDashboardsNumber-1)+1;;
+        int numberOfActiveDashboard = /*rnd.nextInt(activeDashboardsNumber-1)+1*/45;
         WebElement activeDashboardToClick = scrollElementIntoView(By.xpath(String.format(activeDashboardInList,numberOfActiveDashboard)));
         activeDashboardToClick.click();
     }
@@ -259,6 +276,11 @@ public class DashboardPage extends BasePage{
         LogInPage logInPage = new LogInPage(driver, wait);
         logInPage.provideUsername(validUsername, true);
         logInPage.providePassword(validPassword, true);
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         chooseActiveDashboard(rnd);
         //deleteAllPanelsFromDashboard();
         try {
@@ -458,5 +480,168 @@ public class DashboardPage extends BasePage{
         driver.findElement(editMonitoringButton).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(confirmEditButton));
         driver.findElement(confirmEditButton).click();
+    }
+
+    public void checkDuplicateDashboardStartingPoint(String username,String password){
+        LogInPage logInPage = new LogInPage(driver,wait);
+        logInPage.provideUsername(username,true);
+        logInPage.providePassword(password,true);
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
+        driver.findElement(dashboardDropdownButton).click();
+        int numberOfDashboards = driver.findElements(dashboardToBeDuplicated).size()-4;
+        int index = rnd.nextInt(numberOfDashboards - 1 ) + 1;
+        WebElement duplicatedDashboard = scrollElementIntoView(By.xpath(String.format(specificDashboardToBeDuplicated,index)));
+        duplicatedDashboard.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(specificDashboardToBeDuplicatedName));
+        WebElement specificDuplicateDashboard = driver.findElement(specificDashboardToBeDuplicatedName);
+        String dashboardName = specificDuplicateDashboard.getText();
+        specificDuplicateDashboard.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(duplicateOption));
+        driver.findElement(duplicateOption).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(startingPoint));
+        WebElement startingPointDashboard = driver.findElement(startingPoint);
+        String startingPointDashboardName = startingPointDashboard.getText();
+        Assert.assertEquals(dashboardName,startingPointDashboardName);
+    }
+
+    public void checkDuplicateDashboardLocation(String username,String password){
+        LogInPage logInPage = new LogInPage(driver,wait);
+        logInPage.provideUsername(username,true);
+        logInPage.providePassword(password,true);
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
+        driver.findElement(dashboardDropdownButton).click();
+        int numberOfDashboards = driver.findElements(dashboardToBeDuplicated).size()-4;
+        int index = rnd.nextInt(numberOfDashboards - 1 ) + 1;
+        WebElement duplicatedDashboard = scrollElementIntoView(By.xpath(String.format(specificDashboardToBeDuplicated,index)));
+        duplicatedDashboard.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(specificDashboardToBeDuplicateLocation));
+        WebElement specificDuplicateDashboard = driver.findElement(specificDashboardToBeDuplicateLocation);
+        String dashboardLocation = specificDuplicateDashboard.getText();
+        specificDuplicateDashboard.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(duplicateOption));
+        driver.findElement(duplicateOption).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(confirmDuplicateDashboardNameButton));
+        driver.findElement(confirmDuplicateDashboardNameButton).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardLocationInput));
+        WebElement locationInput = driver.findElement(dashboardLocationInput);
+        String dashboardLocationInputText = locationInput.getAttribute("title");
+        System.out.println(dashboardLocationInputText);
+        Assert.assertEquals(dashboardLocation,dashboardLocationInputText);
+    }
+    public void checkDuplicateDashboardContent(String username,String password,Random rnd){
+        LogInPage logInPage = new LogInPage(driver,wait);
+        logInPage.provideUsername(username,true);
+        logInPage.providePassword(password,true);
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        chooseActiveDashboard(rnd);
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        List<String> panelsHeaders = new ArrayList<String>();
+        panelsHeaders.add("Alert Center");
+        int numberOfPanelHeaders = driver.findElements(panelHeader).size();
+        int forecastIndex=1;
+        for(int i = 2;i<=numberOfPanelHeaders;i++){
+            wait.until(ExpectedConditions.visibilityOf(scrollElementIntoView(By.xpath(String.format(specificPanelHeader,i)))));
+            WebElement specificPanelTitle = scrollElementIntoView(By.xpath(String.format(specificPanelHeader,i)));
+            String specificPanelTitleText = specificPanelTitle.getText();
+            if(specificPanelTitleText.contains("(")){
+                WebElement forecastPanelTitle = scrollElementIntoView(By.xpath(String.format(specificForecastPanelHeader,forecastIndex)));
+                String forecastPanelTitleText = forecastPanelTitle.getText();
+                panelsHeaders.add(forecastPanelTitleText);
+                forecastIndex++;
+            }
+            else {
+                panelsHeaders.add(specificPanelTitleText);
+            }
+        }
+        wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
+        driver.findElement(dashboardDropdownButton).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(duplicateOption));
+        driver.findElement(duplicateOption).click();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        int numberOfDuplicatePanelHeaders = driver.findElements(duplicatePanelHeader).size();
+        for(int i = 1;i<numberOfDuplicatePanelHeaders;i++){
+            String panelHeader = panelsHeaders.get(i);
+            if(panelHeader.contains("Strikes")){
+                    panelHeader = panelHeader.replace("Strikes","Detection");
+                    WebElement specificDuplicateDashboardWidget = driver.findElement(By.xpath(String.format(specificDuplicatePanelHeader,i+1)));
+                    String dashboardWidgetText = specificDuplicateDashboardWidget.getText();
+                    Assert.assertEquals(panelHeader,dashboardWidgetText);
+                }
+                else{
+                    if(panelHeader.contains("1st")){
+                        panelHeader = panelHeader.replace("1st","1St");
+                        WebElement specificDuplicateDashboardWidget = driver.findElement(By.xpath(String.format(specificDuplicatePanelHeader,i+1)));
+                        String dashboardWidgetText = specificDuplicateDashboardWidget.getText();
+                        Assert.assertEquals(panelHeader,dashboardWidgetText);
+                    }
+                    else{
+                        if(panelHeader.contains("Temperature Departure")){
+                            panelHeader = panelHeader.replace("Temperature Departure","Temp Departure");
+                            WebElement specificDuplicateDashboardWidget = driver.findElement(By.xpath(String.format(specificDuplicatePanelHeader,i+1)));
+                            String dashboardWidgetText = specificDuplicateDashboardWidget.getText();
+                            Assert.assertEquals(panelHeader,dashboardWidgetText);
+                        }
+                        else{
+                            if(panelHeader.contains("Month")){
+                                panelHeader = panelHeader.replace("Month","- Month");
+                                WebElement specificDuplicateDashboardWidget = driver.findElement(By.xpath(String.format(specificDuplicatePanelHeader,i+1)));
+                                String dashboardWidgetText = specificDuplicateDashboardWidget.getText();
+                                Assert.assertEquals(panelHeader,dashboardWidgetText);
+                            }
+                            else{
+                                if(panelHeader.contains("Year")){
+                                    panelHeader = panelHeader.replace("Year","- Year");
+                                    WebElement specificDuplicateDashboardWidget = driver.findElement(By.xpath(String.format(specificDuplicatePanelHeader,i+1)));
+                                    String dashboardWidgetText = specificDuplicateDashboardWidget.getText();
+                                    Assert.assertEquals(panelHeader,dashboardWidgetText);
+                                }
+                                else{
+                                    if(panelHeader.contains("Since")){
+                                        panelHeader = panelHeader.replace("Since","- Since");
+                                        WebElement specificDuplicateDashboardWidget = driver.findElement(By.xpath(String.format(specificDuplicatePanelHeader,i+1)));
+                                        String dashboardWidgetText = specificDuplicateDashboardWidget.getText();
+                                        Assert.assertEquals(panelHeader,dashboardWidgetText);
+                                    }
+                                    else{
+                                        if(panelHeader.contains(" Hr")){
+                                            panelHeader = panelHeader.replace(" Hr","Hr");
+                                            WebElement specificDuplicateDashboardWidget = driver.findElement(By.xpath(String.format(specificDuplicatePanelHeader,i+1)));
+                                            String dashboardWidgetText = specificDuplicateDashboardWidget.getText();
+                                            Assert.assertEquals(panelHeader,dashboardWidgetText);
+                                        }
+                                        else {
+                                            WebElement specificDuplicateDashboardWidget = driver.findElement(By.xpath(String.format(specificDuplicatePanelHeader,i+1)));
+                                            String dashboardWidgetText = specificDuplicateDashboardWidget.getText();
+                                            Assert.assertEquals(panelHeader,dashboardWidgetText);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

@@ -130,12 +130,12 @@ public class InteractiveMapPage extends BasePage {
         }
         WebElement element = driver.findElement(map);
         driver.manage().window().fullscreen();
-        String locationPinsSettingsBefore = ((JavascriptExecutor) driver).executeScript("return this.map[\"opsdashboard-imap\"].isLocationPinsOn",element).toString();
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        String locationPinsSettingsBefore = ((JavascriptExecutor) driver).executeScript("return this.map[\"opsdashboard-imap\"].isLocationPinsOn",element).toString();
         try{wait.until(ExpectedConditions.visibilityOfElementLocated(mapSettingsIcon));}
         catch(TimeoutException e){
             driver.navigate().refresh();
@@ -158,12 +158,12 @@ public class InteractiveMapPage extends BasePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(map));
         WebElement element = driver.findElement(map);
         driver.manage().window().fullscreen();
-        String rangeRingsSettingsBefore = ((JavascriptExecutor) driver).executeScript("return this.map[\"opsdashboard-imap\"].areRangeRingsOn",element).toString();
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        String rangeRingsSettingsBefore = ((JavascriptExecutor) driver).executeScript("return this.map[\"opsdashboard-imap\"].areRangeRingsOn",element).toString();
         try{wait.until(ExpectedConditions.visibilityOfElementLocated(mapSettingsIcon));}
         catch(TimeoutException e){
             driver.navigate().refresh();

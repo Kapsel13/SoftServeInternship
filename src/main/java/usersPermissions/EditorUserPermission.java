@@ -12,15 +12,15 @@ public class EditorUserPermission extends BaseUserPermissions {
     private By readOnlyUserCheckBox = By.xpath("(//div[@class='body-row' and contains(.,'readonly test')]//div[contains(@class,'mat-checkbox-inner-container')])[1]");
     private By dashboardDropdownButton = By.xpath("//button[@id='dashboard-dropdown']");
     private By dashboards = By.xpath("//div[contains(@class,'dropdown-menu')]//button");
-    private String specificDashboard = "(//div[contains(@class,'dropdown-menu')]//button)[%d]";
+    private String specificDashboard = "(//div[contains(@class,'dropdown-menu')]//span[contains(@class,'prevent-native-tooltip')])[%d]";
     private By editOption =By.xpath("//span[contains(@class,'dropdown-item-title') and contains(text(),'Edit Selected')]");
     private By confirmNameButton = By.xpath("(//button[contains(text(),'Next')])[1]");
     private By confirmMonitoringButton = By.xpath("(//button[contains(text(),'Next')])[2]");
-    private By readOnlyPermission = By.xpath("//div[@aria-labelledby='assignPeoplePermissionDropdown']//button[contains(text(),'Read-Only')]");
+    private By readOnlyPermission = By.xpath("//div[@aria-labelledby='assignPeoplePermissionDropdown' and @x-placement='bottom-left']//button[contains(text(),'Read-Only')]");
     private By editorUserPermissionDropdown = By.xpath("//div[@class='body-row' and contains(.,'editor test')]//svg-icon");
     private By saveEditionButton = By.xpath("//button[contains(text(),'Save')]");
     private String dashboardName = "";
-    private String editedDashboard = "//span[contains(@class,'dropdown-item-title') and contains(text(),'%s')]";
+    private String editedDashboard = "//div[contains(@class,'dropdown-menu')]//span[contains(@class,'prevent-native-tooltip') and contains(text(),'%s')]";
     public EditorUserPermission(WebDriver driver, WebDriverWait wait){super(driver, wait);}
 
     public void addPermissionForUserAndLogOut(String username,String password,String permissionUser){
@@ -77,7 +77,7 @@ public class EditorUserPermission extends BaseUserPermissions {
         }
         driver.findElement(saveEditionButton).click();
         try{
-            Thread.sleep(2000);
+            Thread.sleep(5000);
         }
         catch (InterruptedException e){}
         dashboardPage.logOut();

@@ -17,7 +17,7 @@ public class RedirectionBetweenPagesTest extends TestPreparation {
     private By summaryPageLink = By.xpath("//div[contains(@class,'')]/a[contains(text(),'Summary')]");
     private String dashboardPageLink = "//div[contains(@class, '%s')]/a[contains(text(),'Dashboards')]";
     private String interactivePageLink = "//div[contains(@class, '%s')]/a[contains(text(),'Interactive Map')]";
-    private By canvas = By.xpath("//div[@id='mapContainer']");
+    private By layerOption = By.xpath("//mat-icon[contains(@class,'options-toggle-icon-off')]");
     private By summaryPageText = By.xpath("//span[contains(text(),'Summary')]");
     private By dashboardPageText = By.xpath("//span[contains(text(),'My Dashboards')]");
 
@@ -37,6 +37,7 @@ public class RedirectionBetweenPagesTest extends TestPreparation {
         logInPage.providePassword(validAdminPassword,true);
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.redirectBetweenTwoPages(summaryPageLink, By.xpath(String.format(dashboardPageLink, "")),summaryPageText);
+        dashboardPage.redirectBetweenTwoPages(By.xpath(String.format(dashboardPageLink, "")),summaryPageLink,dashboardPageText);
 
     }
 
@@ -47,6 +48,8 @@ public class RedirectionBetweenPagesTest extends TestPreparation {
         logInPage.providePassword(validAdminPassword,true);
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.redirectBetweenTwoPages(summaryPageLink,By.xpath(String.format(interactivePageLink, "")),summaryPageText);
+        dashboardPage.redirectBetweenTwoPages(By.xpath(String.format(interactivePageLink, "")),summaryPageLink,layerOption);
+        dashboardPage.redirectBetweenTwoPages(summaryPageLink,By.xpath(String.format(interactivePageLink, "")),summaryPageText);
     }
 
     @Test(retryAnalyzer = Retry.class)
@@ -55,28 +58,10 @@ public class RedirectionBetweenPagesTest extends TestPreparation {
         logInPage.provideUsername(validAdminUsername,true);
         logInPage.providePassword(validAdminPassword,true);
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
+        dashboardPage.redirectBetweenTwoPages(By.xpath(String.format(interactivePageLink, "")),By.xpath(String.format(dashboardPageLink, "")),layerOption);
         dashboardPage.redirectBetweenTwoPages(By.xpath(String.format(dashboardPageLink, "")),By.xpath(String.format(interactivePageLink, "")),dashboardPageText);
     }
 
-    @Test(retryAnalyzer = Retry.class)
-    public void testRedirectionInteractiveMapPageAndSummaryPage(){
-        LogInPage logInPage = new LogInPage(driver,wait);
-        logInPage.provideUsername(validAdminUsername,true);
-        logInPage.providePassword(validAdminPassword,true);
-        DashboardPage dashboardPage = new DashboardPage(driver,wait);
-        dashboardPage.redirectBetweenTwoPages(By.xpath(String.format(interactivePageLink, "")),summaryPageLink,canvas);
-
-    }
-
-    @Test(retryAnalyzer = Retry.class)
-    public void testRedirectionInteractiveMapPageAndDashboardPage(){
-        LogInPage logInPage = new LogInPage(driver,wait);
-        logInPage.provideUsername(validAdminUsername,true);
-        logInPage.providePassword(validAdminPassword,true);
-        DashboardPage dashboardPage = new DashboardPage(driver,wait);
-        dashboardPage.redirectBetweenTwoPages(By.xpath(String.format(interactivePageLink, "")),By.xpath(String.format(dashboardPageLink, "")),canvas);
-
-    }
     @Test(retryAnalyzer = Retry.class)
     public void testRedirectionToTheSpecificDashboardFromSummaryPage(){
         LogInPage logInPage = new LogInPage(driver,wait);

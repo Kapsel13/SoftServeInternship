@@ -1,16 +1,11 @@
 package pages;
 
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 public class SummaryPage extends BasePage {
@@ -180,12 +175,12 @@ public class SummaryPage extends BasePage {
     }
     public void filterDashboardsByCriticalAlerts(){
         redirectToSummaryPage();
-        driver.navigate().refresh();
+        //driver.navigate().refresh();
         wait.until(ExpectedConditions.visibilityOfElementLocated(filteringButton));
         driver.findElement(filteringButton).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(filterByCriticalAlertsButton));
         driver.findElement(filterByCriticalAlertsButton).click();
-        driver.navigate().refresh();
+        //driver.navigate().refresh();
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
@@ -207,7 +202,7 @@ public class SummaryPage extends BasePage {
     }
     public void filterDashboardsByNumberOfAlerts(){
         redirectToSummaryPage();
-        driver.navigate().refresh();
+        //driver.navigate().refresh();
         wait.until(ExpectedConditions.visibilityOfElementLocated(filteringButton));
         driver.findElement(filteringButton).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(numberOfAlertsDropdown));
@@ -233,7 +228,7 @@ public class SummaryPage extends BasePage {
     }
     public void filterDashboardByAlertType(){
         redirectToSummaryPage();
-        driver.navigate().refresh();
+        //driver.navigate().refresh();
         wait.until(ExpectedConditions.visibilityOfElementLocated(filteringButton));
         driver.findElement(filteringButton).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(alertTypeOption));
@@ -287,12 +282,12 @@ public class SummaryPage extends BasePage {
                 wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
             }catch(TimeoutException e){
                 driver.navigate().refresh();
-                File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+                /*File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
                 try {
                     FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
                 } catch (IOException ex) {
                     ex.printStackTrace();
-                }
+                }*/
                 wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
             }
             driver.findElement(dashboardDropdownButton).click();

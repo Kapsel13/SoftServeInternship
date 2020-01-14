@@ -3,45 +3,44 @@ import org.testng.annotations.Test;
 import pages.InteractiveMapPage;
 
 public class InteractiveMapPageSettingsTest extends TestPreparation {
-    InteractiveMapPage interactiveMapPage;
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testSettingLocationPins(){
-        interactiveMapPage = new InteractiveMapPage(driver,wait);
+        InteractiveMapPage interactiveMapPage = new InteractiveMapPage(driver,wait);
         interactiveMapPage.setLocationPinsToInteractiveMapPage(validAdminUsername,validAdminPassword);
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testSettingRangeRings(){
-        interactiveMapPage = new InteractiveMapPage(driver,wait);
+        InteractiveMapPage interactiveMapPage = new InteractiveMapPage(driver,wait);
         interactiveMapPage.setRangeRingsToInteractiveMapPage(validAdminUsername,validAdminPassword);
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testSettingMapType() {
-        interactiveMapPage = new InteractiveMapPage(driver,wait);
+        InteractiveMapPage interactiveMapPage = new InteractiveMapPage(driver,wait);
         interactiveMapPage.setMapTypeSettingsToInteractiveMapPage(validAdminUsername,validAdminPassword);
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testSettingTemperatureUnit(){
-        interactiveMapPage = new InteractiveMapPage(driver,wait);
+        InteractiveMapPage interactiveMapPage = new InteractiveMapPage(driver,wait);
         interactiveMapPage.setTempUnitSettingsToInteractiveMapPage(validAdminUsername,validAdminPassword);
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testSettingDistanceUnits(){
-        interactiveMapPage = new InteractiveMapPage(driver,wait);
+        InteractiveMapPage interactiveMapPage = new InteractiveMapPage(driver,wait);
         interactiveMapPage.setDistanceUnitSettingsToInteractiveMapPage(validAdminUsername,validAdminPassword);
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testSettingHeightUnits(){
-        interactiveMapPage = new InteractiveMapPage(driver,wait);
+        InteractiveMapPage interactiveMapPage = new InteractiveMapPage(driver,wait);
         interactiveMapPage.setHeightUnitSettingsToInteractiveMapPage(validAdminUsername,validAdminPassword);
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testSettingPressureUnits(){
-        interactiveMapPage = new InteractiveMapPage(driver,wait);
+        InteractiveMapPage interactiveMapPage = new InteractiveMapPage(driver,wait);
         interactiveMapPage.setPressureSettingsToInteractiveMap(validAdminUsername,validAdminPassword);
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testSettingSpeedUnits(){
-        interactiveMapPage = new InteractiveMapPage(driver,wait);
+        InteractiveMapPage interactiveMapPage = new InteractiveMapPage(driver,wait);
         interactiveMapPage.setSpeedSettingsToInteractiveMap(validAdminUsername,validAdminPassword);
     }
 }

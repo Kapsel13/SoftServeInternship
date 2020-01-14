@@ -103,21 +103,25 @@ public class ForecastDataAlertPanel extends BasePanel {
         wait.until(ExpectedConditions.visibilityOfElementLocated(dataConfirmButton));
         driver.findElement(dataConfirmButton).click();
 
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(unitsDropdownArrow));
-        driver.findElement(unitsDropdownArrow).click();
-        int unitIndex = 0;
-        int numberOfUnits = driver.findElements(units).size();
-        if(numberOfUnits == 1){
-            unitIndex = 1;
+        String unitInAListText = "";
+        if(!weatherTypeText.contains("Cloud")) {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(unitsDropdownArrow));
+            driver.findElement(unitsDropdownArrow).click();
+            int unitIndex = 0;
+            int numberOfUnits = driver.findElements(units).size();
+            if (numberOfUnits == 1) {
+                unitIndex = 1;
+            } else {
+                unitIndex = rnd.nextInt(numberOfUnits - 1) + 1;
+            }
+            WebElement unitInAList = driver.findElement(By.xpath(String.format(unit, unitIndex)));
+             unitInAListText = unitInAList.getText();
+            System.out.println("units: " + unitInAListText);
+            unitInAList.click();
         }
         else{
-            unitIndex = rnd.nextInt(numberOfUnits-1)+1;
+            unitInAListText = "%";
         }
-        WebElement unitInAList = driver.findElement(By.xpath(String.format(unit,unitIndex)));
-        String unitInAListText = unitInAList.getText();
-        System.out.println("units: "+unitInAListText);
-        unitInAList.click();
         try {
             if(!jsonWeatherTypeText.contains("Normal")) {
                 JSONParser jsonParser = new JSONParser();
@@ -202,10 +206,10 @@ public class ForecastDataAlertPanel extends BasePanel {
         wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelButton));
         driver.findElement(addPanelButton).click();
         try{
-            waitUntillAllElementsVisible(Arrays.asList(timeOfAlert,titleOfChart));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(timeOfAlert));
         }catch(TimeoutException e){
             driver.navigate().refresh();
-            waitUntillAllElementsVisible(Arrays.asList(timeOfAlert,titleOfChart));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(timeOfAlert));
         }
         String panelHeaderText = driver.findElement(panelHeader).getText();
         Assert.assertEquals(weatherTypeText,panelHeaderText);
