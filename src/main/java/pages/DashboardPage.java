@@ -51,7 +51,7 @@ public class DashboardPage extends BasePage{
     protected By panelMenu = By.xpath("//div[@class='header-menu-icon']");
     protected By specificPanelMenu = By.xpath("(//div[@class='header-menu-icon'])[1]");
     protected By deleteButton = By.xpath("//span[contains(text(),'Delete') and not(contains(text(),'Selected'))]");
-    protected By confirmDeletingButton = By.xpath("//button[contains(text(),'YES')]");
+    protected By confirmDeletingButton = By.xpath("//button[contains(text(),'Yes')]");
     protected By okButton = By.xpath("//button[contains(text(),'OK')]");
     private String addedDashboard = "//span[contains(@class,'dropdown-item-title') and contains(text(),'%s')]";
     private By deleteOption = By.xpath("//span[contains(@class,'dropdown-item-title') and contains(text(),'Delete Selected')]");
@@ -253,7 +253,7 @@ public class DashboardPage extends BasePage{
             e.printStackTrace();
         }
         int activeDashboardsNumber = driver.findElements(activeDashboard).size();
-        int numberOfActiveDashboard = /*rnd.nextInt(activeDashboardsNumber-1)+1*/45;
+        int numberOfActiveDashboard = rnd.nextInt(activeDashboardsNumber-1)+1;
         WebElement activeDashboardToClick = scrollElementIntoView(By.xpath(String.format(activeDashboardInList,numberOfActiveDashboard)));
         activeDashboardToClick.click();
     }
@@ -282,7 +282,7 @@ public class DashboardPage extends BasePage{
             e.printStackTrace();
         }
         chooseActiveDashboard(rnd);
-        //deleteAllPanelsFromDashboard();
+        deleteAllPanelsFromDashboard();
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelOption));
         }catch (TimeoutException e){
@@ -305,8 +305,6 @@ public class DashboardPage extends BasePage{
             driver.findElement(deleteButton).click();
             wait.until(ExpectedConditions.visibilityOfElementLocated(confirmDeletingButton));
             driver.findElement(confirmDeletingButton).click();
-            wait.until(ExpectedConditions.visibilityOfElementLocated(okButton));
-            driver.findElement(okButton).click();
             panelsNumber--;
             try{
                 Thread.sleep(2000);

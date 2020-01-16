@@ -3,15 +3,14 @@ package panels;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import pages.DashboardPage;
+import pages.LogInPage;
 
+import java.beans.Expression;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -29,7 +28,7 @@ public class CurrentDataAlertPanel extends BasePanel {
     private By dataConfirmButton = By.xpath("//form[not(contains(@class,'ng-untouched'))]//button[contains(text(),'Next')]");
     private By triggerTypeConfirmButton = By.xpath("//form[contains(.,'Preview: Alert Mode')]//button[contains(text(),'Next')]");
     private By alertMessageConfirmButton = By.xpath("//form[contains(.,'Preview: Default alert message')]//button[contains(text(),'Next')]");
-    private By notificationConfirmButton = By.xpath("(//button[contains(text(),'Next')])[4]");
+    private By notificationConfirmButton = By.xpath("//form[contains(.,'Preview: Mobile notification')]//button[contains(text(),'Next')]");
     private By addPanelButton = By.xpath("//button[contains(text(),'Add Panel')]");
     private By selectWeatherTypeButton = By.xpath("//div[@class='phoenix-typeahead-input-arrow']");
     private By timeOfAlert = By.xpath("(//mat-sidenav-content//time[contains(@class,'data-update-time')])[1]");
@@ -51,6 +50,15 @@ public class CurrentDataAlertPanel extends BasePanel {
     private By alertPreview = By.xpath("//div[@class='mat-button-toggle-label-content' and contains(text(),'Alert')]");
     private By selectWeatherInput = By.xpath("//input[@placeholder='Select weather option']");
     private By  disabledConfirmPanelTypeButton = By.xpath("//form[not(contains(@class,'ng-touched'))]//button[contains(text(),'Next')]");
+    //private By currentDataAlertPanel = By.xpath("//header[contains(@class,'value-panel-header')]");
+    protected By addPanelOption = By.xpath("//span[contains(text(),'Add Panel')]");
+    private By settingsIcon = By.xpath("//div[@class='header-menu-icon']");
+    private By editOption = By.xpath("//button[contains(@class,'mat-menu-item') and contains(.,'Edit')]");
+    private boolean noUnitsDropdown = false;
+    private By panelHeader = By.xpath("(//div[contains(@class,'header-text')])[1]");
+    private By dataUnits = By.xpath("//span[@class='data-units']");
+    private By dataNumber = By.xpath("//div[contains(@class,'data-value-text')]");
+    private By saveEditionButton = By.xpath("//button[contains(text(),'Save')]");
     public CurrentDataAlertPanel(WebDriver driver, WebDriverWait wait){
         super(driver,wait);
     }
@@ -71,6 +79,9 @@ public class CurrentDataAlertPanel extends BasePanel {
         String weatherTypeText = weatherType.getAttribute("value");
         String jsonWeatherText = weatherTypeText;
         System.out.println("weatherType: "+weatherTypeText);
+        if((weatherTypeText.contains("Humidity"))||(weatherTypeText.contains("Pressure"))){
+            noUnitsDropdown = true;
+        }
         if(weatherTypeText.contains("-")){
             weatherTypeText=weatherTypeText.replace(" -","");
         }
@@ -81,21 +92,28 @@ public class CurrentDataAlertPanel extends BasePanel {
         wait.until(ExpectedConditions.visibilityOfElementLocated(dataConfirmButton));
         driver.findElement(dataConfirmButton).click();
 
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(unitsDropdownArrow));
-        driver.findElement(unitsDropdownArrow).click();
-        int unitIndex = 0;
-        int numberOfUnits = driver.findElements(units).size();
-        if(numberOfUnits == 1){
-            unitIndex = 1;
+        String unitInAListText = "";
+        if(weatherTypeText.contains("Humidity")){
+            unitInAListText = "%";
         }
-        else{
-            unitIndex = rnd.nextInt(numberOfUnits-1)+1;
+        if(weatherTypeText.contains("Pressure")){
+            unitInAListText = "mb";
         }
-        WebElement unitInAList = driver.findElement(By.xpath(String.format(unit,unitIndex)));
-        String unitInAListText = unitInAList.getText();
-        System.out.println("units: "+unitInAListText);
-        unitInAList.click();
+        if(!noUnitsDropdown) {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(unitsDropdownArrow));
+            driver.findElement(unitsDropdownArrow).click();
+            int unitIndex = 0;
+            int numberOfUnits = driver.findElements(units).size();
+            if (numberOfUnits == 1) {
+                unitIndex = 1;
+            } else {
+                unitIndex = rnd.nextInt(numberOfUnits - 1) + 1;
+            }
+            WebElement unitInAList = driver.findElement(By.xpath(String.format(unit, unitIndex)));
+            unitInAListText = unitInAList.getText();
+            System.out.println("units: " + unitInAListText);
+            unitInAList.click();
+        }
         try {
             if(!jsonWeatherText.contains("Departure")) {
                 JSONParser jsonParser = new JSONParser();
@@ -205,5 +223,71 @@ public class CurrentDataAlertPanel extends BasePanel {
         driver.findElement(selectWeatherInput).sendKeys(invalidWeatherOption);
         wait.until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(disabledConfirmPanelTypeButton)));
     }
-
+    public void checkEditingCurrentDataAlertPanel(String username,String password){
+        LogInPage logInPage = new LogInPage(driver,wait);
+        logInPage.provideUsername(username,true);
+        logInPage.providePassword(password,true);
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        DashboardPage dashboardPage = new DashboardPage(driver,wait);
+        dashboardPage.chooseActiveDashboard(rnd);
+        dashboardPage.deleteAllPanelsFromDashboard();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelOption));
+        driver.findElement(addPanelOption).click();
+        addCurrentDataAlertPanel();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(settingsIcon));
+        driver.findElement(settingsIcon).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(editOption));
+        driver.findElement(editOption).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(panelHeader));
+        WebElement paneHeaderContent = driver.findElement(panelHeader);
+        String panelHeaderContentText = paneHeaderContent.getText();
+        String unitSymbol = "";
+        if(panelHeaderContentText.contains("Humidity")){
+            unitSymbol = "%";
+        }
+        if(panelHeaderContentText.contains("Pressure")){
+            unitSymbol = "mb";
+        }
+        if(!noUnitsDropdown) {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(unitsDropdownArrow));
+            driver.findElement(unitsDropdownArrow).click();
+            int unitIndex = 0;
+            int numberOfUnits = driver.findElements(units).size();
+            if (numberOfUnits == 1) {
+                unitIndex = 1;
+            } else {
+                unitIndex = rnd.nextInt(numberOfUnits - 1) + 1;
+            }
+            WebElement unitInAList = driver.findElement(By.xpath(String.format(unit, unitIndex)));
+            unitSymbol = unitInAList.getText();
+            System.out.println("units: " + unitSymbol);
+            unitInAList.click();
+        }
+        wait.until(ExpectedConditions.visibilityOfElementLocated(triggerTypeConfirmButton));
+        driver.findElement(triggerTypeConfirmButton).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(alertMessageConfirmButton));
+        driver.findElement(alertMessageConfirmButton).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(notificationConfirmButton));
+        driver.findElement(notificationConfirmButton).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(saveEditionButton));
+        driver.findElement(saveEditionButton).click();
+        try {
+            Thread.sleep(30000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        wait.until(ExpectedConditions.visibilityOfElementLocated(dataUnits));
+        WebElement dataUnitsContent = driver.findElement(dataUnits);
+        String dataUnitsContentText = dataUnitsContent.getText();
+        Assert.assertEquals(unitSymbol,dataUnitsContentText);
+    }
 }
