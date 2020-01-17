@@ -235,10 +235,10 @@ public class CurrentDataAlertPanel extends BasePanel {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        System.out.println("jhbfirjo hjfklsnlhndjsghudejgjgkdhdksghjdskhgkljsdhgklshjshgsjhdsjkgdjshgklshgjsgljkshlskd");
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.chooseActiveDashboard(rnd);
         dashboardPage.deleteAllPanelsFromDashboard();
-        System.out.println("jhbfirjo hjfklsnlhndjsghudejgjgkdhdksghjdskhgkljsdhgklshjshgsjhdsjkgdjshgklshgjsgljkshlskd");
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelOption));
         }catch(TimeoutException e){
