@@ -241,6 +241,7 @@ public class CurrentDataAlertPanel extends BasePanel {
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelOption));
         }catch(TimeoutException e){
+            System.out.println("jhbfirjo hjfklsnlhndjsghudejgjgkdhdksghjdskhgkljsdhgklshjshgsjhdsjkgdjshgklshgjsgljkshlskd");
             driver.navigate().refresh();
             try {
                 Thread.sleep(15000);
@@ -257,7 +258,6 @@ public class CurrentDataAlertPanel extends BasePanel {
         }
         driver.findElement(addPanelOption).click();
         addCurrentDataAlertPanel();
-        System.out.println("jhbfirjo hjfklsnlhndjsghudejgjgkdhdksghjdskhgkljsdhgklshjshgsjhdsjkgdjshgklshgjsgljkshlskd");
         wait.until(ExpectedConditions.visibilityOfElementLocated(settingsIcon));
         driver.findElement(settingsIcon).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(editOption));
