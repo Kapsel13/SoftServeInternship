@@ -1,5 +1,6 @@
 package panels;
 
+import org.apache.commons.io.FileUtils;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -11,6 +12,7 @@ import pages.DashboardPage;
 import pages.LogInPage;
 
 import java.beans.Expression;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -239,6 +241,12 @@ public class CurrentDataAlertPanel extends BasePanel {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
+        }
+        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
         wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelOption));
         driver.findElement(addPanelOption).click();
