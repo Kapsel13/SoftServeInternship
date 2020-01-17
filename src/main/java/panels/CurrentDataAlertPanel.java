@@ -234,6 +234,12 @@ public class CurrentDataAlertPanel extends BasePanel {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.chooseActiveDashboard(rnd);
         dashboardPage.deleteAllPanelsFromDashboard();
@@ -244,7 +250,7 @@ public class CurrentDataAlertPanel extends BasePanel {
         }
         File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         try {
-            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
+            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot2.png"));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
