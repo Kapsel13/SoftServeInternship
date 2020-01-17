@@ -299,7 +299,12 @@ public class DashboardPage extends BasePage{
         }catch (InterruptedException e){}
         int panelsNumber = driver.findElements(panelMenu).size();
         while(panelsNumber!=0){
-            wait.until(ExpectedConditions.visibilityOfElementLocated(specificPanelMenu));
+            try {
+                wait.until(ExpectedConditions.visibilityOfElementLocated(specificPanelMenu));
+            }catch(TimeoutException e){
+                driver.navigate().refresh();
+                wait.until(ExpectedConditions.visibilityOfElementLocated(specificPanelMenu));
+            }
             driver.findElement(specificPanelMenu).click();
             wait.until(ExpectedConditions.visibilityOfElementLocated(deleteButton));
             driver.findElement(deleteButton).click();
