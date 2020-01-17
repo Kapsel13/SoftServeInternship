@@ -238,7 +238,6 @@ public class CurrentDataAlertPanel extends BasePanel {
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.chooseActiveDashboard(rnd);
         dashboardPage.deleteAllPanelsFromDashboard();
-        System.out.println("jgonhnj;njjnkjn;jm;fmn klfjn jfhl;io");
         try {
             wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelOption));
         }catch(TimeoutException e){
@@ -257,6 +256,7 @@ public class CurrentDataAlertPanel extends BasePanel {
             wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelOption));
         }
         driver.findElement(addPanelOption).click();
+        System.out.println("jgonhnj;njjnkjn;jm;fmn klfjn jfhl;io");
         addCurrentDataAlertPanel();
         wait.until(ExpectedConditions.visibilityOfElementLocated(settingsIcon));
         driver.findElement(settingsIcon).click();
