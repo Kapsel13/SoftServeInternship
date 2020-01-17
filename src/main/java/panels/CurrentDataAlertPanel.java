@@ -184,6 +184,7 @@ public class CurrentDataAlertPanel extends BasePanel {
         else{
             System.out.println("sendNotification: Yes");
         }
+        System.out.println("kosjgihjshiishdygisuygisdygiosidisgudisghysughssihsuy");
         wait.until(ExpectedConditions.visibilityOfElementLocated(notificationConfirmButton));
         driver.findElement(notificationConfirmButton).click();
 
@@ -257,7 +258,6 @@ public class CurrentDataAlertPanel extends BasePanel {
         }
         driver.findElement(addPanelOption).click();
         addCurrentDataAlertPanel();
-        System.out.println("jgonhnj;njjnkjn;jm;fmn klfjn jfhl;io");
         wait.until(ExpectedConditions.visibilityOfElementLocated(settingsIcon));
         driver.findElement(settingsIcon).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(editOption));
