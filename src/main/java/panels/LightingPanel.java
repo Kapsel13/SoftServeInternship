@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import pages.DashboardPage;
+import pages.LogInPage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -48,6 +49,12 @@ public class LightingPanel extends BasePanel {
     private By range2PriorityContent = By.xpath("(//div[@class='dropdown-range-icon-wrapper'])[2]");
     private By range = By.xpath("//div[@class='range-radius']");
     private By deleteRangeButton = By.xpath("//div[contains(@class,'remove-range-btn')]//svg-icon");
+    protected By addPanelOption = By.xpath("//span[contains(text(),'Add Panel')]");
+    private By settingsIcon = By.xpath("//div[@class='header-menu-icon']");
+    private By editOption = By.xpath("//button[contains(@class,'mat-menu-item') and contains(.,'Edit')]");
+    private By saveOption = By.xpath("//button[contains(text(),'Save')]");
+    private By lightingPanelParameter = By.xpath("//div[@class='parameter']");
+    private By range1UnitsEditDropdownArrow = By.xpath("//div[@class='flex']//div[contains(.,'Range 1')]//svg-icon");
     protected static Random rnd = new Random();
 
     public LightingPanel(WebDriver driver, WebDriverWait wait){
@@ -217,4 +224,80 @@ public class LightingPanel extends BasePanel {
         return rangeInfo;
     }
 
+    public void checkEditingLightingPanel(String username,String password){
+        LogInPage logInPage = new LogInPage(driver,wait);
+        logInPage.provideUsername(username,true);
+        logInPage.providePassword(password,true);
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        DashboardPage dashboardPage = new DashboardPage(driver,wait);
+        dashboardPage.chooseActiveDashboard(rnd);
+        dashboardPage.deleteAllPanelsFromDashboard();
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelOption));
+        driver.findElement(addPanelOption).click();
+        addLightingPanel();
+        try {
+            Thread.sleep(30000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        wait.until(ExpectedConditions.visibilityOfElementLocated(settingsIcon));
+        driver.findElement(settingsIcon).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(editOption));
+        driver.findElement(editOption).click();
+
+        String lightningPanelUnits = "";
+        wait.until(ExpectedConditions.visibilityOfElementLocated(lightningRangeUnitsDropdownArrow));
+        driver.findElement(lightningRangeUnitsDropdownArrow).click();
+        int numberOfLightningRangeUnits = driver.findElements(lightningRangeUnits).size();
+        int lightningRangeUnitIndex = rnd.nextInt(numberOfLightningRangeUnits-1)+1;
+        WebElement lightningRangeUnitInAList = driver.findElement(By.xpath(String.format(lightningRangeUnit,lightningRangeUnitIndex)));
+        lightningPanelUnits = lightningRangeUnitInAList.getText();
+        System.out.println("lightningRangeUnit: "+lightningRangeUnitInAList.getText());
+        lightningRangeUnitInAList.click();
+
+        String range1Number = "";
+        wait.until(ExpectedConditions.visibilityOfElementLocated(range1UnitsEditDropdownArrow ));
+        driver.findElement(range1UnitsEditDropdownArrow ).click();
+        int numberOfRange1Units = driver.findElements(range1Units).size();
+        int range1UnitIndex = rnd.nextInt(numberOfRange1Units-1)+1;
+        dashboardPage = new DashboardPage(driver,wait);
+        WebElement range1UnitInAList = dashboardPage.scrollElementIntoView(By.xpath(String.format(range1Unit,range1UnitIndex)));
+        range1Number = range1UnitInAList.getText();
+        System.out.println("range1Unit: "+range1UnitInAList.getText());
+        range1UnitInAList.click();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(confirmLightningRangeButton));
+        driver.findElement(confirmLightningRangeButton).click();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(confirmAlertMessageButton));
+        driver.findElement(confirmAlertMessageButton).click();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(confirmSendNotificationButton));
+        driver.findElement(confirmSendNotificationButton).click();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(confirmMapSettingsButton));
+        driver.findElement(confirmMapSettingsButton).click();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(saveOption));
+        driver.findElement(saveOption).click();
+
+        try {
+            Thread.sleep(30000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        wait.until(ExpectedConditions.visibilityOfElementLocated(lightingPanelParameter));
+        WebElement lightningPanelParameterContent = driver.findElement(lightingPanelParameter);
+        String lightningPanelParameterContentText = lightningPanelParameterContent.getText();
+        Assert.assertEquals(range1Number+lightningPanelUnits,lightningPanelParameterContentText);
+    }
 }
