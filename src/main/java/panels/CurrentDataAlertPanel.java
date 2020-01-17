@@ -16,6 +16,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Time;
 import java.util.Arrays;
 import java.util.Random;
 
@@ -238,17 +239,22 @@ public class CurrentDataAlertPanel extends BasePanel {
         dashboardPage.chooseActiveDashboard(rnd);
         dashboardPage.deleteAllPanelsFromDashboard();
         try {
-            Thread.sleep(60000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelOption));
+        }catch(TimeoutException e){
+            driver.navigate().refresh();
+            try {
+                Thread.sleep(15000);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
+            File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+            try {
+                FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot2.png"));
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelOption));
         }
-        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        try {
-            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot2.png"));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelOption));
         driver.findElement(addPanelOption).click();
         addCurrentDataAlertPanel();
         wait.until(ExpectedConditions.visibilityOfElementLocated(settingsIcon));
