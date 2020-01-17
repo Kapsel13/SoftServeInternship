@@ -257,9 +257,9 @@ public class CurrentDataAlertPanel extends BasePanel {
         }
         driver.findElement(addPanelOption).click();
         addCurrentDataAlertPanel();
+        System.out.println("jgonhnj;njjnkjn;jm;fmn klfjn jfhl;io");
         wait.until(ExpectedConditions.visibilityOfElementLocated(settingsIcon));
         driver.findElement(settingsIcon).click();
-        System.out.println("jgonhnj;njjnkjn;jm;fmn klfjn jfhl;io");
         wait.until(ExpectedConditions.visibilityOfElementLocated(editOption));
         driver.findElement(editOption).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(panelHeader));
