@@ -159,13 +159,7 @@ public class LightingPanel extends BasePanel {
         }
         wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelButton));
         driver.findElement(addPanelButton).click();
-        try {
-            waitUntillAllElementsVisible(Arrays.asList(headerIcon, clearStatus));
-        }
-        catch (TimeoutException e){
-            driver.navigate().refresh();
-            waitUntillAllElementsVisible(Arrays.asList(headerIcon, clearStatus));
-        }
+        waitUntillAllElementsVisible(Arrays.asList(headerIcon, clearStatus));
     }
     public void addRange(){
         List<String> rangeInfo = addNewRange();
@@ -255,7 +249,6 @@ public class LightingPanel extends BasePanel {
         }
         driver.findElement(addPanelOption).click();
         addLightingPanel();
-        System.out.println("kfjnfhdjuhgkdhsygjshgjshkdjshgksgkksgijksghsg");
         try {
             Thread.sleep(30000);
         } catch (InterruptedException e) {
