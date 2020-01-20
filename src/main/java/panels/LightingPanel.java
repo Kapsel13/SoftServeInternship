@@ -159,18 +159,24 @@ public class LightingPanel extends BasePanel {
         }
         wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelButton));
         driver.findElement(addPanelButton).click();
-        try {
-            Thread.sleep(60000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        try{
+            waitUntillAllElementsVisible(Arrays.asList(headerIcon, clearStatus));
+        }catch(TimeoutException e)
+        {
+            driver.navigate().refresh();
+            try {
+                Thread.sleep(15000);
+            } catch (InterruptedException ex) {
+                e.printStackTrace();
+            }
+            File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+            try {
+                FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot2.png"));
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            waitUntillAllElementsVisible(Arrays.asList(headerIcon, clearStatus));
         }
-        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        try {
-            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot2.png"));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        waitUntillAllElementsVisible(Arrays.asList(headerIcon, clearStatus));
     }
     public void addRange(){
         List<String> rangeInfo = addNewRange();
