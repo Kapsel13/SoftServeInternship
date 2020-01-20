@@ -3,6 +3,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import panels.CurrentDataAlertPanel;
 import panels.CurrentWeatherConditonsPanel;
+import panels.ForecastDataAlertPanel;
 import panels.LightingPanel;
 
 import java.util.Random;
@@ -28,5 +29,10 @@ public class EditPanelsTest extends TestPreparation
     public void testEditingLightingPanel(){
         LightingPanel lightingPanel = new LightingPanel(driver,wait);
         lightingPanel.checkEditingLightingPanel(validAdminUsername,validAdminPassword);
+    }
+    @Test
+    public void testEditingForecastDataPanel(){
+        ForecastDataAlertPanel forecastDataAlertPanel = new ForecastDataAlertPanel(driver,wait);
+        forecastDataAlertPanel.checkEditingForecastDataAlertPanel(validAdminUsername,validAdminPassword);
     }
 }

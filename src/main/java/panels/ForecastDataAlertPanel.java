@@ -1,17 +1,17 @@
 package panels;
 
+import org.apache.commons.io.FileUtils;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import pages.DashboardPage;
+import pages.LogInPage;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -54,6 +54,12 @@ public class ForecastDataAlertPanel extends BasePanel {
     private By lessThanButton = By.xpath("//div[contains(text(),'Less Than')]");
     private By selectWeatherInput = By.xpath("//input[@placeholder='Select weather option']");
     private By  disabledConfirmPanelTypeButton = By.xpath("//form[not(contains(@class,'ng-touched'))]//button[contains(text(),'Next')]");
+    protected By addPanelOption = By.xpath("//span[contains(text(),'Add Panel')]");
+    private By settingsIcon = By.xpath("//div[@class='header-menu-icon']");
+    private By editOption = By.xpath("//button[contains(@class,'mat-menu-item') and contains(.,'Edit')]");
+    private By dataConfirmEditingButton = By.xpath("//form[contains(.,'Forecast Range')]//button[contains(text(),'Next')]");
+    private By saveEditionButton = By.xpath("//button[contains(text(),'Save')]");
+    private By forecastInformation = By.xpath("//span[@class='forecast-widget-chart-range']");
     public ForecastDataAlertPanel(WebDriver driver, WebDriverWait wait){
         super(driver,wait);
     }
@@ -222,5 +228,99 @@ public class ForecastDataAlertPanel extends BasePanel {
         wait.until(ExpectedConditions.visibilityOfElementLocated(selectWeatherInput));
         driver.findElement(selectWeatherInput).sendKeys(invalidPanelType);
         wait.until(ExpectedConditions.not(ExpectedConditions.elementToBeClickable(disabledConfirmPanelTypeButton)));
+    }
+    public void checkEditingForecastDataAlertPanel(String username,String password){
+        LogInPage logInPage = new LogInPage(driver,wait);
+        logInPage.provideUsername(username,true);
+        logInPage.providePassword(password,true);
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        DashboardPage dashboardPage = new DashboardPage(driver,wait);
+        dashboardPage.chooseActiveDashboard(rnd);
+        dashboardPage.deleteAllPanelsFromDashboard();
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelOption));
+        }catch(TimeoutException e){
+            driver.navigate().refresh();
+            try {
+                Thread.sleep(15000);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
+            wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelOption));
+        }
+        driver.findElement(addPanelOption).click();
+        addForecastDataAlertPanel();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(settingsIcon));
+        driver.findElement(settingsIcon).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(editOption));
+        driver.findElement(editOption).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(forecastRangeTimeUnitsDropdown));
+        driver.findElement(forecastRangeTimeUnitsDropdown).click();
+        int numberOfForecastRangeTimeUnits = driver.findElements(forecastRangeTimeUnits).size();
+        int forecastRangeTimeUnitIndex = 0;
+        if(numberOfForecastRangeTimeUnits == 1){
+            forecastRangeTimeUnitIndex = 1;
+        }
+        else {
+            forecastRangeTimeUnitIndex = rnd.nextInt(numberOfForecastRangeTimeUnits-1)+1;
+        }
+        WebElement chooseForecastTimeUnit = driver.findElement(By.xpath(String.format(forecastRangeTimeUnit,forecastRangeTimeUnitIndex)));
+        String chooseForecastTimeUnitText = chooseForecastTimeUnit.getText();
+        System.out.println("rangeTimeUnit: "+chooseForecastTimeUnitText);
+        chooseForecastTimeUnit.click();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(forecastRangeMeasureUnitDropdown));
+        driver.findElement(forecastRangeMeasureUnitDropdown).click();
+        int numberOfForecastRangeMeasureUnits = driver.findElements(forecastRangeMeasureUnits).size();
+        int forecastRangeMeasureUnitIndex = rnd.nextInt(numberOfForecastRangeMeasureUnits-1)+1;
+        WebElement chooseForecastRangeMeasureUnit = dashboardPage.scrollElementIntoView(By.xpath(String.format(forecastRangeMeasureUnit,forecastRangeMeasureUnitIndex)));
+        String chooseForecastRangeMeasureUnitText = chooseForecastRangeMeasureUnit.getText();
+        System.out.println("rangeMeasureUnit: "+chooseForecastRangeMeasureUnitText);
+        chooseForecastRangeMeasureUnit.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(dataConfirmEditingButton));
+        driver.findElement(dataConfirmEditingButton).click();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(triggerTypeConfirmButton));
+        driver.findElement(triggerTypeConfirmButton).click();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(alertMessageConfirmButton));
+        driver.findElement(alertMessageConfirmButton).click();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(notificationConfirmButton));
+        driver.findElement(notificationConfirmButton).click();
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(saveEditionButton));
+        driver.findElement(saveEditionButton).click();
+
+        try {
+            Thread.sleep(15000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        driver.navigate().refresh();
+        try {
+            Thread.sleep(40000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        wait.until(ExpectedConditions.visibilityOfElementLocated(forecastInformation));
+        WebElement information = driver.findElement(forecastInformation);
+        String forecastInformationContent = information.getText();
+        String forecastRange = forecastInformationContent.split(" ")[1];
+        String editedForecastRange = "";
+        if(chooseForecastTimeUnitText.equals("Minutes")){
+            editedForecastRange = chooseForecastRangeMeasureUnitText+"mins";
+        }
+        if(chooseForecastTimeUnitText.equals("Hours")){
+            editedForecastRange = chooseForecastRangeMeasureUnitText+"hrs";
+        }
+        if(chooseForecastTimeUnitText.equals("Days")){
+            editedForecastRange = chooseForecastRangeMeasureUnitText+"days";
+        }
+        Assert.assertEquals(editedForecastRange,forecastRange);
     }
 }
