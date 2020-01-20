@@ -329,6 +329,7 @@ public class LightingPanel extends BasePanel {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        driver.navigate().refresh();
         wait.until(ExpectedConditions.visibilityOfElementLocated(lightingPanelParameter));
         WebElement lightningPanelParameterContent = driver.findElement(lightingPanelParameter);
         String lightningPanelParameterContentText = lightningPanelParameterContent.getText();
