@@ -1,14 +1,14 @@
 package panels;
-import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import pages.DashboardPage;
 import pages.LogInPage;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
@@ -237,13 +237,25 @@ public class LightingPanel extends BasePanel {
         dashboardPage.chooseActiveDashboard(rnd);
         dashboardPage.deleteAllPanelsFromDashboard();
         try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelOption));
+        }catch(TimeoutException e){
+            driver.navigate().refresh();
+            try {
+                Thread.sleep(15000);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
+            /*File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+            try {
+                FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot2.png"));
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }*/
+            wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelOption));
         }
-        wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelOption));
         driver.findElement(addPanelOption).click();
         addLightingPanel();
+        System.out.println("kfjnfhdjuhgkdhsygjshgjshkdjshgksgkksgijksghsg");
         try {
             Thread.sleep(30000);
         } catch (InterruptedException e) {
