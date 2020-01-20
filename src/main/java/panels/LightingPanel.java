@@ -266,18 +266,24 @@ public class LightingPanel extends BasePanel {
         }
         driver.findElement(addPanelOption).click();
         addLightingPanel();
-        try {
-            Thread.sleep(15000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        try{
+            wait.until(ExpectedConditions.visibilityOfElementLocated(settingsIcon));
         }
-        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        try {
-            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot2.png"));
-        } catch (IOException ex) {
-            ex.printStackTrace();
+        catch(TimeoutException e){
+            driver.navigate().refresh();
+            try {
+                Thread.sleep(15000);
+            } catch (InterruptedException ex) {
+                ex.printStackTrace();
+            }
+            File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+            try {
+                FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot2.png"));
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            wait.until(ExpectedConditions.visibilityOfElementLocated(settingsIcon));
         }
-        wait.until(ExpectedConditions.visibilityOfElementLocated(settingsIcon));
         driver.findElement(settingsIcon).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(editOption));
         driver.findElement(editOption).click();
