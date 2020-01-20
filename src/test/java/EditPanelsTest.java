@@ -30,7 +30,7 @@ public class EditPanelsTest extends TestPreparation
         LightingPanel lightingPanel = new LightingPanel(driver,wait);
         lightingPanel.checkEditingLightingPanel(validAdminUsername,validAdminPassword);
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testEditingForecastDataPanel(){
         ForecastDataAlertPanel forecastDataAlertPanel = new ForecastDataAlertPanel(driver,wait);
         forecastDataAlertPanel.checkEditingForecastDataAlertPanel(validAdminUsername,validAdminPassword);
