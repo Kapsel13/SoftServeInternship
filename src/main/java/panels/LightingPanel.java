@@ -267,7 +267,7 @@ public class LightingPanel extends BasePanel {
         driver.findElement(addPanelOption).click();
         addLightingPanel();
         try {
-            Thread.sleep(30000);
+            Thread.sleep(15000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
