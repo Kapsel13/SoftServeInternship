@@ -29,7 +29,7 @@ public class ForecastDataAlertPanel extends BasePanel {
     private By dataConfirmButton = By.xpath("//form[not(contains(@class,'ng-untouched'))]//button[contains(text(),'Next')]");
     private By triggerTypeConfirmButton = By.xpath("//form[contains(.,'Preview: Alert Mode')]//button[contains(text(),'Next')]");
     private By alertMessageConfirmButton = By.xpath("//form[contains(.,'Preview: Default alert message')]//button[contains(text(),'Next')]");
-    private By notificationConfirmButton = By.xpath("(//button[contains(text(),'Next')])[4]");
+    private By notificationConfirmButton = By.xpath("//form[contains(.,'Send notifications')]//button[contains(text(),'Next')]");
     private By addPanelButton = By.xpath("//button[contains(text(),'Add Panel')]");
     private By timeOfAlert = By.xpath("(//time[contains(@class,'preview-update-time')])[1]");
     private By titleOfChart = By.xpath("(//span[@class='highcharts-legend-item'])[1]");
@@ -139,6 +139,7 @@ public class ForecastDataAlertPanel extends BasePanel {
                 int min = Integer.parseInt(String.valueOf(unitJson.get("min"))) + 1;
                 int unitNumber = rnd.nextInt(max - min) + min;
                 System.out.println("unitNumber: " + unitNumber);
+                driver.findElement(unitNumberInput).clear();
                 driver.findElement(unitNumberInput).sendKeys(String.valueOf(unitNumber));
             }
         } catch (

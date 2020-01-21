@@ -45,6 +45,9 @@ public class SummaryPage extends BasePage {
     protected By dashboardDropdownButton = By.xpath("//button[@id='dashboard-dropdown']");
     private By dashboardOnDashboardsPage = By.xpath("//div[@class='ps-content']//button");
     private By firstDashboardOnSummaryPage = By.xpath("//tr[2]");
+    private By totalActiveAlertsField = By.xpath("//div[contains(@class,'total-alerts-container active')]");
+    private String specificTotalActiveAlertsField = "(//div[contains(@class,'total-alerts-container active')])[%d]";
+    private By dashboardTitle = By.xpath("(//span[contains(@class,'dropdown-item-title')])[1]");
     public SummaryPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }
@@ -331,5 +334,23 @@ public class SummaryPage extends BasePage {
             }
             Assert.assertFalse(expressionNotFound);
         }
+    }
+    public void checkTotalAlertsFieldAfterDeletingAllPanelsFromDashboard(){
+        redirectToSummaryPage();
+        int numberOfDashboardWithActiveAlertBefore = driver.findElements(totalActiveAlertsField).size();
+        int index = rnd.nextInt(numberOfDashboardWithActiveAlertBefore -1)+1;
+        wait.until(ExpectedConditions.visibilityOf(scrollElementIntoView(By.xpath(String.format(specificTotalActiveAlertsField,index)))));
+        WebElement specificDashboard = scrollElementIntoView(By.xpath(String.format(specificTotalActiveAlertsField,index)));
+        specificDashboard.click();
+        DashboardPage dashboardPage = new DashboardPage(driver,wait);
+        dashboardPage.deleteAllPanelsFromDashboard();
+        redirectToSummaryPage();
+        try {
+            Thread.sleep(15000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        int numberOfDashboardWithActiveAlertAfter = driver.findElements(totalActiveAlertsField).size();
+        Assert.assertEquals(numberOfDashboardWithActiveAlertBefore-1,numberOfDashboardWithActiveAlertAfter);
     }
 }

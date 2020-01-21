@@ -40,7 +40,7 @@ public class TestPreparation {
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--no-sandbox");
         driver = new ChromeDriver(options);
-       driver.manage().timeouts().pageLoadTimeout(10,TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(10,TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(10000, TimeUnit.MILLISECONDS);
         driver.manage().window().setSize(new Dimension(2100, 1050));
         //driver.manage().window().maximize();
