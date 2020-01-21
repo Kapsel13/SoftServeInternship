@@ -340,6 +340,7 @@ public class SummaryPage extends BasePage {
     }
     public void checkTotalAlertsFieldAfterDeletingAllPanelsFromDashboard(){
         redirectToSummaryPage();
+        driver.navigate().refresh();
         try {
             Thread.sleep(15000);
         } catch (InterruptedException e) {
