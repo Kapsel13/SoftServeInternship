@@ -1,11 +1,14 @@
 package pages;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
 
 public class SummaryPage extends BasePage {
@@ -341,6 +344,12 @@ public class SummaryPage extends BasePage {
             Thread.sleep(15000);
         } catch (InterruptedException e) {
             e.printStackTrace();
+        }
+        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot2.png"));
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
         int numberOfDashboardWithActiveAlertBefore = driver.findElements(totalActiveAlertsField).size();
         int index = rnd.nextInt(numberOfDashboardWithActiveAlertBefore -1)+1;
