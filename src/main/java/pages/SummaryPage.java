@@ -363,7 +363,7 @@ public class SummaryPage extends BasePage {
         redirectToSummaryPage();
         driver.navigate().refresh();
         try {
-            Thread.sleep(15000);
+            Thread.sleep(60000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
