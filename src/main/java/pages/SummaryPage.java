@@ -338,6 +338,7 @@ public class SummaryPage extends BasePage {
     public void checkTotalAlertsFieldAfterDeletingAllPanelsFromDashboard(){
         redirectToSummaryPage();
         int numberOfDashboardWithActiveAlertBefore = driver.findElements(totalActiveAlertsField).size();
+        System.out.println(numberOfDashboardWithActiveAlertBefore);
         int index = rnd.nextInt(numberOfDashboardWithActiveAlertBefore -1)+1;
         wait.until(ExpectedConditions.visibilityOf(scrollElementIntoView(By.xpath(String.format(specificTotalActiveAlertsField,index)))));
         WebElement specificDashboard = scrollElementIntoView(By.xpath(String.format(specificTotalActiveAlertsField,index)));
