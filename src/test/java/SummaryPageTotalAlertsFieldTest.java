@@ -12,7 +12,7 @@ public class SummaryPageTotalAlertsFieldTest extends TestPreparation {
         logInPage.providePassword(validAdminPassword,true);
         summaryPage = new SummaryPage(driver,wait);
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testResponseOnDeletingAllPanelsFromDashboard(){
         summaryPage = new SummaryPage(driver,wait);
         summaryPage.checkTotalAlertsFieldAfterDeletingAllPanelsFromDashboard();
