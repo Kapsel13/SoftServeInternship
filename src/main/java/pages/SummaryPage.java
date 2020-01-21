@@ -353,6 +353,7 @@ public class SummaryPage extends BasePage {
             ex.printStackTrace();
         }
         int numberOfDashboardWithActiveAlertBefore = driver.findElements(totalActiveAlertsField).size();
+        System.out.println(numberOfDashboardWithActiveAlertBefore);
         int index = rnd.nextInt(numberOfDashboardWithActiveAlertBefore -1)+1;
         wait.until(ExpectedConditions.visibilityOf(scrollElementIntoView(By.xpath(String.format(specificTotalActiveAlertsField,index)))));
         WebElement specificDashboard = scrollElementIntoView(By.xpath(String.format(specificTotalActiveAlertsField,index)));
@@ -367,6 +368,7 @@ public class SummaryPage extends BasePage {
             e.printStackTrace();
         }
         int numberOfDashboardWithActiveAlertAfter = driver.findElements(totalActiveAlertsField).size();
+        System.out.println(numberOfDashboardWithActiveAlertAfter);
         Assert.assertEquals(numberOfDashboardWithActiveAlertBefore-1,numberOfDashboardWithActiveAlertAfter);
     }
 }
