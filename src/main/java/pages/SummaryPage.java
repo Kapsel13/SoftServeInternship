@@ -360,6 +360,7 @@ public class SummaryPage extends BasePage {
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.deleteAllPanelsFromDashboard();
         redirectToSummaryPage();
+        driver.navigate().refresh();
         try {
             Thread.sleep(15000);
         } catch (InterruptedException e) {
