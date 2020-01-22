@@ -376,6 +376,12 @@ public class SummaryPage extends BasePage {
     }
     public void checkTotalAlertsFieldAfterAddingAlertCurrentDataPanel(){
         redirectToSummaryPage();
+        driver.navigate().refresh();
+        try {
+            Thread.sleep(15000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         int numberOfDashboardLocations = driver.findElements(activeDashboardLocation).size();
         int index = rnd.nextInt(numberOfDashboardLocations-1)+1;
         wait.until(ExpectedConditions.visibilityOf(scrollElementIntoView(By.xpath(String.format(specificDashboardAlertField,index)))));
