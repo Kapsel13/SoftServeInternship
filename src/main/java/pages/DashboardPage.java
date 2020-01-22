@@ -300,13 +300,8 @@ public class DashboardPage extends BasePage{
             Thread.sleep(2000);
 
         }catch (InterruptedException e){}
-        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        try {
-            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot2.png"));
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
         int panelsNumber = driver.findElements(panelMenu).size();
+        System.out.println("panels number: "+ panelsNumber);
         while(panelsNumber!=0){
             try {
                 wait.until(ExpectedConditions.visibilityOfElementLocated(specificPanelMenu));
