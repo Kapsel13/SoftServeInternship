@@ -348,7 +348,7 @@ public class SummaryPage extends BasePage {
         }
         File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
         try {
-            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot2.png"));
+            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -360,6 +360,12 @@ public class SummaryPage extends BasePage {
         specificDashboard.click();
         DashboardPage dashboardPage = new DashboardPage(driver,wait);
         dashboardPage.deleteAllPanelsFromDashboard();
+        srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot2.png"));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
         redirectToSummaryPage();
         driver.navigate().refresh();
         try {
