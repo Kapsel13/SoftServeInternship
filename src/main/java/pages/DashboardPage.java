@@ -300,6 +300,12 @@ public class DashboardPage extends BasePage{
             Thread.sleep(2000);
 
         }catch (InterruptedException e){}
+        try{
+            wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
+        }catch(TimeoutException e){
+            driver.navigate().refresh();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
+        }
         int panelsNumber = driver.findElements(panelMenu).size();
         System.out.println("panels number: "+ panelsNumber);
         while(panelsNumber!=0){
