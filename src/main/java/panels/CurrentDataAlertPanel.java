@@ -62,6 +62,7 @@ public class CurrentDataAlertPanel extends BasePanel {
     private By dataUnits = By.xpath("//span[@class='data-units']");
     private By dataNumber = By.xpath("//div[contains(@class,'data-value-text')]");
     private By saveEditionButton = By.xpath("//button[contains(text(),'Save')]");
+    private By windSpeedPanelOption = By.xpath("//input[@value='Wind Speed']");
     public CurrentDataAlertPanel(WebDriver driver, WebDriverWait wait){
         super(driver,wait);
     }
@@ -304,5 +305,43 @@ public class CurrentDataAlertPanel extends BasePanel {
         WebElement dataUnitsContent = driver.findElement(dataUnits);
         String dataUnitsContentText = dataUnitsContent.getText();
         Assert.assertEquals(unitSymbol,dataUnitsContentText);
+    }
+    public void addWindSpeedPanel(
+    ) {
+        DashboardPage dashboardPage = new DashboardPage(driver, wait);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelOption));
+        driver.findElement(addPanelOption).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(currentDataAlertPanelOption));
+        driver.findElement(currentDataAlertPanelOption).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(confirmChoosingPanelButton));
+        driver.findElement(confirmChoosingPanelButton).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(selectWeatherTypeButton));
+        driver.findElement(selectWeatherTypeButton).click();
+        wait.until(ExpectedConditions.visibilityOf(dashboardPage.scrollElementIntoView(windSpeedPanelOption)));
+        WebElement windSpeedOption = dashboardPage.scrollElementIntoView(windSpeedPanelOption);
+        windSpeedOption.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(dataConfirmButton));
+        driver.findElement(dataConfirmButton).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(triggerTypeConfirmButton));
+        driver.findElement(triggerTypeConfirmButton).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(alertMessageConfirmButton));
+        driver.findElement(alertMessageConfirmButton).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(notificationConfirmButton));
+        driver.findElement(notificationConfirmButton).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(alertPreview));
+        driver.findElement(alertPreview).click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelButton));
+        driver.findElement(addPanelButton).click();
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        driver.navigate().refresh();
+        try {
+            Thread.sleep(15000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }

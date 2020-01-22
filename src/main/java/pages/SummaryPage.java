@@ -4,8 +4,10 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Wait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import panels.CurrentDataAlertPanel;
 
 import java.io.File;
 import java.io.IOException;
@@ -50,7 +52,8 @@ public class SummaryPage extends BasePage {
     private By firstDashboardOnSummaryPage = By.xpath("//tr[2]");
     private By totalActiveAlertsField = By.xpath("//div[contains(@class,'total-alerts-container active')]");
     private String specificTotalActiveAlertsField = "(//div[contains(@class,'total-alerts-container active')])[%d]";
-    private By dashboardTitle = By.xpath("(//span[contains(@class,'dropdown-item-title')])[1]");
+    private String specificDashboardAlertField = "(//tr[not(contains(.,'Inactive'))]//div[contains(@class,'total-alerts-container')])[%d]";
+    private By activeDashboardLocation = By.xpath("//td[contains(@class,'table-cell-location ') and not(contains(.,'Inactive'))]");
     public SummaryPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
     }
@@ -370,5 +373,30 @@ public class SummaryPage extends BasePage {
         int numberOfDashboardWithActiveAlertAfter = driver.findElements(totalActiveAlertsField).size();
         System.out.println(numberOfDashboardWithActiveAlertAfter);
         Assert.assertEquals(numberOfDashboardWithActiveAlertBefore-1,numberOfDashboardWithActiveAlertAfter);
+    }
+    public void checkTotalAlertsFieldAfterAddingAlertCurrentDataPanel(){
+        redirectToSummaryPage();
+        int numberOfDashboardLocations = driver.findElements(activeDashboardLocation).size();
+        int index = rnd.nextInt(numberOfDashboardLocations-1)+1;
+        wait.until(ExpectedConditions.visibilityOf(scrollElementIntoView(By.xpath(String.format(specificDashboardAlertField,index)))));
+        WebElement alertFieldBefore = scrollElementIntoView(By.xpath(String.format(specificDashboardAlertField,index)));
+        String alertFieldNumberBefore = alertFieldBefore.getText();
+        alertFieldBefore.click();
+        CurrentDataAlertPanel currentDataAlertPanel= new CurrentDataAlertPanel(driver,wait);
+        currentDataAlertPanel.addWindSpeedPanel();
+        redirectToSummaryPage();
+        driver.navigate().refresh();
+        try {
+            Thread.sleep(15000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        wait.until(ExpectedConditions.visibilityOf(scrollElementIntoView(By.xpath(String.format(specificDashboardAlertField,index)))));
+        WebElement alertFieldAfter = scrollElementIntoView(By.xpath(String.format(specificDashboardAlertField,index)));
+        String alertFieldNumberAfter = alertFieldAfter.getText();
+        int alertFieldBeforeValue = Integer.parseInt(alertFieldNumberBefore);
+        int alertFiledAfterValue = Integer.parseInt(alertFieldNumberAfter);
+        System.out.println(alertFieldBeforeValue+" "+alertFiledAfterValue);
+        Assert.assertEquals(alertFieldBeforeValue+1,alertFiledAfterValue);
     }
 }

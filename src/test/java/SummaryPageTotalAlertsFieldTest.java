@@ -17,4 +17,9 @@ public class SummaryPageTotalAlertsFieldTest extends TestPreparation {
         summaryPage = new SummaryPage(driver,wait);
         summaryPage.checkTotalAlertsFieldAfterDeletingAllPanelsFromDashboard();
     }
+    @Test(retryAnalyzer = Retry.class)
+    public void testResponseOnAddingAlertCurrentDataPanel(){
+        summaryPage = new SummaryPage(driver,wait);
+        summaryPage.checkTotalAlertsFieldAfterAddingAlertCurrentDataPanel();
+    }
 }

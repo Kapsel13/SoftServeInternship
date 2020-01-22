@@ -307,7 +307,6 @@ public class DashboardPage extends BasePage{
             wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
         }
         int panelsNumber = driver.findElements(panelMenu).size();
-        System.out.println("panels number: "+ panelsNumber);
         while(panelsNumber!=0){
             try {
                 wait.until(ExpectedConditions.visibilityOfElementLocated(specificPanelMenu));
