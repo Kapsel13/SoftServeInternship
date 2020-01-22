@@ -11,12 +11,12 @@ public class HourDailyForecastPanelTest extends TestPreparation{
         HourDailyForecastPanel hourDailyForecastPanel = new HourDailyForecastPanel(driver,wait);
         hourDailyForecastPanel.addNewHourDailyForecastPanel();
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testDisplayingDayTag(){
         HourDailyForecastPanel hourDailyForecastPanel = new HourDailyForecastPanel(driver,wait);
         hourDailyForecastPanel.checkDisplayingContentOfDayTag(validAdminUsername,validAdminPassword);
     }
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void testDisplayNightTag(){
         HourDailyForecastPanel hourDailyForecastPanel = new HourDailyForecastPanel(driver,wait);
         hourDailyForecastPanel.checkDisplayContentOfNightTag(validAdminUsername,validAdminPassword);
