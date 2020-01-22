@@ -1,11 +1,14 @@
 package pages;
 
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.events.WebDriverEventListener;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -297,6 +300,12 @@ public class DashboardPage extends BasePage{
             Thread.sleep(2000);
 
         }catch (InterruptedException e){}
+        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot2.png"));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
         int panelsNumber = driver.findElements(panelMenu).size();
         while(panelsNumber!=0){
             try {
