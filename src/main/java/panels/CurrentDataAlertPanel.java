@@ -306,10 +306,15 @@ public class CurrentDataAlertPanel extends BasePanel {
         String dataUnitsContentText = dataUnitsContent.getText();
         Assert.assertEquals(unitSymbol,dataUnitsContentText);
     }
-    public void addWindSpeedPanel(
-    ) {
+    public void addWindSpeedPanel() {
         DashboardPage dashboardPage = new DashboardPage(driver, wait);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelOption));
+        try {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelOption));
+        }
+        catch(TimeoutException e){
+            driver.navigate().refresh();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelOption));
+        }
         driver.findElement(addPanelOption).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(currentDataAlertPanelOption));
         driver.findElement(currentDataAlertPanelOption).click();
