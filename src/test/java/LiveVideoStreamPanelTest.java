@@ -22,6 +22,6 @@ public class LiveVideoStreamPanelTest extends TestPreparation {
     @Test(retryAnalyzer = Retry.class)
     public void testResponseOnStopAndStartVideo(){
         LiveVideoStreamPanel liveVideoStreamPanel = new LiveVideoStreamPanel(driver,wait);
-        liveVideoStreamPanel.checkStopAndStartVideo(validAdminUsername,validAdminPassword);
+        liveVideoStreamPanel.checkStopAndStartVideo(liveVideoStreamName,liveStreamSourceUrl);
     }
 }

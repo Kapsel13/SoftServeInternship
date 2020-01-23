@@ -34,6 +34,7 @@ public class LiveVideoStreamPanel extends BasePanel{
         driver.findElement(liveStreamNameInput).clear();
         driver.findElement(liveStreamNameInput).sendKeys(videoName);
         wait.until(ExpectedConditions.visibilityOfElementLocated(liveStreamSourceUrl));
+        driver.findElement(liveStreamNameInput).clear();
         driver.findElement(liveStreamSourceUrl).sendKeys(videoSource);
         wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelButton));
         driver.findElement(addPanelButton).click();
@@ -45,6 +46,8 @@ public class LiveVideoStreamPanel extends BasePanel{
         Assert.assertEquals(videoHeaderText,"Live Stream - "+videoName);
     }
     public void checkStopAndStartVideo(String videoName,String videoSource){
+        System.out.println(videoName);
+        System.out.println(videoSource);
         wait.until(ExpectedConditions.visibilityOfElementLocated(liveVideoStreamPanelOption));
         driver.findElement(liveVideoStreamPanelOption).click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(confirmChoosingPanelButton));
@@ -53,6 +56,7 @@ public class LiveVideoStreamPanel extends BasePanel{
         driver.findElement(liveStreamNameInput).clear();
         driver.findElement(liveStreamNameInput).sendKeys(videoName);
         wait.until(ExpectedConditions.visibilityOfElementLocated(liveStreamSourceUrl));
+        driver.findElement(liveStreamNameInput).clear();
         driver.findElement(liveStreamSourceUrl).sendKeys(videoSource);
         wait.until(ExpectedConditions.visibilityOfElementLocated(addPanelButton));
         driver.findElement(addPanelButton).click();
