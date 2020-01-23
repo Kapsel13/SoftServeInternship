@@ -210,11 +210,11 @@ public class CreateDashboardTest extends TestPreparation{
         logInPage.provideUsername(validAdminUsername, true);
         logInPage.providePassword(validAdminPassword, true);
         dashboardPage.deleteDashboard(validDashboardName);
-        try {
+        /*try {
             Thread.sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
+        }*/
         System.out.println("deleteAddedDashboard");
     }
 }

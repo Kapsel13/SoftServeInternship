@@ -113,11 +113,7 @@ public class DashboardPage extends BasePage{
 
     public void selectValidLocation(String typeOfLocation, String cityOfTypeOfLocation){
         wait.until(ExpectedConditions.visibilityOfElementLocated(searchLocationInput));
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        driver.findElement(searchLocationInput).clear();
         driver.findElement(searchLocationInput).sendKeys(typeOfLocation);
         driver.findElement(By.xpath(String.format(locationInList, cityOfTypeOfLocation))).click();
         wait.until(ExpectedConditions.elementToBeClickable(locationEnabledButton));
@@ -335,12 +331,12 @@ public class DashboardPage extends BasePage{
             wait.until(ExpectedConditions.visibilityOfElementLocated(dashboardDropdownButton));
         }
         driver.findElement(dashboardDropdownButton).click();
-        try {
+        /*try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
-        //wait.until(ExpectedConditions.visibilityOf(scrollElementIntoView(By.xpath(String.format(addedDashboard, dashboardName)))));
+        }*/
+        wait.until(ExpectedConditions.visibilityOf(scrollElementIntoView(By.xpath(String.format(addedDashboard, dashboardName)))));
         /*File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
             try {
                 FileUtils.copyFile(srcFile,new File("target/screenshots/screenshot.png"));
