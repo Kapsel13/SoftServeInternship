@@ -10,6 +10,7 @@ public class TestData {
      protected static List<String> endDate = Arrays.asList("02/13/2017","08/21/2017","10/28/2018","06/19/2017");
      protected static List<String> startDateBeforeCurrentDate = Arrays.asList("11/11/2019","09/24/2019","12/20/2019");
      protected static List<String> endDateAfterCurrentDate = Arrays.asList("12/29/2019","01/24/2020","03/05/2020");
+     protected static List<String> videoStream = Arrays.asList("https://www.radiantmediaplayer.com/media/bbb-360p.mp4");
      protected static Random rnd = new Random();
 
     public  static String generateData(int limit) {
@@ -47,6 +48,9 @@ public class TestData {
     }
     public static String getRandomIcaoCodes() {
         return icaoCodes.get(rnd.nextInt(icaoCodes.size()));
+    }
+    public static String getVideoStream(){
+        return videoStream.get(0);
     }
 
 }
